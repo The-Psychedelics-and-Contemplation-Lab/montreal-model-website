@@ -1,0 +1,37 @@
+---
+import { PageHeader, Section } from '@pcl/design-system';
+import Shell from '../../components/Shell.astro';
+import { langPaths } from '../../lib/i18n';
+import { media } from '../../content/data/publications';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const meta = fr
+  ? { title: 'Couverture médiatique — Le modèle de Montréal', description: 'Balados et articles de presse sur le modèle de Montréal de thérapie par la kétamine : La Presse, National Post, Business Insider, Carlat Psychiatry.' }
+  : { title: 'Media Coverage — The Montreal Model of Ketamine Therapy', description: 'Podcasts and news articles about the Montreal Model of ketamine therapy: La Presse, National Post, Business Insider, the Carlat Psychiatry Podcast and more.' };
+---
+<Shell lang={lang} path="/media-coverage/" title={meta.title} description={meta.description}>
+  <main id="main">
+    <PageHeader eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Couverture médiatique' : 'Media Coverage'} lead={fr ? 'Balados et reportages sur le modèle de Montréal et la thérapie par la kétamine.' : 'Podcasts and press coverage of the Montreal Model and ketamine therapy.'} />
+    <Section>
+      <h2>{fr ? 'Balados' : 'Podcasts'}</h2>
+      <ul class="media-list" style="margin-top: var(--s-6)">
+        {media.podcasts.map((p) => (
+          <li><a href={p.url} target="_blank" rel="noopener noreferrer" lang="en">{p.title}</a></li>
+        ))}
+      </ul>
+    </Section>
+    <Section band>
+      <h2>{fr ? 'Dans les médias' : 'In the news'}</h2>
+      <ul class="media-list" style="margin-top: var(--s-6)">
+        {media.news.map((n) => (
+          <li>
+            <p lang={n.lang}>“{n.title}”</p>
+            <p class="media__meta">{n.outlet} — {n.date[lang]}</p>
+            <p class="media__meta"><a href={n.url} target="_blank" rel="noopener noreferrer">{fr ? 'Lire l’article' : 'Read article'}</a></p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  </main>
+</Shell>

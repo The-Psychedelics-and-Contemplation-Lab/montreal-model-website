@@ -1,0 +1,15 @@
+---
+/** Site shell: <Layout> + language switch, for one page in one language. */
+import { Layout, LangSwitch } from '@pcl/design-system';
+import { pageMeta } from '../lib/i18n';
+import type { Lang } from '../site.config';
+import '../styles/site.css';
+
+export interface Props { lang: Lang; path: string; title: string; description: string; schema?: Record<string, unknown> | Record<string, unknown>[]; ogType?: 'website' | 'article' }
+const { lang, path, title, description, schema, ogType } = Astro.props;
+const m = pageMeta(lang, path, { title, description, schema, ogType });
+---
+<Layout site={m.site} page={m.page} nav={m.nav} lang={lang}>
+  <LangSwitch slot="nav-extra" current={lang} links={m.switchLinks} />
+  <slot />
+</Layout>

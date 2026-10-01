@@ -1,0 +1,49 @@
+---
+import { PageHeader, Section } from '@pcl/design-system';
+import Shell from '../../components/Shell.astro';
+import { langPaths } from '../../lib/i18n';
+import { u } from '../../lib/url';
+import { pubGroups } from '../../content/data/publications';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const meta = fr
+  ? { title: 'Publications de recherche — Le modèle de Montréal', description: 'Articles évalués par les pairs sur le modèle de Montréal : protocole, essai MUSIK, déprescription des benzodiazépines, imprinting, revue et rapports de cas.' }
+  : { title: 'Research Publications — The Montreal Model of Ketamine Therapy', description: 'Peer-reviewed papers on the Montreal Model: the protocol paper, the MUSIK trial, benzodiazepine deprescription, imprinting, a review and case reports.' };
+const schema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: meta.title, inLanguage: fr ? 'fr-CA' : 'en-CA',
+  hasPart: pubGroups.flatMap(g => g.items).map(p => ({ '@type': 'ScholarlyArticle', headline: p.title, author: p.authors, datePublished: String(p.year), isPartOf: { '@type': 'Periodical', name: p.journal }, sameAs: `https://doi.org/${p.doi}` })),
+};
+---
+<Shell lang={lang} path="/research-publications/" title={meta.title} description={meta.description} schema={schema}>
+  <main id="main">
+    <PageHeader eyebrow={fr ? 'Recherche' : 'Research'} title={fr ? 'Publications de recherche' : 'Research Publications'} lead={fr ? 'Les articles évalués par les pairs qui décrivent, évaluent et étendent le modèle de Montréal.' : 'The peer-reviewed papers that describe, evaluate and extend the Montreal Model.'} />
+    <Section>
+      <div class="pubs">
+        {pubGroups.map((g) => {
+          const Item = g.heading ? 'h3' : 'h2';
+          return (
+            <section class="pub-group" id={g.id} aria-labelledby={g.heading ? `${g.id}-h` : undefined}>
+              {g.heading && <h2 id={`${g.id}-h`}>{g.heading[lang]}</h2>}
+              {g.intro && <p>{g.intro[lang]}</p>}
+              <ol class="pub-list">
+                {g.items.map((p) => (
+                  <li class="pub" id={p.id}>
+                    <Item>{p.heading}</Item>
+                    {p.summary && <p class="pub__summary">{p.summary[lang]}</p>}
+                    <p class="pub__cite">{p.authors} (<span class="year">{p.year}</span>). {p.title}. <em>{p.journal}</em>{p.details && <>, <em>{p.details}</em></>}. https://doi.org/{p.doi}</p>
+                    <p class="pub__links">
+                      <a href={p.url} target="_blank" rel="noopener noreferrer">{fr ? 'Article' : 'Article'}</a>
+                      <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">DOI</a>
+                      {p.pdf && <a href={u(`/papers/${p.pdf}`)}>PDF</a>}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          );
+        })}
+      </div>
+    </Section>
+  </main>
+</Shell>

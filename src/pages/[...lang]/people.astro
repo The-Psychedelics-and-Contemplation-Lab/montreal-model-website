@@ -1,0 +1,59 @@
+---
+import { PageHeader, Section } from '@pcl/design-system';
+import Shell from '../../components/Shell.astro';
+import { langPaths } from '../../lib/i18n';
+import { u } from '../../lib/url';
+import { peopleIntro, leads, collaborators, type Person } from '../../content/data/people';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const meta = fr
+  ? { title: 'Équipe — Le modèle de Montréal de thérapie par la kétamine', description: 'Les psychiatres et chercheurs qui ont développé le modèle de Montréal à McGill, à l’Hôpital général juif et au CHUM, et leurs collaborateurs.' }
+  : { title: 'People — The Montreal Model of Ketamine Therapy', description: 'The psychiatrists and researchers who developed the Montreal Model at McGill, the Jewish General Hospital and the CHUM, and their collaborators.' };
+const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('');
+---
+<Shell lang={lang} path="/people/" title={meta.title} description={meta.description}>
+  <main id="main">
+    <PageHeader eyebrow={fr ? 'Équipe' : 'Team'} title={fr ? 'Équipe' : 'People'} lead={peopleIntro[lang][0]} />
+    <Section>
+      <div class="prose"><p>{peopleIntro[lang][1]}</p></div>
+      <div class="people people--leads" style="margin-top: var(--s-12)">
+        {leads.map((p: Person) => (
+          <article class="person person--lead">
+            <img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="600" loading="lazy" decoding="async" />
+            <div class="person__head">
+              <h2>{p.name}</h2>
+              <p class="person__role">{p.role[lang]}</p>
+              <p class="person__aff">{p.affiliation[lang]}</p>
+            </div>
+            <div class="person__bio"><p>{p.bio?.[lang]}</p></div>
+          </article>
+        ))}
+      </div>
+    </Section>
+    <Section band ariaLabelledby="collab-h">
+      <h2 id="collab-h">{fr ? 'Collaborateurs' : 'Collaborators'}</h2>
+      <div class="people people--collab" style="margin-top: var(--s-8)">
+        {collaborators.map((p: Person) => (
+          <article class="person person--compact">
+            {p.photo
+              ? <img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" />
+              : <div class="person__placeholder" aria-hidden="true">{initials(p.name)}</div>}
+            <div class="person__head">
+              <h3>{p.name}</h3>
+              <p class="person__role">{p.role[lang]}</p>
+              <p class="person__aff">{p.affiliation[lang]}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
+    <Section tight ariaLabelledby="partners-h">
+      <h2 id="partners-h" class="visually-hidden">{fr ? 'Établissements partenaires' : 'Partner institutions'}</h2>
+      <div class="partners">
+        <img src={u('/images/logo-chum.png')} alt="Centre hospitalier de l’Université de Montréal (CHUM)" width="264" height="224" loading="lazy" decoding="async" />
+        <img src={u('/images/logo-udem.png')} alt="Université de Montréal" width="250" height="99" loading="lazy" decoding="async" />
+      </div>
+    </Section>
+  </main>
+</Shell>

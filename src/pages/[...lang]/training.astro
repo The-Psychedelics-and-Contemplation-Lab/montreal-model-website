@@ -1,0 +1,37 @@
+---
+import { Section } from '@pcl/design-system';
+import ProsePage from '../../components/ProsePage.astro';
+import { langPaths, href } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const moduleUrl = 'https://media.psychedelicsandcontemplationlab.com/montreal-model/module-1/';
+---
+<ProsePage lang={lang} slug="training" path="/training/">
+  <Section id="online" band ariaLabelledby="online-h">
+    <p class="eyebrow">{fr ? 'Apprentissage en ligne' : 'Online learning'}</p>
+    <h2 id="online-h" style="margin-top: var(--s-3)">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
+    <div class="grid grid--2" style="margin-top: var(--s-8)">
+      <div class="card card--module">
+        <p class="eyebrow">{fr ? 'Module 1' : 'Module 1'}</p>
+        <h3>{fr ? 'Le modèle de Montréal – Module 1' : 'The Montreal Model – Module 1'}</h3>
+        <p class="sans muted">{fr
+          ? 'Module de formation interactif (HTML5) présentant le modèle de Montréal de thérapie par la kétamine. Hébergé sur le serveur média du laboratoire.'
+          : 'Interactive HTML5 training module introducing the Montreal Model of ketamine therapy. Hosted on the lab’s media server.'}</p>
+        <div class="cluster">
+          <a class="btn btn--primary" href={moduleUrl} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir le module 1' : 'Open Module 1'}<span class="btn__icon" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div class="card card--module">
+        <p class="eyebrow">{fr ? 'Module interactif' : 'Interactive module'}</p>
+        <h3>{fr ? 'Comment la kétamine agit sur le cerveau' : 'How ketamine acts on the brain'}</h3>
+        <p class="sans muted">{fr
+          ? 'Diapositives interactives sur la kétamine et le glutamate : doses subanesthésiques et anesthésiques comparées.'
+          : 'Interactive slides on ketamine and glutamate: subanesthetic and anesthetic doses compared.'}</p>
+        <div class="cluster">
+          <a class="btn btn--secondary" href={href(lang, '/ketamine-mechanism/')}>{fr ? 'Voir le module' : 'View the module'}</a>
+        </div>
+      </div>
+    </div>
+  </Section>
+</ProsePage>

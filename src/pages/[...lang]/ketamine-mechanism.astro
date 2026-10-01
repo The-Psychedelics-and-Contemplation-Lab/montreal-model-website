@@ -1,0 +1,32 @@
+---
+import { PageHeader, Section } from '@pcl/design-system';
+import Shell from '../../components/Shell.astro';
+import { langPaths } from '../../lib/i18n';
+import { u } from '../../lib/url';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const moduleSrc = u('/modules/ketamine-mechanism/index.html');
+const meta = fr
+  ? { title: 'Mécanisme de la kétamine — module interactif — Le modèle de Montréal', description: 'Module interactif sur l’action de la kétamine dans le cerveau : glutamate, doses subanesthésiques et anesthésiques, réseaux cérébraux et expérience subjective.' }
+  : { title: 'Ketamine Mechanism — Interactive Module — The Montreal Model', description: 'Interactive module on how ketamine acts on the brain: glutamate, subanesthetic versus anesthetic doses, brain networks and the subjective experience.' };
+---
+<Shell lang={lang} path="/ketamine-mechanism/" title={meta.title} description={meta.description}>
+  <main id="main">
+    <PageHeader eyebrow={fr ? 'Module interactif' : 'Interactive module'} title={fr ? 'Mécanisme de la kétamine' : 'Ketamine Mechanism'} lead={fr
+      ? 'Comment la kétamine agit sur le cerveau : des récepteurs du glutamate aux réseaux cérébraux et à l’expérience vécue, aux doses subanesthésiques et anesthésiques. Module en anglais.'
+      : 'How ketamine acts on the brain: from glutamate receptors to brain networks and the lived experience, at subanesthetic and anesthetic doses.'} wide />
+    <Section wide>
+      <div class="module">
+        <iframe src={moduleSrc} title={fr ? 'Module interactif : comment la kétamine agit sur le cerveau' : 'Interactive module: how ketamine acts on the brain'} loading="lazy"></iframe>
+        <div class="module__bar">
+          <span>{fr ? 'Utilisez les flèches ou les boutons du module pour changer de diapositive.' : 'Use the module’s arrows or buttons to move between slides.'}</span>
+          <a class="btn btn--secondary btn--small" href={moduleSrc} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir en plein écran' : 'Open full screen'}<span class="btn__icon" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <p class="sans muted" style="margin-top: var(--s-4); max-width: var(--measure)">{fr
+        ? 'Le module s’ouvre dans un nouvel onglet en plein écran. Il contient des animations ; si vous préférez les réduire, utilisez les commandes du module.'
+        : 'The full-screen version opens in a new tab. The module contains animations; use its own controls if you prefer to step through it manually.'}</p>
+    </Section>
+  </main>
+</Shell>

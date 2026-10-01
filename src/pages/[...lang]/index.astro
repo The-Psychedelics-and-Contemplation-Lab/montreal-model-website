@@ -1,0 +1,78 @@
+---
+import { Section } from '@pcl/design-system';
+import { getEntry } from 'astro:content';
+import { withBase } from '../../lib/content';
+import Shell from '../../components/Shell.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import { langPaths, href } from '../../lib/i18n';
+import { u } from '../../lib/url';
+import { site } from '../../site.config';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const entry = await getEntry('pages', `${lang}/home`);
+if (!entry) throw new Error('Missing home content');
+const html = withBase(entry.rendered?.html ?? '');
+const d = entry.data;
+const h1 = fr ? 'Le modèle de Montréal de thérapie par la kétamine' : 'The Montreal Model of Ketamine Therapy';
+
+const schema = [
+  site.organizationSchema,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    name: d.seoTitle,
+    description: d.description,
+    inLanguage: fr ? 'fr-CA' : 'en-CA',
+    url: site.url + (fr ? '/fr/' : '/'),
+    citation: {
+      '@type': 'ScholarlyArticle',
+      headline: 'The Montreal model: An integrative biomedical-psychedelic approach to ketamine for severe treatment-resistant depression',
+      author: 'Garel N, Drury J, Thibault Lévesque J, Goyette N, Lehmann A, Looper K, Erritzoe D, Dames S, Turecki G, Rej S, Greenway KT',
+      datePublished: '2023',
+      isPartOf: { '@type': 'Periodical', name: 'Frontiers in Psychiatry' },
+      sameAs: 'https://doi.org/10.3389/fpsyt.2023.1268832',
+    },
+  },
+];
+---
+<Shell lang={lang} path="/" title={d.seoTitle} description={d.description} schema={schema}>
+  <main id="main">
+    <div class="hero hero--mm">
+      <div class="container hero__inner">
+        <div>
+          <p class="eyebrow">{d.eyebrow}</p>
+          <h1>{h1}</h1>
+          <p class="lead">{d.lead}</p>
+          <div class="cluster">
+            <a class="btn btn--primary" href={href(lang, '/clinical-information/')}>{fr ? 'Information clinique' : 'Clinical information'}</a>
+            <a class="btn btn--secondary" href={href(lang, '/research-publications/')}>{fr ? 'Publications de recherche' : 'Research publications'}</a>
+          </div>
+        </div>
+        <img class="hero__mark" src={u('/images/montreal-model-mark.png')} alt={fr ? 'Emblème du modèle de Montréal : deux cœurs formant un nuage' : 'Montreal Model emblem: two hearts forming a cloud'} width="592" height="358" decoding="async" />
+      </div>
+    </div>
+
+    <Section>
+      <div class="facts" aria-label={fr ? 'Faits saillants' : 'Key facts'}>
+        <div class="facts__item"><strong>2018</strong><span>{fr ? 'Développement du modèle à McGill, affiné depuis dans le réseau public' : 'Model first developed at McGill and refined in public healthcare since'}</span></div>
+        <div class="facts__item"><strong>{fr ? 'Des milliers' : 'Thousands'}</strong><span>{fr ? 'de traitements offerts à des patients atteints de dépression résistante sévère' : 'of treatments provided to patients with severe treatment-resistant depression'}</span></div>
+        <div class="facts__item"><strong>2</strong><span>{fr ? 'sites hospitaliers à Montréal : Hôpital général juif et CHUM' : 'hospital sites in Montreal: Jewish General Hospital and CHUM'}</span></div>
+        <div class="facts__item"><strong>{fr ? 'Kétamine + psychothérapie' : 'Ketamine + psychotherapy'}</strong><span>{fr ? 'Doses multiples jumelées à un soutien psychologique structuré' : 'Multiple doses paired with structured psychological support'}</span></div>
+      </div>
+    </Section>
+
+    <Section tight>
+      <div class="prose" set:html={html}></div>
+    </Section>
+
+    <Section tight>
+      <div class="reference">
+        <p class="eyebrow">{fr ? 'Référence' : 'Reference'}</p>
+        <p>Garel, N., Drury, J., Thibault Lévesque, J., Goyette, N., Lehmann, A., Looper, K., Erritzoe, D., Dames, S., Turecki, G., Rej, S., &amp; Greenway, K. T. (2023). The Montreal model: An integrative biomedical-psychedelic approach to ketamine for severe treatment-resistant depression. <em>Frontiers in Psychiatry</em>, <em>14</em>, 1268832. <a href="https://doi.org/10.3389/fpsyt.2023.1268832" target="_blank" rel="noopener noreferrer">https://doi.org/10.3389/fpsyt.2023.1268832</a></p>
+      </div>
+    </Section>
+
+    <ContactBlock lang={lang} />
+  </main>
+</Shell>

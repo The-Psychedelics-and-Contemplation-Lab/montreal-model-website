@@ -1,0 +1,7 @@
+---
+import ProsePage from '../../components/ProsePage.astro';
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+---
+<ProsePage lang={lang} slug="clinical-information" path="/clinical-information/" />

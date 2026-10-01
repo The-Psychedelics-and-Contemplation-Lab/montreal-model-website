@@ -1,0 +1,34 @@
+---
+import { Section } from '@pcl/design-system';
+import ProsePage from '../../components/ProsePage.astro';
+import { langPaths } from '../../lib/i18n';
+import { media } from '../../content/data/publications';
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+---
+<ProsePage lang={lang} slug="music" path="/music/">
+  <Section id="playlists" band ariaLabelledby="playlists-h">
+    <div class="prose">
+      <h2 id="playlists-h">{fr ? 'Listes de lecture musicales' : 'Musical Playlists'}</h2>
+      <p>
+        {fr ? 'Pour d’autres listes de lecture, consultez notre ' : 'For more playlists, check out our '}
+        <a href={media.spotify.profile} target="_blank" rel="noopener noreferrer"><strong>{fr ? 'page Spotify!' : 'Spotify page!'}</strong></a>
+      </p>
+    </div>
+    <div class="playlists" style="margin-top: var(--s-8)">
+      {media.spotify.playlists.map((id, i) => (
+        <div class="card playlist">
+          <h3>{fr ? `Liste de lecture ${i + 1}` : `Playlist ${i + 1}`}</h3>
+          <iframe
+            src={`https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0`}
+            title={fr ? `Lecteur Spotify – liste de lecture ${i + 1} du modèle de Montréal` : `Spotify player – Montreal Model playlist ${i + 1}`}
+            loading="lazy"
+            allow="encrypted-media"
+          ></iframe>
+          <p class="sans"><a href={`https://open.spotify.com/playlist/${id}`} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir dans Spotify' : 'Open in Spotify'}</a></p>
+        </div>
+      ))}
+    </div>
+  </Section>
+</ProsePage>

@@ -1,0 +1,95 @@
+/* Site-specific layout for montreal-model-website. Tokens and typography come
+   from @pcl/design-system and are never overridden here. */
+
+/* --- Home hero ------------------------------------------------------------- */
+.hero--mm { border-bottom: 1px solid var(--rule); }
+.hero--mm .hero__inner { display: grid; gap: var(--s-8); align-items: center; }
+.hero--mm .hero__mark { display: none; }
+@media (min-width: 60em) {
+  .hero--mm .hero__inner { grid-template-columns: minmax(0, 1fr) 18rem; }
+  .hero--mm .hero__mark { display: block; justify-self: end; width: 16rem; }
+}
+
+/* --- Home: key facts strip ---------------------------------------------------- */
+.facts { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+.facts__item { border-top: 2px solid var(--accent); padding-top: var(--s-3); }
+.facts__item strong { display: block; font-family: var(--font-serif); font-size: var(--fs-h3); line-height: var(--lh-tight); }
+.facts__item span { display: block; margin-top: var(--s-2); font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
+
+/* --- Reference block ------------------------------------------------------------ */
+.reference { max-width: var(--measure); border-left: 3px solid var(--accent); padding-left: var(--s-6); }
+.reference p { font-family: var(--font-sans); font-size: var(--fs-ui); line-height: 1.55; }
+.reference .eyebrow { margin-bottom: var(--s-2); }
+
+/* --- Figures ------------------------------------------------------------------- */
+.prose figure.figure--wide { max-width: none; width: min(100vw - 2 * var(--gutter), var(--container)); }
+.prose figure img { border: 1px solid var(--rule); border-radius: var(--radius-card); background: var(--card); }
+
+/* --- People ------------------------------------------------------------------- */
+.people { display: grid; gap: var(--s-8); }
+.person { display: grid; gap: var(--s-4); align-content: start; }
+.person__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); }
+.person__photo--portrait { aspect-ratio: 1 / 1; }
+.person__role { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; color: var(--ink); }
+.person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
+.person__bio { margin-top: var(--s-2); }
+.person__bio p + p { margin-top: var(--s-3); }
+@media (min-width: 48em) {
+  .people--leads { grid-template-columns: 1fr 1fr; }
+  .person--lead { grid-template-columns: 14rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: var(--s-6); }
+  .person--lead .person__photo { grid-row: 1; aspect-ratio: 1 / 1; }
+  .person--lead .person__head { grid-column: 2; align-self: start; }
+  .person--lead .person__bio { grid-column: 1 / -1; }
+}
+@media (min-width: 70em) {
+  .people--leads { grid-template-columns: 1fr; }
+  .person--lead { grid-template-columns: 16rem minmax(0, 1fr); grid-template-rows: auto auto; }
+  .person--lead .person__photo { grid-row: 1 / span 2; }
+  .person--lead .person__bio { grid-column: 2; margin-top: 0; }
+}
+.people--collab { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: var(--s-6); }
+.person--compact .person__photo { aspect-ratio: 1 / 1; }
+.person__placeholder { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); display: grid; place-items: center; color: var(--ink-muted); font-family: var(--font-serif); font-size: var(--fs-h2); }
+.partners { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); }
+.partners img { height: 64px; width: auto; }
+.partners img:first-child { height: 88px; }
+
+/* --- Publications ------------------------------------------------------------- */
+.pubs { display: grid; gap: var(--s-12); max-width: 56rem; }
+.pub-group > h2 + p { margin-top: var(--s-3); }
+.pub-group > .pub-list { margin-top: var(--s-6); }
+.pub-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-6); }
+.pub { border-top: 1px solid var(--rule); padding-top: var(--s-6); }
+.pub h3, .pub h4 { font-size: var(--fs-h4); max-width: var(--measure); }
+.pub__summary { margin-top: var(--s-3); max-width: var(--measure); }
+.pub__cite { margin-top: var(--s-3); font-family: var(--font-sans); font-size: var(--fs-ui); line-height: 1.55; color: var(--ink-muted); max-width: var(--measure); }
+.pub__cite .year { color: var(--ink); font-weight: 600; }
+.pub__links { margin-top: var(--s-3); display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); font-family: var(--font-sans); font-size: var(--fs-ui); }
+
+/* --- Media coverage ------------------------------------------------------------- */
+.media-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); max-width: var(--measure); }
+.media-list li { border-top: 1px solid var(--rule); padding-top: var(--s-4); }
+.media-list .media__meta { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); margin-top: var(--s-1); }
+
+/* --- Music: playlists -------------------------------------------------------------- */
+.playlists { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.playlists iframe { width: 100%; height: 152px; border: 0; border-radius: 12px; background: var(--paper-deep); }
+
+/* --- Interactive module ------------------------------------------------------------- */
+.module { border: 1px solid var(--rule); border-radius: var(--radius-card); overflow: hidden; background: var(--card); }
+.module iframe { display: block; width: 100%; height: min(85vh, 60rem); min-height: 40rem; border: 0; }
+.module__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
+
+/* --- Contact ---------------------------------------------------------------------- */
+.contact { display: grid; gap: var(--s-8); }
+.contact__col > * + * { margin-top: var(--s-3); }
+.contact__col .btn { margin-top: var(--s-2); }
+@media (min-width: 60em) { .contact { grid-template-columns: 3fr 2fr; gap: var(--s-12); } }
+
+/* --- Training placeholder card ------------------------------------------------------ */
+.card--module { display: grid; gap: var(--s-3); }
+.card--module .cluster { margin-top: var(--s-4); }
+
+@media print {
+  .hero__mark, .playlists { display: none !important; }
+}

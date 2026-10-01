@@ -1,0 +1,41 @@
+---
+/** Contact — mailto links only (the old site used WPForms; no forms are built here). */
+import type { Lang } from '../site.config';
+import { contactEmail } from '../site.config';
+export interface Props { lang: Lang; id?: string }
+const { lang, id = 'contact' } = Astro.props;
+const fr = lang === 'fr';
+const s = fr ? {
+  eyebrow: 'Contact', title: 'Nous joindre',
+  noPatients: 'Aucune demande de patients, s’il vous plaît.',
+  inquiries: 'Écrivez-nous pour toute demande clinique, de recherche ou de presse.',
+  write: 'Écrire à l’équipe',
+  listTitle: 'Liste d’envoi', listText: 'Recevez des nouvelles de nos occasions de formation.',
+  subscribe: 'S’inscrire à la liste d’envoi',
+  subj1: 'Modèle de Montréal – demande', subj2: 'Modèle de Montréal – inscription à la liste d’envoi',
+} : {
+  eyebrow: 'Contact', title: 'Contact us',
+  noPatients: 'No patient inquiries please.',
+  inquiries: 'Contact us here for any clinical, research, or press inquiries.',
+  write: 'Email the team',
+  listTitle: 'Mailing list', listText: 'Receive updates for our training opportunities.',
+  subscribe: 'Join the mailing list',
+  subj1: 'Montreal Model – inquiry', subj2: 'Montreal Model – mailing list',
+};
+---
+<section id={id} class="section section--band" aria-labelledby={`${id}-h`}>
+  <div class="container contact">
+    <div class="contact__col">
+      <p class="eyebrow">{s.eyebrow}</p>
+      <h2 id={`${id}-h`}>{s.title}</h2>
+      <p class="contact__notice"><strong>{s.noPatients}</strong></p>
+      <p>{s.inquiries}</p>
+      <p><a class="btn btn--primary" href={`mailto:${contactEmail}?subject=${encodeURIComponent(s.subj1)}`}>{s.write}</a></p>
+    </div>
+    <div class="contact__col">
+      <h3>{s.listTitle}</h3>
+      <p>{s.listText}</p>
+      <p><a class="btn btn--secondary" href={`mailto:${contactEmail}?subject=${encodeURIComponent(s.subj2)}`}>{s.subscribe}</a></p>
+    </div>
+  </div>
+</section>
