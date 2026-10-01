@@ -1,5 +1,6 @@
 ---
-import { PageHeader, Section } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
 import { media } from '../../content/data/publications';
@@ -12,18 +13,18 @@ const meta = fr
 ---
 <Shell lang={lang} path="/media-coverage/" title={meta.title} description={meta.description}>
   <main id="main">
-    <PageHeader eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Couverture médiatique' : 'Media Coverage'} lead={fr ? 'Balados et reportages sur le modèle de Montréal et la thérapie par la kétamine.' : 'Podcasts and press coverage of the Montreal Model and ketamine therapy.'} />
+    <PageHead eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Couverture médiatique' : 'Media Coverage'} lead={fr ? 'Balados et reportages sur le modèle de Montréal et la thérapie par la kétamine.' : 'Podcasts and press coverage of the Montreal Model and ketamine therapy.'} />
     <Section>
-      <h2 class="reveal">{fr ? 'Les Podcasts' : 'Podcasts'}</h2>
-      <ul class="media-list reveal-group" style="margin-top: var(--s-6)">
+      <h2 class="reveal-words">{fr ? 'Les Podcasts' : 'Podcasts'}</h2>
+      <ul class="media-list reveal-group reveal-group--slow" style="margin-top: var(--s-6)">
         {media.podcasts.map((p) => (
           <li><a href={p.url} target="_blank" rel="noopener noreferrer" lang="en">{p.title}</a></li>
         ))}
       </ul>
     </Section>
     <Section band>
-      <h2 class="reveal">{fr ? 'Dans l’actualité' : 'In the news'}</h2>
-      <ul class="media-list reveal-group" style="margin-top: var(--s-6)">
+      <h2 class="reveal-words">{fr ? 'Dans l’actualité' : 'In the news'}</h2>
+      <ul class="media-list reveal-group reveal-group--slow" style="margin-top: var(--s-6)">
         {media.news.map((n) => (
           <li>
             <p lang={n.lang}>“{n.title}”</p>

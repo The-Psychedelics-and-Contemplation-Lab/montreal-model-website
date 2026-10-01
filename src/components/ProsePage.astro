@@ -1,8 +1,9 @@
 ---
 /** Renders one Markdown entry from src/content/pages/<lang>/<slug>.md as a full page. */
-import { PageHeader, Section } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
+import PageHead from './PageHead.astro';
 import { getEntry } from 'astro:content';
-import { withBase } from '../lib/content';
+import { withBase, revealHeadings, revealLists } from '../lib/content';
 import Shell from './Shell.astro';
 import type { Lang } from '../site.config';
 
@@ -10,12 +11,12 @@ export interface Props { lang: Lang; slug: string; path: string; schema?: Record
 const { lang, slug, path, schema } = Astro.props;
 const entry = await getEntry('pages', `${lang}/${slug}`);
 if (!entry) throw new Error(`Missing content: ${lang}/${slug}`);
-const html = withBase(entry.rendered?.html ?? '');
+const html = revealLists(revealHeadings(withBase(entry.rendered?.html ?? '')));
 const d = entry.data;
 ---
 <Shell lang={lang} path={path} title={d.seoTitle} description={d.description} schema={schema}>
   <main id="main">
-    <PageHeader eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
     <Section>
       <div class="prose" set:html={html}></div>
     </Section>

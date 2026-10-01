@@ -1,0 +1,17 @@
+---
+/**
+ * Page header for inner pages — same markup as the design-system's <PageHeader>
+ * (the page's ONLY <h1>), with the Round-3 treatment: the column is centred at
+ * reading width, the title's words rise one by one and the lead blurs in.
+ */
+export interface Props { eyebrow?: string; title: string; lead?: string; wide?: boolean }
+const { eyebrow, title, lead, wide = false } = Astro.props;
+---
+<div class="page-header">
+  <div class={wide ? 'container--wide' : 'container container--reading'}>
+    {eyebrow && <p class="eyebrow reveal reveal--fade">{eyebrow}</p>}
+    <h1 class="reveal-words">{title}</h1>
+    {lead && <p class="lead reveal reveal--blur" style="--reveal-delay: 160ms">{lead}</p>}
+    <slot />
+  </div>
+</div>

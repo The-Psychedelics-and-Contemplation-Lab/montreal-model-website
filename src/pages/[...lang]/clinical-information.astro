@@ -1,7 +1,8 @@
 ---
-import { PageHeader, Section, Figure } from '@pcl/design-system';
+import { Section, Figure } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import { getEntry } from 'astro:content';
-import { withBase, splitAtH2, revealHeadings, mottoToPullquote } from '../../lib/content';
+import { withBase, splitAtH2, revealHeadings, revealLists, mottoToPullquote } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
 import { u } from '../../lib/url';
@@ -11,7 +12,7 @@ const fr = lang === 'fr';
 const entry = await getEntry('pages', `${lang}/clinical-information`);
 if (!entry) throw new Error(`Missing content: ${lang}/clinical-information`);
 const d = entry.data;
-const html = revealHeadings(mottoToPullquote(withBase(entry.rendered?.html ?? '')));
+const html = revealLists(revealHeadings(mottoToPullquote(withBase(entry.rendered?.html ?? ''))));
 // First h2 section = overview (motto + one paragraph); the protocol figure follows it, then the rest.
 const [, overview, ...rest] = splitAtH2(html);
 const diagram = {
@@ -24,13 +25,15 @@ const diagram = {
 ---
 <Shell lang={lang} path="/clinical-information/" title={d.seoTitle} description={d.description}>
   <main id="main">
-    <PageHeader eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
     <Section>
       <div class="prose" set:html={overview}></div>
     </Section>
     <Section tight>
-      <Figure src={diagram.src} alt={diagram.alt} caption={diagram.caption} ratio="cinema" width={1600} height={706} class="figure--diagram reveal reveal--scale" />
-      <p class="sans small muted figure__link"><a href={diagram.src} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir le schéma en taille réelle' : 'Open the full-size diagram'}</a></p>
+      <div class="reveal reveal--mask-in">
+        <Figure src={diagram.src} alt={diagram.alt} caption={diagram.caption} ratio="cinema" width={1600} height={706} class="figure--diagram unveil" />
+      </div>
+      <p class="sans small muted figure__link text-center reveal reveal--fade" style="--reveal-delay: 400ms"><a href={diagram.src} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir le schéma en taille réelle' : 'Open the full-size diagram'}</a></p>
     </Section>
     <Section>
       <div class="prose" set:html={rest.join('')}></div>

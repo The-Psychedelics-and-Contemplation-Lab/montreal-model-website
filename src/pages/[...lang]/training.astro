@@ -1,7 +1,8 @@
 ---
-import { PageHeader, Section, Figure, MediaCard } from '@pcl/design-system';
+import { Section, Figure, MediaCard } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import { getEntry } from 'astro:content';
-import { withBase, splitAtH2, splitFirstParagraph, revealHeadings } from '../../lib/content';
+import { withBase, splitAtH2, splitFirstParagraph, revealHeadings, revealLists } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import { langPaths, href } from '../../lib/i18n';
 import { u } from '../../lib/url';
@@ -11,7 +12,7 @@ const fr = lang === 'fr';
 const entry = await getEntry('pages', `${lang}/training`);
 if (!entry) throw new Error(`Missing content: ${lang}/training`);
 const d = entry.data;
-const html = revealHeadings(withBase(entry.rendered?.html ?? ''));
+const html = revealLists(revealHeadings(withBase(entry.rendered?.html ?? '')));
 // Section 1 = workshop (h2 + two paragraphs; the photo pair goes between them), section 2 = upcoming trainings.
 const [, workshop, upcoming] = splitAtH2(html);
 const [workshopIntro, workshopRest] = splitFirstParagraph(workshop);
@@ -28,12 +29,12 @@ const photos = fr
 ---
 <Shell lang={lang} path="/training/" title={d.seoTitle} description={d.description}>
   <main id="main">
-    <PageHeader eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
     <Section>
       <div class="prose" set:html={workshopIntro}></div>
-      <div class="image-pair reveal-group training-photos">
-        <Figure src={photos[0].src} alt={photos[0].alt} caption={photos[0].caption} ratio="wide" drift width={1600} height={1200} />
-        <Figure src={photos[1].src} alt={photos[1].alt} caption={photos[1].caption} ratio="wide" drift width={1600} height={1067} />
+      <div class="image-pair training-photos">
+        <div class="reveal reveal--mask-in"><Figure src={photos[0].src} alt={photos[0].alt} caption={photos[0].caption} ratio="wide" drift width={1600} height={1200} class="unveil" /></div>
+        <div class="reveal reveal--mask-in"><Figure src={photos[1].src} alt={photos[1].alt} caption={photos[1].caption} ratio="wide" drift width={1600} height={1067} class="unveil" /></div>
       </div>
       <div class="prose" set:html={workshopRest}></div>
     </Section>
@@ -41,8 +42,9 @@ const photos = fr
       <div class="prose" set:html={upcoming}></div>
     </Section>
     <Section id="online" ariaLabelledby="online-h">
-      <h2 id="online-h" class="ruled-heading reveal">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
-      <div class="grid grid--2 reveal-group modules" style="margin-top: var(--s-8)">
+      <h2 id="online-h" class="ruled-heading ruled-heading--drawn reveal-words">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
+      <span class="ruled-heading__rule reveal reveal--line" style="--reveal-delay: 240ms" aria-hidden="true"></span>
+      <div class="grid grid--2 reveal-group reveal-group--slow modules" style="margin-top: var(--s-8)">
         <MediaCard
           href={href(lang, '/ketamine-mechanism/')}
           eyebrow={fr ? 'Module interactif' : 'Interactive module'}
@@ -50,13 +52,14 @@ const photos = fr
           text={fr ? 'Onze diapositives interactives sur la kétamine et le glutamate : doses subanesthésiques et anesthésiques comparées. En anglais.' : 'Eleven interactive slides on ketamine and glutamate: subanesthetic and anesthetic doses compared.'}
           src={u('/images/module-ketamine-mechanism.webp')}
           alt={fr ? 'Première diapositive du module : « Ketamine and Glutamate: One Blocker, Different Effects at Different Doses », avec un schéma des doses analgésique, subanesthésique et anesthésique.' : 'First slide of the module, “Ketamine and Glutamate: One Blocker, Different Effects at Different Doses”, with a diagram of analgesic, subanesthetic and anesthetic dose ranges.'}
-          ratio="wide" />
+          ratio="wide" class="media-card--hover" />
         <MediaCard
           href={moduleUrl} external
           eyebrow={fr ? 'Module 1' : 'Module 1'}
           title={fr ? 'Le Modèle de Montréal – Module 1' : 'The Montreal Model – Module 1'}
           text={fr ? 'Module de formation interactif (HTML5) présentant le Modèle de Montréal de thérapie par kétamine. Hébergé sur le serveur média du laboratoire.' : 'Interactive HTML5 training module introducing the Montreal Model of ketamine therapy. Hosted on the lab’s media server.'}
-          ratio="wide" />
+          mark={u('/images/montreal-model-mark.webp')} markAlt={fr ? 'Logo du Modèle de Montréal' : 'Montreal Model logo'}
+          ratio="wide" class="media-card--hover" />
       </div>
     </Section>
   </main>

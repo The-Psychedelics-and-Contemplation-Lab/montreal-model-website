@@ -8,23 +8,24 @@
   --brand-purple-deep: #4E2448;   /* panel frame, darker plum (replaces the original's black frame) */
   --brand-purple-soft: #F4EDF3;   /* faint tint for hairlines on plum */
   --panel-radius: 10px;
+  --reading: 38.5rem;             /* 64ch of body text (Source Serif 4, 18 px) — a rem so headings share the same column */
 }
 
 /* --- Header: thin plum top rule, as the original's plum bar ------------------------- */
 .site-header { border-top: 4px solid var(--brand-purple); }
 
-/* --- Home hero: centred logo, one-sentence intro, "Learn More" (original layout) ---- */
-.hero--mm { padding-block: var(--s-16) var(--s-16); text-align: left; }
-.hero--mm .hero__inner { max-width: 48rem; margin-inline: auto; display: grid; justify-items: center; text-align: center; }
+/* --- Home hero: the mark (~160 px), then the display-size title, one-sentence intro, buttons ---- */
+.hero--mm { padding-block: var(--s-12) var(--s-16); text-align: left; }
+.hero--mm .hero__inner { max-width: 52rem; margin-inline: auto; display: grid; justify-items: center; text-align: center; }
 .hero--mm .hero__inner > * { text-align: center; }
-.hero-logo { margin: 0; line-height: 0; }
-.hero-logo img { width: min(100%, 22rem); height: auto; display: block; }
-.hero--mm .eyebrow { margin-top: var(--s-8); }
-.hero--mm .lead { margin-top: var(--s-6); max-width: 52ch; color: var(--ink); font-size: 1.25rem; line-height: 1.55; }
+.hero-mark { margin: 0; line-height: 0; }
+.hero-mark img { width: 10rem; height: auto; display: block; }
+.hero--mm .eyebrow { margin-top: var(--s-6); }
+.hero--mm h1 { margin-top: var(--s-4); max-width: 18ch; color: var(--brand-purple); font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.1; text-wrap: balance; }
+.hero--mm .lead { margin-top: var(--s-6); max-width: 52ch; margin-inline: auto; color: var(--ink); font-size: 1.25rem; line-height: 1.55; }
 .hero--mm .cluster { margin-top: var(--s-8); justify-content: center; }
 @media (min-width: 60em) {
-  .hero--mm { padding-block: var(--s-24) var(--s-24); }
-  .hero-logo img { width: 26rem; }
+  .hero--mm { padding-block: var(--s-16) var(--s-24); }
 }
 
 /* --- Plum band holding a white, framed panel (original rhythm) --------------------- */
@@ -33,12 +34,19 @@
 .band-plum__title { color: #fff; margin-bottom: var(--s-6); }
 .band-plum__intro { max-width: var(--measure); margin-bottom: var(--s-8); }
 .band-plum__intro p + p { margin-top: var(--s-3); }
+/* a large faint `waves` watermark in cream, drifting slowly behind the band (parallax 0.15) */
+.band-plum .watermark--cream { color: var(--paper); opacity: 0.08; }
+.band-plum .watermark--right { right: -18%; top: -30%; }
+.band-plum .watermark--left { left: -18%; bottom: -30%; }
+@media (max-width: 59.99em) { .band-plum .watermark--cream { opacity: 0.06; } }
 .panel {
+  position: relative;
   background: var(--card); color: var(--ink);
   border: 3px solid var(--brand-purple-deep); border-radius: var(--panel-radius);
   padding: var(--s-8) var(--s-6);
 }
-.panel > .prose { margin-inline: auto; }
+/* the panel's text sits in a centred reading column (64ch) */
+.panel > .prose { width: min(100%, var(--reading)); max-width: none; margin-inline: auto; }
 .panel > .prose > h2 { margin-top: 0; }
 @media (min-width: 60em) {
   .band-plum { padding-block: var(--s-12); }
@@ -48,9 +56,14 @@
 /* --- Big plum heading with the underline rule (original pages) --------------------- */
 .ruled-heading { color: var(--brand-purple); padding-bottom: var(--s-3); border-bottom: 3px solid var(--brand-purple); }
 .ruled-heading--xl { font-size: clamp(2rem, 4.2vw, 3rem); }
+/* heading whose underline is a separate element so it can draw from the left (reveal--line) */
+.ruled-heading--drawn { border-bottom: 0; padding-bottom: 0; }
+.ruled-heading__rule { display: block; height: 3px; background: var(--brand-purple); margin-top: var(--s-3); }
+.ruled-heading__rule + * { margin-top: var(--s-6); }
 .ruled-heading + * { margin-top: var(--s-6); }
 .prose > h2.ruled-heading { padding-bottom: var(--s-3); }
 .page-header { border-bottom: 0; padding-bottom: var(--s-6); }
+.page-header .container--reading { width: min(100% - 2 * var(--gutter), var(--reading)); }
 .page-header h1 { color: var(--brand-purple); padding-bottom: var(--s-3); border-bottom: 3px solid var(--brand-purple); max-width: none; }
 .page-header .lead { margin-top: var(--s-6); }
 .page-header + .section { padding-top: var(--s-8); }
@@ -58,31 +71,45 @@
 /* --- Prose headings in plum (original inner pages) ----------------------------------- */
 .prose h2 { color: var(--brand-purple); }
 
-/* --- Home sections on white ----------------------------------------------------- */
-.home-ideas .prose { max-width: var(--container); }
-.home-ideas .prose > p, .home-ideas .prose > ul { max-width: var(--measure); }
+/* --- Home sections on white: centred reading column ------------------------------ */
+.home-ideas .prose { max-width: none; }
+.home-ideas .container--reading { width: min(100% - 2 * var(--gutter), var(--reading)); }
 
-/* --- Partner-logo row (McGill · JGH/LDI · MM mark · CHUM · UdeM), white, airy ----- */
-.partners-row { display: grid; gap: var(--s-12) var(--s-8); justify-items: center; align-items: center; grid-template-columns: 1fr; padding-block: var(--s-4); }
+/* --- Reading columns are centred on the screen (Round 3) ---------------------------- */
+.prose { margin-inline: auto; }
+.section > .container > .prose { width: min(100%, var(--reading)); max-width: none; }
+.pubs, .media-list, .reference, .pub-group > h2, .pub-group > p { margin-inline: auto; }
+.section > .container > h2:not(.visually-hidden), .section > .container > .ruled-heading__rule, .section > .container > p.sans { width: min(100%, var(--reading)); margin-inline: auto; }
+
+/* --- Explore cards (home) and module cards (training): lift + soft shadow on hover ---- */
+.explore .media-card, .modules .media-card { clip-path: none; overflow: hidden; transition: transform 500ms var(--ease), box-shadow 500ms var(--ease); }
+.explore .media-card:hover, .explore .media-card:focus-visible, .modules .media-card:hover, .modules .media-card:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-card, 0 10px 30px rgba(28, 27, 25, 0.12)); }
+.explore .media-card--accent { background: var(--brand-purple); }
+.explore .media-card__mark { padding: 14% 22%; }
+.explore .media-card__mark img { opacity: 0.9; }
+.explore .media-card:not(.media-card--accent)::after, .modules .media-card:not(.media-card--accent)::after { background: linear-gradient(to top, rgba(28, 27, 25, 0.92) 0%, rgba(28, 27, 25, 0.7) 40%, rgba(28, 27, 25, 0.15) 75%, rgba(28, 27, 25, 0) 100%); }
+/* the module's first slide is near-white: keep the hover state from hiding the title (ROUND3 §3) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  html.js .explore .media-card--hover::after, html.js .modules .media-card--hover::after { opacity: 0.55; }
+  html.js .explore .media-card--hover .media-card__body, html.js .modules .media-card--hover .media-card__body { opacity: 1; transform: none; }
+  html.js .explore .media-card--hover .media-card__text, html.js .modules .media-card--hover .media-card__text { opacity: 0; transform: translateY(8px); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+  html.js .explore .media-card--hover:hover .media-card__text, html.js .explore .media-card--hover:focus-visible .media-card__text,
+  html.js .modules .media-card--hover:hover .media-card__text, html.js .modules .media-card--hover:focus-visible .media-card__text { opacity: 0.9; transform: none; }
+}
+
+/* --- Partner-logo row (McGill · JGH/LDI · MM mark · CHUM · UdeM) on one line, white ----- */
+.partners-row { display: flex; flex-wrap: wrap; gap: var(--s-8) var(--s-12); justify-content: center; align-items: center; padding-block: var(--s-4); }
 .partners-row > * { display: flex; align-items: center; justify-content: center; }
-.partners-row img { width: auto; max-width: 100%; height: auto; }
-.partners-row .partner--mcgill img { height: 56px; }
-.partners-row .partner--ldi img { height: 120px; }
-.partners-row .partner--mm img { height: 72px; }
-.partners-row .partner--chum img { height: 108px; }
-.partners-row .partner--udem img { height: 80px; }
-@media (min-width: 48em) {
-  .partners-row { grid-template-columns: 1fr 1fr; gap: var(--s-16) var(--s-12); }
-  .partners-row .partner--mm { grid-column: 1 / -1; }
-  .partners-row .partner--mcgill img { height: 84px; }
-  .partners-row .partner--ldi img { height: 170px; }
-  .partners-row .partner--mm img { height: 96px; }
-  .partners-row .partner--chum img { height: 160px; }
-  .partners-row .partner--udem img { height: 120px; }
+.partners-row img { width: auto; max-width: 100%; height: 56px; }
+/* the two compact (near-square) lockups need more height to read at the same visual weight */
+.partners-row .partner--ldi img, .partners-row .partner--chum img { height: 84px; }
+.partners-row .partner--mm img { height: 64px; }
+@media (min-width: 60em) {
+  .partners-row { flex-wrap: nowrap; justify-content: space-between; gap: var(--s-8); }
 }
 
 /* --- Reference block ------------------------------------------------------------ */
-.reference { max-width: var(--measure); border-left: 3px solid var(--brand-purple); padding-left: var(--s-6); }
+.reference { width: min(100%, var(--reading)); border-left: 3px solid var(--brand-purple); padding-left: var(--s-6); }
 .reference p { font-family: var(--font-sans); font-size: var(--fs-ui); line-height: 1.55; }
 .reference .eyebrow { margin-bottom: var(--s-2); }
 
@@ -103,6 +130,8 @@
 .leads { display: grid; gap: var(--s-12); }
 .lead-person { display: grid; gap: var(--s-6); align-content: start; color: #fff; }
 .lead-person h2 { color: #fff; text-align: center; }
+.lead-person__frame { width: 100%; max-width: 22rem; margin-inline: auto; border-radius: var(--panel-radius); overflow: hidden; }
+.lead-person__frame .lead-person__photo { max-width: none; }
 .lead-person__photo { width: 100%; max-width: 22rem; margin-inline: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 25%; border-radius: var(--panel-radius); border: 3px solid #fff; background: var(--brand-purple-deep); display: block; }
 .lead-person__role { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; color: #fff; margin: 0; text-align: center; }
 .lead-person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--brand-purple-soft); margin: var(--s-1) 0 0; text-align: center; }
@@ -114,6 +143,8 @@
 }
 .people { display: grid; gap: var(--s-8); }
 .person { display: grid; gap: var(--s-4); align-content: start; }
+.person__frame { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-card); overflow: hidden; }
+.person__frame .person__photo { height: 100%; }
 .person__photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 30%; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); }
 .person__role { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; color: var(--ink); }
 .person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
@@ -121,7 +152,7 @@
 .person__placeholder { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); display: grid; place-items: center; color: var(--ink-muted); font-family: var(--font-serif); font-size: var(--fs-h2); }
 
 /* --- Publications ------------------------------------------------------------- */
-.pubs { display: grid; gap: var(--s-12); max-width: 56rem; }
+.pubs { display: grid; gap: var(--s-12); width: min(100%, var(--reading)); margin-inline: auto; }
 .pub-group > h2 + p { margin-top: var(--s-3); }
 .pub-group > .pub-list { margin-top: var(--s-6); }
 .pub-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-6); }
@@ -133,7 +164,7 @@
 .pub__links { margin-top: var(--s-3); display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); font-family: var(--font-sans); font-size: var(--fs-ui); }
 
 /* --- Media coverage ------------------------------------------------------------- */
-.media-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-4); max-width: var(--measure); }
+.media-list { list-style: none; padding: 0; margin: 0 auto; display: grid; gap: var(--s-4); width: min(100%, var(--reading)); }
 .media-list li { border-top: 1px solid var(--rule); padding-top: var(--s-4); }
 .media-list .media__meta { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); margin-top: var(--s-1); }
 
@@ -151,8 +182,6 @@
 /* Design-system v0.2.0 bug: `a.no-icon::after { content: none !important }` (the ↗ suppressor) also removes
    MediaCard's gradient pseudo-element. Restore it here with higher specificity (report upstream). */
 .media-card.no-icon::after { content: "" !important; position: absolute; inset: 0; margin: 0; font-size: 0; opacity: 1; display: block; }
-/* The module card's image is a near-white slide: strengthen the gradient so the white title stays legible. */
-.modules .media-card:not(.media-card--accent)::after { background: linear-gradient(to top, rgba(28, 27, 25, 0.92) 0%, rgba(28, 27, 25, 0.7) 40%, rgba(28, 27, 25, 0.15) 75%, rgba(28, 27, 25, 0) 100%); }
 .modules { max-width: var(--container); }
 
 /* --- Contact ---------------------------------------------------------------------- */
@@ -165,4 +194,31 @@
   .playlists { display: none !important; }
   .band-plum { background: none; color: var(--ink); }
   .lead-person, .lead-person h2, .lead-person__role, .lead-person__aff, .lead-person__bio { color: var(--ink); }
+}
+
+/* --- Round 3: figure pairs stagger, lists and headings on inner pages ------------------ */
+.image-pair > :nth-child(2).reveal { --reveal-delay: 220ms; }
+.training-photos { margin-inline: auto; }
+.page-header .container--wide h1 { max-width: none; }
+
+/* --- Wipe / mask reveals on a wrapper --------------------------------------------------
+   Chromium's IntersectionObserver takes clip-path into account, so a block that clips
+   ITSELF to nothing (design-system `reveal--wipe` / `reveal--mask`) never intersects and
+   only appears through the script's above-the-fold safety net. Same motion, but the
+   observed element is a plain wrapper and the clip is on its child. (Report upstream.) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal.reveal--wipe-in, html.js .reveal.reveal--mask-in { opacity: 1; transform: none; }
+  html.js .reveal--wipe-in > .unveil { clip-path: inset(100% 0 0 0); transition: clip-path var(--reveal-dur, 1000ms) var(--ease); }
+  html.js .reveal--wipe-in.is-visible > .unveil { clip-path: inset(0 0 0 0); }
+  html.js .reveal--mask-in > .unveil { clip-path: inset(0 0 100% 0); transition: clip-path var(--reveal-dur, 1100ms) var(--ease); }
+  html.js .reveal--mask-in > .unveil img { transform: scale(1.08); transition: transform calc(var(--reveal-dur, 1100ms) + 400ms) var(--ease); }
+  html.js .reveal--mask-in.is-visible > .unveil { clip-path: inset(0 0 0 0); }
+  html.js .reveal--mask-in.is-visible > .unveil img { transform: scale(1); }
+}
+.lead-person__frame .unveil, .person__frame .unveil { height: 100%; }
+.person__frame .unveil img { height: 100%; }
+/* phones: the 16:9 card can't hold eyebrow + title + text, so keep eyebrow + title only */
+@media (max-width: 40em) {
+  .explore .media-card__text, .modules .media-card__text { display: none; }
+  .explore .media-card__body, .modules .media-card__body { margin-top: 0; }
 }

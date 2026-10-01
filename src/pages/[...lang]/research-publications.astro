@@ -1,5 +1,6 @@
 ---
-import { PageHeader, Section } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
 import { u } from '../../lib/url';
@@ -17,16 +18,16 @@ const schema = {
 ---
 <Shell lang={lang} path="/research-publications/" title={meta.title} description={meta.description} schema={schema}>
   <main id="main">
-    <PageHeader eyebrow={fr ? 'Recherche' : 'Research'} title={fr ? 'Publications' : 'Research Publications'} lead={fr ? 'Les articles évalués par les pairs qui décrivent, évaluent et étendent le Modèle de Montréal.' : 'The peer-reviewed papers that describe, evaluate and extend the Montreal Model.'} />
-    <Section>
+    <PageHead eyebrow={fr ? 'Recherche' : 'Research'} title={fr ? 'Publications' : 'Research Publications'} lead={fr ? 'Les articles évalués par les pairs qui décrivent, évaluent et étendent le Modèle de Montréal.' : 'The peer-reviewed papers that describe, evaluate and extend the Montreal Model.'} />
+    <Section watermark="waves" watermarkPosition="right">
       <div class="pubs">
         {pubGroups.map((g) => {
           const Item = g.heading ? 'h3' : 'h2';
           return (
             <section class="pub-group" id={g.id} aria-labelledby={g.heading ? `${g.id}-h` : undefined}>
-              {g.heading && <h2 id={`${g.id}-h`} class="reveal">{g.heading[lang]}</h2>}
-              {g.intro && <p>{g.intro[lang]}</p>}
-              <ol class="pub-list reveal-group">
+              {g.heading && <h2 id={`${g.id}-h`} class="reveal-words">{g.heading[lang]}</h2>}
+              {g.intro && <p class="reveal reveal--blur">{g.intro[lang]}</p>}
+              <ol class="pub-list reveal-group reveal-group--slow">
                 {g.items.map((p) => (
                   <li class="pub" id={p.id}>
                     <Item>{p.heading}</Item>

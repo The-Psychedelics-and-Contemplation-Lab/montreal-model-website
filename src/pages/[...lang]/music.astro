@@ -9,9 +9,10 @@ const fr = lang === 'fr';
 ---
 <ProsePage lang={lang} slug="music" path="/music/">
   <Section id="playlists" band ariaLabelledby="playlists-h">
-    <h2 id="playlists-h" class="ruled-heading reveal">{fr ? 'Les Playlists Musicales' : 'Musical Playlists'}</h2>
-    <div class="prose">
-      <p class="reveal reveal--fade">
+    <h2 id="playlists-h" class="ruled-heading ruled-heading--drawn text-center reveal-words">{fr ? 'Les Playlists Musicales' : 'Musical Playlists'}</h2>
+    <span class="ruled-heading__rule reveal reveal--line" style="--reveal-delay: 240ms" aria-hidden="true"></span>
+    <div class="prose text-center">
+      <p class="reveal reveal--blur" style="--reveal-delay: 200ms">
         {fr ? 'Pour plus de playlists, consultez notre ' : 'For more playlists, check out our '}
         <a href={media.spotify.profile} target="_blank" rel="noopener noreferrer"><strong>{fr ? 'Spotify page!' : 'Spotify page!'}</strong></a>
       </p>

@@ -27,14 +27,17 @@ export const h2Text = (chunk: string) => (chunk.match(/<h2[^>]*>(.*?)<\/h2>/)?.[
  * Add class="reveal" to h2/h3 headings (never to body paragraphs) so they fade in on scroll.
  * Headings carry an id from the Markdown renderer; the class is appended to the opening tag.
  */
-export const revealHeadings = (html: string) => html.replace(/<(h2|h3)(\s[^>]*)?>/g, (_m, tag, attrs = '') => `<${tag}${attrs} class="reveal">`);
+export const revealHeadings = (html: string, cls = 'reveal-words') => html.replace(/<(h2|h3)(\s[^>]*)?>/g, (_m, tag, attrs = '') => `<${tag}${attrs} class="${cls}">`);
+
+/** Stagger the items of every top-level list (ul/ol) slowly on scroll. */
+export const revealLists = (html: string, cls = 'reveal-group reveal-group--slow') => html.replace(/<(ul|ol)(\s[^>]*)?>/g, (_m, tag, attrs = '') => `<${tag}${attrs} class="${cls}">`);
 
 /**
  * A paragraph that is entirely italic (<p><em>…</em></p>) at the start of a page is the
  * model's motto; render it as a pull quote. Only the first match is converted.
  */
 export const mottoToPullquote = (html: string) =>
-  html.replace(/<p><em>([^<]+)<\/em><\/p>/, (_m, text) => `<blockquote class="pullquote reveal"><p>${text}</p></blockquote>`);
+  html.replace(/<p><em>([^<]+)<\/em><\/p>/, (_m, text) => `<blockquote class="pullquote reveal reveal--rise-lg"><p>${text}</p></blockquote>`);
 
 /** Remove <figure>…</figure> blocks from rendered Markdown (the page renders them with <Figure>). */
 export const stripFigures = (html: string) => html.replace(/<figure[\s\S]*?<\/figure>/g, '');

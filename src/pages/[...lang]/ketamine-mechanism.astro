@@ -1,5 +1,6 @@
 ---
-import { PageHeader, Section } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
 import { u } from '../../lib/url';
@@ -13,7 +14,7 @@ const meta = fr
 ---
 <Shell lang={lang} path="/ketamine-mechanism/" title={meta.title} description={meta.description}>
   <main id="main">
-    <PageHeader eyebrow={fr ? 'Module interactif' : 'Interactive module'} title={fr ? 'Mécanisme de la kétamine' : 'Ketamine Mechanism'} lead={fr
+    <PageHead eyebrow={fr ? 'Module interactif' : 'Interactive module'} title={fr ? 'Mécanisme de la kétamine' : 'Ketamine Mechanism'} lead={fr
       ? 'Comment la kétamine agit sur le cerveau : des récepteurs du glutamate aux réseaux cérébraux et à l’expérience vécue, aux doses subanesthésiques et anesthésiques. Module en anglais.'
       : 'How ketamine acts on the brain: from glutamate receptors to brain networks and the lived experience, at subanesthetic and anesthetic doses.'} wide />
     <Section wide>

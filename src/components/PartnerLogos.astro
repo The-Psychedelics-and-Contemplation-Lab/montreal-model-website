@@ -1,8 +1,8 @@
 ---
 /**
- * Partner-logo row, laid out as on the original site: McGill and JGH/LDI on the first line,
- * the Montreal Model mark centred, then CHUM and Université de Montréal — all on white,
- * generously spaced. McGill and LDI–JGH are the official SVGs from the design system.
+ * Partner-logo row, as on the original site: McGill · JGH/LDI · Montreal Model mark · CHUM · UdeM
+ * on ONE line (equal height, wrapping to two lines only under 60em), on white.
+ * McGill and LDI–JGH are the official SVGs from the design system.
  */
 import mcgillLogo from '@pcl/design-system/logos/mcgill.svg';
 import ldiLogo from '@pcl/design-system/logos/ldi-jgh.svg';
@@ -15,7 +15,7 @@ const fr = lang === 'fr';
 <section id={id} class="section" aria-labelledby={`${id}-h`}>
   <div class="container">
     <h2 id={`${id}-h`} class="visually-hidden">{fr ? 'Établissements partenaires' : 'Partner institutions'}</h2>
-    <div class="partners-row reveal-group">
+    <div class="partners-row reveal-group reveal-group--slow">
       <a class="partner partner--mcgill no-icon" href="https://www.mcgill.ca/" target="_blank" rel="noopener noreferrer">
         <img src={mcgillLogo.src} alt={fr ? 'Université McGill' : 'McGill University'} width={mcgillLogo.width} height={mcgillLogo.height} loading="lazy" decoding="async" />
       </a>

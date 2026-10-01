@@ -55,15 +55,16 @@ export function siteFor(lang: Lang): typeof site {
 /** Navigation; hrefs are built by the page with the base prefix (see lib/i18n.ts). */
 /** Secondary pages, linked from the footer (built per language in lib/i18n.ts). */
 export const footerItems: { path: string; label: Record<Lang, string> }[] = [
-  { path: '/ketamine-mechanism/', label: { en: 'Ketamine mechanism (interactive module)', fr: 'Mécanisme de la kétamine (module interactif)' } },
   { path: '/media-coverage/', label: { en: 'Media coverage', fr: 'Couverture médiatique' } },
   { path: '/#contact', label: { en: 'Contact', fr: 'Contact' } },
 ];
 
+/** Six items max so the header fits beside the McGill / LDI–JGH lockup from 1024 px up. */
 export const navItems: { path: string; label: Record<Lang, string> }[] = [
   { path: '/clinical-information/', label: { en: 'Clinical', fr: 'Clinique' } },
-  { path: '/research-publications/', label: { en: 'Publications', fr: 'Publications' } },
+  { path: '/research-publications/', label: { en: 'Publications', fr: 'Recherche' } },
   { path: '/music/', label: { en: 'Music', fr: 'Musique' } },
   { path: '/training/', label: { en: 'Training', fr: 'Formation' } },
+  { path: '/ketamine-mechanism/', label: { en: 'Mechanism', fr: 'Mécanisme' } },
   { path: '/people/', label: { en: 'People', fr: 'Équipe' } },
 ];

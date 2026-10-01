@@ -1,5 +1,6 @@
 ---
-import { PageHeader, Section } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
+import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
 import PartnerLogos from '../../components/PartnerLogos.astro';
 import { langPaths } from '../../lib/i18n';
@@ -15,22 +16,24 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
 ---
 <Shell lang={lang} path="/people/" title={meta.title} description={meta.description}>
   <main id="main">
-    <PageHeader eyebrow={fr ? 'Équipe' : 'Team'} title={fr ? 'Personnes' : 'People'} lead={peopleIntro[lang][0]}>
-      <p class="lead">{peopleIntro[lang][1]}</p>
-    </PageHeader>
+    <PageHead eyebrow={fr ? 'Équipe' : 'Team'} title={fr ? 'Personnes' : 'People'} lead={peopleIntro[lang][0]}>
+      <p class="lead reveal reveal--blur" style="--reveal-delay: 320ms">{peopleIntro[lang][1]}</p>
+    </PageHead>
 
     <section class="band-plum section" aria-label={fr ? 'Les fondateurs du modèle' : 'The model’s founders'}>
       <div class="container">
-        <div class="leads reveal-group">
+        <div class="leads">
           {leads.map((p: Person) => (
             <article class="lead-person">
-              <h2>{p.name}</h2>
-              <img class="lead-person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" />
-              <div>
+              <h2 class="reveal-words">{p.name}</h2>
+              <div class="lead-person__frame reveal reveal--mask-in">
+                <div class="unveil"><img class="lead-person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" /></div>
+              </div>
+              <div class="reveal reveal--fade" style="--reveal-delay: 200ms">
                 <p class="lead-person__role">{p.role[lang]}</p>
                 <p class="lead-person__aff">{p.affiliation[lang]}</p>
               </div>
-              <div class="lead-person__bio"><p>{p.bio?.[lang]}</p></div>
+              <div class="lead-person__bio reveal reveal--fade" style="--reveal-delay: 320ms"><p>{p.bio?.[lang]}</p></div>
             </article>
           ))}
         </div>
@@ -38,12 +41,13 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
     </section>
 
     <Section ariaLabelledby="collab-h">
-      <h2 id="collab-h" class="ruled-heading reveal">{fr ? 'Collaborateurs' : 'Collaborators'}</h2>
-      <div class="people people--collab reveal-group" style="margin-top: var(--s-8)">
+      <h2 id="collab-h" class="ruled-heading ruled-heading--drawn reveal-words">{fr ? 'Collaborateurs' : 'Collaborators'}</h2>
+      <span class="ruled-heading__rule reveal reveal--line" style="--reveal-delay: 240ms" aria-hidden="true"></span>
+      <div class="people people--collab reveal-group reveal-group--slow" style="margin-top: var(--s-8)">
         {collaborators.map((p: Person) => (
           <article class="person">
             {p.photo
-              ? <img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" />
+              ? <div class="person__frame reveal reveal--mask-in"><div class="unveil"><img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" /></div></div>
               : <div class="person__placeholder" aria-hidden="true">{initials(p.name)}</div>}
             <div class="person__head">
               <h3>{p.name}</h3>

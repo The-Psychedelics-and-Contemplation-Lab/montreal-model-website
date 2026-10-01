@@ -1,11 +1,11 @@
 ---
-import { Section } from '@pcl/design-system';
+import { Section, SectionMark, Watermark, MediaCard } from '@pcl/design-system';
 import { getEntry } from 'astro:content';
 import { withBase, splitAtH2, h2Text } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
 import PartnerLogos from '../../components/PartnerLogos.astro';
-import { langPaths } from '../../lib/i18n';
+import { langPaths, href } from '../../lib/i18n';
 import { u } from '../../lib/url';
 import { site } from '../../site.config';
 export const getStaticPaths = langPaths;
@@ -26,6 +26,26 @@ const sections = splitAtH2(html)
     body: chunk.replace(/<h2[^>]*>[\s\S]*?<\/h2>/, ''),
   }));
 const [therapy, model, research] = sections;
+
+const ui = fr ? {
+  learn: 'En savoir plus', mechanism: 'Comment agit la kétamine',
+  explore: 'Explorer', exploreTitle: 'Aller plus loin',
+  moduleEyebrow: 'Module interactif', moduleTitle: 'Comment la kétamine agit sur le cerveau',
+  moduleText: 'Onze diapositives interactives sur la kétamine et le glutamate. En anglais.',
+  moduleAlt: 'Première diapositive du module : « Ketamine and Glutamate: One Blocker, Different Effects at Different Doses ».',
+  trainingEyebrow: 'Formation', trainingTitle: 'Formation au Modèle de Montréal',
+  trainingText: 'Ateliers, formations à venir et modules en ligne pour les cliniciens.',
+  markAlt: 'Logo du Modèle de Montréal : deux cœurs en nuage, du rouge au bleu',
+} : {
+  learn: 'Learn More', mechanism: 'How ketamine works',
+  explore: 'Explore', exploreTitle: 'Go further',
+  moduleEyebrow: 'Interactive module', moduleTitle: 'How ketamine acts on the brain',
+  moduleText: 'Eleven interactive slides on ketamine and glutamate, from receptors to the lived experience.',
+  moduleAlt: 'First slide of the module, “Ketamine and Glutamate: One Blocker, Different Effects at Different Doses”.',
+  trainingEyebrow: 'Training', trainingTitle: 'Training in the Montreal Model',
+  trainingText: 'Workshops, upcoming trainings and online modules for clinicians.',
+  markAlt: 'Montreal Model logo: two heart-shaped clouds, red to blue',
+};
 
 const schema = [
   site.organizationSchema,
@@ -51,44 +71,73 @@ const schema = [
   <main id="main">
     <div class="hero hero--mm">
       <div class="container hero__inner">
-        <h1 class="hero-logo reveal reveal--scale">
-          <img src={u('/images/montreal-model-mark.webp')} alt={d.title} width="790" height="436" loading="eager" decoding="async" fetchpriority="high" />
-        </h1>
-        <p class="eyebrow reveal reveal--fade" style="--reveal-delay: 80ms">{d.eyebrow}</p>
-        <p class="lead reveal" style="--reveal-delay: 140ms">{d.lead}</p>
-        <div class="cluster reveal reveal--fade" style="--reveal-delay: 220ms">
-          <a class="btn btn--primary" href={`#${therapy.id}`}>{fr ? 'En savoir plus' : 'Learn More'}</a>
+        <p class="hero-mark reveal reveal--scale" style="--reveal-dur: 900ms">
+          <img src={u('/images/montreal-model-mark.webp')} alt={ui.markAlt} width="790" height="436" loading="eager" decoding="async" fetchpriority="high" />
+        </p>
+        <p class="eyebrow reveal reveal--fade" style="--reveal-delay: 120ms">{d.eyebrow}</p>
+        <h1 class="reveal-words" style="--reveal-delay: 200ms">{d.title}</h1>
+        <p class="lead reveal reveal--blur" style="--reveal-delay: 520ms">{d.lead}</p>
+        <div class="cluster reveal reveal--fade" style="--reveal-delay: 760ms">
+          <a class="btn btn--primary" href={`#${therapy.id}`}>{ui.learn}</a>
+          <a class="btn btn--secondary" href={href(lang, '/ketamine-mechanism/')}>{ui.mechanism}</a>
         </div>
       </div>
     </div>
 
-    <section id={therapy.id} class="band-plum" aria-labelledby={`${therapy.id}-h`}>
+    <section id={therapy.id} class="band-plum has-watermark" aria-labelledby={`${therapy.id}-h`}>
+      <Watermark motif="waves" position="right" speed={0.15} size="80rem" class="watermark--cream" />
       <div class="container">
-        <h2 id={`${therapy.id}-h`} class="band-plum__title reveal">{therapy.title}</h2>
-        <div class="panel reveal reveal--fade" style="--reveal-delay: 100ms">
+        <h2 id={`${therapy.id}-h`} class="band-plum__title reveal-words">{therapy.title}</h2>
+        <div class="reveal reveal--wipe-in" style="--reveal-dur: 1000ms"><div class="panel unveil">
           <div class="prose" set:html={therapy.body}></div>
-        </div>
+        </div></div>
       </div>
     </section>
 
-    <Section id={model.id} class="home-ideas" ariaLabelledby={`${model.id}-h`}>
-      <h2 id={`${model.id}-h`} class="ruled-heading ruled-heading--xl reveal">{model.title}</h2>
-      <div class="prose" set:html={model.body}></div>
-    </Section>
+    <section id={model.id} class="section home-ideas" aria-labelledby={`${model.id}-h`}>
+      <div class="container container--reading">
+        <h2 id={`${model.id}-h`} class="ruled-heading ruled-heading--xl ruled-heading--drawn reveal-words">{model.title}</h2>
+        <span class="ruled-heading__rule reveal reveal--line" style="--reveal-delay: 300ms" aria-hidden="true"></span>
+        <div class="prose reveal reveal--fade" style="--reveal-delay: 200ms; --reveal-dur: 900ms" set:html={model.body}></div>
+      </div>
+    </section>
 
-    <section id={research.id} class="band-plum" aria-labelledby={`${research.id}-h`}>
+    <section id={research.id} class="band-plum has-watermark" aria-labelledby={`${research.id}-h`}>
+      <Watermark motif="waves" position="left" speed={0.15} size="80rem" class="watermark--cream" />
       <div class="container">
-        <h2 id={`${research.id}-h`} class="band-plum__title reveal">{research.title}</h2>
-        <div class="panel reveal reveal--fade" style="--reveal-delay: 100ms">
+        <h2 id={`${research.id}-h`} class="band-plum__title reveal-words">{research.title}</h2>
+        <div class="reveal reveal--wipe-in" style="--reveal-dur: 1000ms"><div class="panel unveil">
           <div class="prose" set:html={research.body}></div>
-        </div>
+        </div></div>
       </div>
     </section>
+
+    <Section id="explore" band ariaLabelledby="explore-h">
+      <SectionMark label={ui.explore} accent />
+      <h2 id="explore-h" class="text-center reveal-words">{ui.exploreTitle}</h2>
+      <div class="grid grid--2 reveal-group reveal-group--slow explore" style="margin-top: var(--s-8)">
+        <MediaCard
+          href={href(lang, '/ketamine-mechanism/')}
+          eyebrow={ui.moduleEyebrow}
+          title={ui.moduleTitle}
+          text={ui.moduleText}
+          src={u('/images/module-ketamine-mechanism.webp')}
+          alt={ui.moduleAlt}
+          ratio="wide" class="media-card--hover" />
+        <MediaCard
+          href={href(lang, '/training/')}
+          eyebrow={ui.trainingEyebrow}
+          title={ui.trainingTitle}
+          text={ui.trainingText}
+          mark={u('/images/montreal-model-mark.webp')} markAlt={ui.markAlt}
+          ratio="wide" class="media-card--hover" />
+      </div>
+    </Section>
 
     <PartnerLogos lang={lang} />
 
     <Section band tight ariaLabelledby="reference-h">
-      <div class="reference reveal">
+      <div class="reference reveal reveal--fade">
         <p class="eyebrow" id="reference-h">{fr ? 'Référence' : 'Reference'}</p>
         <p>Garel, N., Drury, J., Thibault Lévesque, J., Goyette, N., Lehmann, A., Looper, K., Erritzoe, D., Dames, S., Turecki, G., Rej, S., &amp; Greenway, K. T. (2023). The Montreal model: An integrative biomedical-psychedelic approach to ketamine for severe treatment-resistant depression. <em>Frontiers in Psychiatry</em>, <em>14</em>, 1268832. <a href="https://doi.org/10.3389/fpsyt.2023.1268832" target="_blank" rel="noopener noreferrer">https://doi.org/10.3389/fpsyt.2023.1268832</a></p>
       </div>
