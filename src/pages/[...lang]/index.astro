@@ -1,7 +1,7 @@
 ---
-import { Section } from '@pcl/design-system';
+import { Section, SectionMark, Figure, Watermark } from '@pcl/design-system';
 import { getEntry } from 'astro:content';
-import { withBase } from '../../lib/content';
+import { withBase, splitAtH2, revealHeadings } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
 import { langPaths, href } from '../../lib/i18n';
@@ -12,9 +12,30 @@ const { lang } = Astro.props;
 const fr = lang === 'fr';
 const entry = await getEntry('pages', `${lang}/home`);
 if (!entry) throw new Error('Missing home content');
-const html = withBase(entry.rendered?.html ?? '');
+const html = revealHeadings(withBase(entry.rendered?.html ?? ''));
 const d = entry.data;
-const h1 = fr ? 'Le modèle de Montréal de thérapie par la kétamine' : 'The Montreal Model of Ketamine Therapy';
+const h1 = d.title;
+
+// The Markdown body is three h2 sections (Ketamine therapy · The Montreal Model · What the research shows);
+// each becomes its own Section with a SectionMark, alternating paper / band.
+const sections = splitAtH2(html).filter((s) => s.trim());
+const marks = fr
+  ? ['Thérapie par kétamine', 'Le modèle', 'Données probantes']
+  : ['Ketamine therapy', 'The model', 'Evidence'];
+
+const stats = fr
+  ? [
+      { value: '2018', label: 'Développement du modèle à McGill, peaufiné depuis dans le système de santé public' },
+      { value: 'Des milliers', label: 'de traitements prodigués à des patients souffrant de dépression résistante sévère' },
+      { value: '2', label: 'sites hospitaliers à Montréal : Hôpital général juif et CHUM' },
+      { value: 'Kétamine + psychothérapie', label: 'Doses multiples associées à un soutien psychologique structuré' },
+    ]
+  : [
+      { value: '2018', label: 'Model first developed at McGill and refined in public healthcare since' },
+      { value: 'Thousands', label: 'of treatments provided to patients with severe treatment-resistant depression' },
+      { value: '2', label: 'hospital sites in Montreal: Jewish General Hospital and CHUM' },
+      { value: 'Ketamine + psychotherapy', label: 'Multiple doses paired with structured psychological support' },
+    ];
 
 const schema = [
   site.organizationSchema,
@@ -38,41 +59,55 @@ const schema = [
 ---
 <Shell lang={lang} path="/" title={d.seoTitle} description={d.description} schema={schema}>
   <main id="main">
-    <div class="hero hero--mm">
+    <div class="hero hero--mm has-watermark">
+      <Watermark motif="waves" position="right" speed={0.12} />
       <div class="container hero__inner">
-        <div>
-          <p class="eyebrow">{d.eyebrow}</p>
-          <h1>{h1}</h1>
-          <p class="lead">{d.lead}</p>
-          <div class="cluster">
-            <a class="btn btn--primary" href={href(lang, '/clinical-information/')}>{fr ? 'Information clinique' : 'Clinical information'}</a>
-            <a class="btn btn--secondary" href={href(lang, '/research-publications/')}>{fr ? 'Publications de recherche' : 'Research publications'}</a>
-          </div>
+        <p class="eyebrow reveal reveal--fade">{d.eyebrow}</p>
+        <h1 class="reveal" style="--reveal-delay: 60ms">{h1}</h1>
+        <p class="lead reveal" style="--reveal-delay: 140ms">{d.lead}</p>
+        <div class="cluster reveal reveal--fade" style="--reveal-delay: 220ms">
+          <a class="btn btn--primary" href={href(lang, '/clinical-information/')}>{fr ? 'Informations cliniques' : 'Clinical information'}</a>
+          <a class="btn btn--secondary" href={href(lang, '/research-publications/')}>{fr ? 'Publications' : 'Research publications'}</a>
         </div>
-        <img class="hero__mark" src={u('/images/montreal-model-mark.png')} alt={fr ? 'Emblème du modèle de Montréal : deux cœurs formant un nuage' : 'Montreal Model emblem: two hearts forming a cloud'} width="592" height="358" decoding="async" />
       </div>
     </div>
 
-    <Section>
-      <div class="facts" aria-label={fr ? 'Faits saillants' : 'Key facts'}>
-        <div class="facts__item"><strong>2018</strong><span>{fr ? 'Développement du modèle à McGill, affiné depuis dans le réseau public' : 'Model first developed at McGill and refined in public healthcare since'}</span></div>
-        <div class="facts__item"><strong>{fr ? 'Des milliers' : 'Thousands'}</strong><span>{fr ? 'de traitements offerts à des patients atteints de dépression résistante sévère' : 'of treatments provided to patients with severe treatment-resistant depression'}</span></div>
-        <div class="facts__item"><strong>2</strong><span>{fr ? 'sites hospitaliers à Montréal : Hôpital général juif et CHUM' : 'hospital sites in Montreal: Jewish General Hospital and CHUM'}</span></div>
-        <div class="facts__item"><strong>{fr ? 'Kétamine + psychothérapie' : 'Ketamine + psychotherapy'}</strong><span>{fr ? 'Doses multiples jumelées à un soutien psychologique structuré' : 'Multiple doses paired with structured psychological support'}</span></div>
+    <Section tight class="hero-figure">
+      <Figure
+        src={u('/images/montreal-model-protocol.jpg')}
+        alt={fr
+          ? 'Schéma du protocole du Modèle de Montréal : évaluation psychiatrique, préparation initiale, six séances de traitement à la kétamine sur quatre semaines avec préparation et intégration continues, puis maintien, le tout accompagné d’une psychothérapie conventionnelle concomitante.'
+          : 'Diagram of the Montreal Model protocol: psychiatric assessment, initial preparation, six ketamine treatment sessions over four weeks with rolling preparation and integration, and maintenance, all accompanied by concomitant conventional psychotherapy.'}
+        caption={fr ? 'Le protocole standard du Modèle de Montréal (Garel et coll., 2023). Figure en anglais.' : 'The standard Montreal Model protocol (Garel et al., 2023).'}
+        ratio="cinema" width={1600} height={706} loading="eager" class="figure--diagram reveal reveal--scale" />
+    </Section>
+
+    <Section band ariaLabelledby="facts-h">
+      <h2 id="facts-h" class="visually-hidden">{fr ? 'Faits saillants' : 'Key facts'}</h2>
+      <div class="stats reveal-group">
+        {stats.map((s) => (
+          <div class="stat stat--accent">
+            <p class="stat__value">{s.value}</p>
+            <p class="stat__label">{s.label}</p>
+          </div>
+        ))}
       </div>
     </Section>
 
-    <Section tight>
-      <div class="prose" set:html={html}></div>
-    </Section>
+    {sections.map((chunk, i) => (
+      <Section band={i % 2 === 1}>
+        <SectionMark label={marks[i] ?? ''} accent />
+        <div class="prose prose--centered" set:html={chunk}></div>
+      </Section>
+    ))}
 
-    <Section tight>
-      <div class="reference">
-        <p class="eyebrow">{fr ? 'Référence' : 'Reference'}</p>
+    <Section band tight>
+      <SectionMark label={fr ? 'Référence' : 'Reference'} />
+      <div class="reference reveal">
         <p>Garel, N., Drury, J., Thibault Lévesque, J., Goyette, N., Lehmann, A., Looper, K., Erritzoe, D., Dames, S., Turecki, G., Rej, S., &amp; Greenway, K. T. (2023). The Montreal model: An integrative biomedical-psychedelic approach to ketamine for severe treatment-resistant depression. <em>Frontiers in Psychiatry</em>, <em>14</em>, 1268832. <a href="https://doi.org/10.3389/fpsyt.2023.1268832" target="_blank" rel="noopener noreferrer">https://doi.org/10.3389/fpsyt.2023.1268832</a></p>
       </div>
     </Section>
 
-    <ContactBlock lang={lang} />
+    <ContactBlock lang={lang} mark />
   </main>
 </Shell>

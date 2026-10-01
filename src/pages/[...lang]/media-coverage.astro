@@ -14,21 +14,21 @@ const meta = fr
   <main id="main">
     <PageHeader eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Couverture médiatique' : 'Media Coverage'} lead={fr ? 'Balados et reportages sur le modèle de Montréal et la thérapie par la kétamine.' : 'Podcasts and press coverage of the Montreal Model and ketamine therapy.'} />
     <Section>
-      <h2>{fr ? 'Balados' : 'Podcasts'}</h2>
-      <ul class="media-list" style="margin-top: var(--s-6)">
+      <h2 class="reveal">{fr ? 'Les Podcasts' : 'Podcasts'}</h2>
+      <ul class="media-list reveal-group" style="margin-top: var(--s-6)">
         {media.podcasts.map((p) => (
           <li><a href={p.url} target="_blank" rel="noopener noreferrer" lang="en">{p.title}</a></li>
         ))}
       </ul>
     </Section>
     <Section band>
-      <h2>{fr ? 'Dans les médias' : 'In the news'}</h2>
-      <ul class="media-list" style="margin-top: var(--s-6)">
+      <h2 class="reveal">{fr ? 'Dans l’actualité' : 'In the news'}</h2>
+      <ul class="media-list reveal-group" style="margin-top: var(--s-6)">
         {media.news.map((n) => (
           <li>
             <p lang={n.lang}>“{n.title}”</p>
             <p class="media__meta">{n.outlet} — {n.date[lang]}</p>
-            <p class="media__meta"><a href={n.url} target="_blank" rel="noopener noreferrer">{fr ? 'Lire l’article' : 'Read article'}</a></p>
+            <p class="media__meta"><a href={n.url} target="_blank" rel="noopener noreferrer">{fr ? '[Lire l’article]' : 'Read article'}</a></p>
           </li>
         ))}
       </ul>

@@ -14,13 +14,13 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
 ---
 <Shell lang={lang} path="/people/" title={meta.title} description={meta.description}>
   <main id="main">
-    <PageHeader eyebrow={fr ? 'Équipe' : 'Team'} title={fr ? 'Équipe' : 'People'} lead={peopleIntro[lang][0]} />
+    <PageHeader eyebrow={fr ? 'Équipe' : 'Team'} title={fr ? 'Personnes' : 'People'} lead={peopleIntro[lang][0]} />
     <Section>
-      <div class="prose"><p>{peopleIntro[lang][1]}</p></div>
-      <div class="people people--leads" style="margin-top: var(--s-12)">
+      <div class="prose"><p class="reveal reveal--fade">{peopleIntro[lang][1]}</p></div>
+      <div class="people people--leads reveal-group" style="margin-top: var(--s-12)">
         {leads.map((p: Person) => (
           <article class="person person--lead">
-            <img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="600" loading="lazy" decoding="async" />
+            <div class="person__frame"><img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="600" loading="lazy" decoding="async" /></div>
             <div class="person__head">
               <h2>{p.name}</h2>
               <p class="person__role">{p.role[lang]}</p>
@@ -32,8 +32,8 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
       </div>
     </Section>
     <Section band ariaLabelledby="collab-h">
-      <h2 id="collab-h">{fr ? 'Collaborateurs' : 'Collaborators'}</h2>
-      <div class="people people--collab" style="margin-top: var(--s-8)">
+      <h2 id="collab-h" class="reveal">{fr ? 'Collaborateurs' : 'Collaborators'}</h2>
+      <div class="people people--collab reveal-group" style="margin-top: var(--s-8)">
         {collaborators.map((p: Person) => (
           <article class="person person--compact">
             {p.photo
@@ -50,7 +50,7 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
     </Section>
     <Section tight ariaLabelledby="partners-h">
       <h2 id="partners-h" class="visually-hidden">{fr ? 'Établissements partenaires' : 'Partner institutions'}</h2>
-      <div class="partners">
+      <div class="partners reveal reveal--fade">
         <img src={u('/images/logo-chum.png')} alt="Centre hospitalier de l’Université de Montréal (CHUM)" width="264" height="224" loading="lazy" decoding="async" />
         <img src={u('/images/logo-udem.png')} alt="Université de Montréal" width="250" height="99" loading="lazy" decoding="async" />
       </div>

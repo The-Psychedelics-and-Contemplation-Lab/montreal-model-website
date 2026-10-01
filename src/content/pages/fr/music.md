@@ -1,60 +1,60 @@
 ---
-title: "La musique en thérapie psychédélique"
+title: "La Musique dans la Thérapie Psychédélique"
 eyebrow: "Musique"
-lead: "Pourquoi la musique fait partie du modèle de Montréal, ce que l’essai MUSIK a montré, et comment les approches avec et sans musique se comparent."
-seoTitle: "La musique en thérapie par la kétamine — Le modèle de Montréal"
-description: "La musique dans le modèle de Montréal : l’essai MUSIK, la structure des listes de lecture, les approches sans musique et les listes Spotify du programme."
+lead: "Pourquoi la musique fait partie du Modèle de Montréal, ce que l’essai MUSIK a révélé, et comment les approches musicales et non musicales se comparent."
+seoTitle: "La musique dans la thérapie psychédélique — Le modèle de Montréal"
+description: "La musique dans le Modèle de Montréal : l’essai MUSIK, la structure des playlists, les approches non musicales et les playlists Spotify du programme."
 ---
 
-La musique est une composante presque universelle des thérapies psychédéliques depuis leur développement initial au milieu du 20<sup>e</sup> siècle. La musique est aussi souvent un élément central du modèle de Montréal de thérapie par la kétamine et a été étudiée dans notre récent essai clinique randomisé : l’essai MUSIK (Music for Subanesthetic Infusions of Ketamine).
+La musique est une composante quasi universelle des thérapies psychédéliques depuis leur développement au milieu du 20<sup>e</sup> siècle. Elle est également souvent au cœur du modèle montréalais de kétamine et a été étudiée dans le cadre de notre récent essai clinique randomisé : l'essai MUSIK (Music for Subanesthetic Infusions of Ketamine).
 
-Cet essai a comparé des listes de lecture musicales soigneusement élaborées à une forme appariée de soutien sans musique, centrée sur la pleine conscience guidée et le dialogue actif. L’essai MUSIK a montré que la musique réduisait efficacement les hausses de pression artérielle associées à la kétamine, mais que les deux approches étaient globalement aussi efficaces l’une que l’autre, tant pour les bienfaits psychiatriques que pour le type d’expériences psychédéliques.
+Cet essai a comparé des playlists musicales soigneusement élaborées à une forme de soutien non musical similaire, axée sur la pleine conscience guidée et le dialogue actif. L'essai MUSIK a révélé que la musique permettait de réduire efficacement l'augmentation de la tension artérielle associée à la kétamine, mais que les deux approches présentaient globalement une efficacité similaire, en termes de bienfaits psychiatriques et de types d'expériences psychédéliques.
 
-Toutefois, les approches avec et sans musique développées dans l’essai MUSIK peuvent avoir des effets très variables d’une personne à l’autre, chacune offrant des avantages et des inconvénients qui lui sont propres, décrits et comparés ci-dessous.
+Cependant, les approches musicales et non musicales développées dans l’essai MUSIK peuvent avoir des effets très spécifiques à chaque personne, chacune offrant des avantages et des inconvénients uniques, comme décrit et comparé ci-dessous.
 
-## La musique dans le modèle de Montréal
+## La Musique dans le Modèle de Montréal
 
-Lorsque la musique est intégrée au modèle, elle suit une structure précise :
+Lorsque la musique est incorporée au modèle, elle suit une structure spécifique :
 
-- Une sélection musicale de 50 à 60 minutes diffusée à la fois par des écouteurs et des haut-parleurs, à partir du début de la perfusion de kétamine ou de l’injection intramusculaire.
-- Les patients choisissent parmi diverses listes de lecture au début de chaque séance de traitement.
-- Les listes de lecture suivent un format constant : elles commencent par des compositions apaisantes, gagnent progressivement en intensité après 10 à 15 minutes, et se terminent par de la musique calme pendant les 20 dernières minutes.
-- En général, il y a peu d’échanges avec les thérapeutes pendant que la musique joue, bien qu’elle puisse toujours être arrêtée ou que les écouteurs puissent être retirés.
-- Après la séance de traitement, la liste de lecture est remise aux patients pour qu’ils puissent la réécouter pendant les périodes d’intégration.
+- Une sélection musicale de 50 à 60 minutes diffusée via des écouteurs et des haut-parleurs après le début de la perfusion de kétamine ou l'injection intramusculaire de kétamine.
+- Les patients choisissent parmi différentes listes de lecture organisées au début de chaque séance de traitement
+- Les playlists musicales sélectionnées suivent un format cohérent : elles commencent par des compositions apaisantes, augmentent progressivement en intensité après 10 à 15 minutes et se terminent par une musique apaisante pendant les 20 dernières minutes.
+- En général, il y a peu de discussions avec les thérapeutes pendant que la musique joue, même si elle peut toujours être arrêtée ou retirée des écouteurs.
+- Après la séance de traitement, les patients reçoivent la playlist à réécouter pendant les périodes d'intégration
 
-## Les approches sans musique dans le modèle de Montréal
+## Approches Non Musicales dans le Modèle de Montréal
 
-La variante sans musique du modèle de Montréal conserve tous les autres éléments thérapeutiques, en remplaçant la musique par d’autres interventions de soutien :
+La variante non musicale du Modèle de Montréal conserve tous les autres éléments thérapeutiques tout en remplaçant la musique par des interventions de soutien alternatives :
 
-- Les patients sont doucement encouragés à pratiquer la pleine conscience, par exemple le balayage corporel et l’attention à la respiration.
-- Les cliniciens favorisent la détente et la curiosité envers l’expérience de kétamine par un accompagnement verbal.
-- Les patients peuvent rester silencieux ou discuter de leurs expériences avec le personnel clinique pendant les traitements.
+- Les patients reçoivent des encouragements doux pour s'engager dans des pratiques de pleine conscience telles que le balayage corporel et la conscience de la respiration
+- Les cliniciens favorisent la relaxation et la curiosité à propos de l'expérience de la kétamine grâce à des conseils verbaux
+- Les patients peuvent rester silencieux ou discuter de leurs expériences avec le personnel clinique pendant les traitements
 
-## Avantages et inconvénients comparés
+## Avantages et Inconvénients Comparatifs
 
 ### Avantages de la musique
 
-- Bienfaits hémodynamiques : l’essai MUSIK a montré que la musique réduit significativement les hausses de pression artérielle systolique induites par la kétamine, améliorant ainsi la tolérance cardiovasculaire.
-- Outil d’intégration : les patients peuvent réécouter les listes de lecture après le traitement pour se remémorer et traiter les états émotionnels vécus pendant les séances.
-- Structure temporelle : la musique offre un cadre constant qui guide les patients à travers les différentes phases de l’expérience de kétamine.
+- Avantages hémodynamiques : l'essai MUSIK a révélé que la musique réduit considérablement les augmentations de la pression artérielle systolique induites par la kétamine, améliorant ainsi la tolérance cardiovasculaire
+- Outil d'intégration : les patients peuvent revisiter les listes de lecture après le traitement pour les aider à se souvenir et à traiter les états émotionnels vécus pendant les séances
+- Structure temporelle : La musique fournit un cadre cohérent qui guide les patients à travers les différentes phases de l'expérience de la kétamine
 
 ### Inconvénients de la musique
 
-- Risque d’orientation non souhaitée : d’après les recherches sur la psilocybine, la musique peut parfois entraîner les patients vers des souvenirs ou des expériences difficiles qu’ils n’étaient pas prêts à aborder.
-- Peut limiter l’interaction interpersonnelle : les écouteurs peuvent faire obstacle à un contact direct avec les cliniciens à des moments critiques.
-- Interférence possible avec la pleine conscience : la musique pourrait distraire des exercices de pleine conscience qui font partie de l’approche thérapeutique.
+- Potentiel d'orientation indésirable : D'après les recherches sur la psilocybine, la musique peut parfois conduire les patients vers des souvenirs ou des expériences difficiles qu'ils n'étaient pas préparés à aborder.
+- Peut limiter l'interaction interpersonnelle : les écouteurs peuvent créer un obstacle à l'engagement direct avec les cliniciens lors des moments critiques
+- Interférence possible avec la pleine conscience : la musique pourrait potentiellement distraire des exercices de pleine conscience qui font partie de l'approche thérapeutique
 
-### Avantages des approches sans musique
+### Avantages des approches non musicales
 
-- Engagement accru dans la pleine conscience : le silence relatif facilite un engagement plus profond dans des pratiques comme le balayage corporel.
-- Interaction accrue avec le thérapeute : sans écouteurs, les patients peuvent interagir plus directement avec les cliniciens pendant l’expérience.
-- Expérience dirigée par le patient : sans l’influence directrice de la musique, les patients peuvent avoir davantage de latitude dans leur expérience intérieure.
+- Engagement accru dans la pleine conscience : le silence relatif facilite un engagement plus profond dans les pratiques de pleine conscience comme le balayage corporel
+- Interaction accrue avec le thérapeute : sans casque, les patients peuvent interagir plus directement avec les cliniciens pendant l'expérience
+- Expérience dirigée par le patient : sans l’influence directrice de la musique, les patients peuvent avoir plus d’influence sur leur expérience interne
 
-### Inconvénients des approches sans musique
+### Inconvénients des approches non musicales
 
-- Inconfort initial : certains patients peuvent trouver le silence relatif inconfortable ou plus difficile, surtout s’ils étaient habitués à la musique lors de séances précédentes.
-- Expérience moins structurée : sans le cadre temporel de la musique, l’expérience peut sembler moins guidée.
+- Inconfort initial : Certains patients peuvent trouver le silence relatif inconfortable ou plus difficile, surtout s'ils ont été habitués à la musique lors des séances précédentes.
+- Expérience moins structurée : Sans le cadre temporel de la musique, l’expérience peut sembler moins guidée
 
 ## Résumé
 
-Le modèle de Montréal constitue une approche flexible de la thérapie par la kétamine qui peut intégrer efficacement des interventions avec ou sans musique selon les besoins et les préférences de chaque patient. La recherche indique que si la musique offre des avantages particuliers pour la tolérance hémodynamique et la structure de l’expérience, les approches sans musique présentent d’autres atouts grâce à un engagement accru dans la pleine conscience et à une interaction plus directe avec le thérapeute. Les résultats cliniques comparables des deux approches suggèrent que les praticiens peuvent adapter la méthode à chaque patient sans compromettre l’efficacité thérapeutique.
+Le Modèle de Montréal représente une approche flexible de la thérapie à la kétamine, qui peut intégrer efficacement des interventions musicales ou non musicales en fonction des besoins et des préférences de chaque patient. La recherche indique que si la musique offre des avantages spécifiques en termes de tolérance hémodynamique et de structure expérientielle, les approches non musicales offrent des avantages alternatifs grâce à une meilleure mobilisation de la pleine conscience et à une interaction accrue avec le thérapeute. Les résultats cliniques comparables entre les différentes approches suggèrent que les praticiens peuvent adapter la méthode à chaque patient sans compromettre l'efficacité thérapeutique.

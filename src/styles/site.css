@@ -1,23 +1,34 @@
 /* Site-specific layout for montreal-model-website. Tokens and typography come
    from @pcl/design-system and are never overridden here. */
 
-/* --- Home hero ------------------------------------------------------------- */
-.hero--mm { border-bottom: 1px solid var(--rule); }
-.hero--mm .hero__inner { display: grid; gap: var(--s-8); align-items: center; }
-.hero--mm .hero__mark { display: none; }
-@media (min-width: 60em) {
-  .hero--mm .hero__inner { grid-template-columns: minmax(0, 1fr) 18rem; }
-  .hero--mm .hero__mark { display: block; justify-self: end; width: 16rem; }
-}
+/* --- Home hero (typographic, waves watermark behind) --------------------------- */
+.hero--mm { border-bottom: 1px solid var(--rule); padding-block: var(--s-16) var(--s-16); }
+.hero--mm .watermark { --wm-size: 64rem; right: -22%; top: -30%; }
+.hero--mm .hero__inner { max-width: 60rem; }
+.hero-figure { padding-top: var(--s-12); }
 
-/* --- Home: key facts strip ---------------------------------------------------- */
-.facts { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
-.facts__item { border-top: 2px solid var(--accent); padding-top: var(--s-3); }
-.facts__item strong { display: block; font-family: var(--font-serif); font-size: var(--fs-h3); line-height: var(--lh-tight); }
-.facts__item span { display: block; margin-top: var(--s-2); font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
+/* --- Figures: the protocol diagram must never be cropped (no drift, natural ratio) --- */
+.figure--diagram .figure__frame { aspect-ratio: auto; border: 1px solid var(--rule); background: #fff; }
+.figure--diagram .figure__frame img { height: auto; object-fit: contain; }
+.figure--diagram { max-width: var(--container); margin-inline: auto; }
+.figure__link { margin-top: var(--s-2); }
+
+/* --- Pull quote inside prose (the model's motto) --------------------------------------- */
+.prose blockquote.pullquote { border-left: 0; padding: 0; color: var(--ink); font-style: normal; margin-block: var(--s-6) var(--s-8); max-width: 28ch; }
+.prose blockquote.pullquote p { font-size: var(--fs-h3); line-height: 1.4; }
+
+/* --- Home: stat tiles ------------------------------------------------------------- */
+.stats { display: grid; gap: var(--s-8) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.stat p { margin: 0; }
+.stat__value { max-width: 14ch; }
+
+/* --- Home prose sections: centred reading column under a SectionMark ----------------- */
+.prose--centered { margin-inline: auto; }
+.centered { text-align: center; }
+h2.centered { margin-bottom: var(--s-8); }
 
 /* --- Reference block ------------------------------------------------------------ */
-.reference { max-width: var(--measure); border-left: 3px solid var(--accent); padding-left: var(--s-6); }
+.reference { max-width: var(--measure); margin-inline: auto; border-left: 3px solid var(--accent); padding-left: var(--s-6); }
 .reference p { font-family: var(--font-sans); font-size: var(--fs-ui); line-height: 1.55; }
 .reference .eyebrow { margin-bottom: var(--s-2); }
 
@@ -34,25 +45,36 @@
 .person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
 .person__bio { margin-top: var(--s-2); }
 .person__bio p + p { margin-top: var(--s-3); }
+.person__frame { overflow: hidden; border-radius: var(--radius-card); }
+.person--lead .person__frame { aspect-ratio: 1 / 1; }
+.person--lead .person__frame .person__photo { aspect-ratio: auto; height: 100%; border: 0; border-radius: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .person__frame img { transition: transform 900ms var(--ease); }
+  .person:hover .person__frame img { transform: scale(1.03); }
+}
 @media (min-width: 48em) {
   .people--leads { grid-template-columns: 1fr 1fr; }
-  .person--lead { grid-template-columns: 14rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: var(--s-6); }
-  .person--lead .person__photo { grid-row: 1; aspect-ratio: 1 / 1; }
+  .person--lead { grid-template-columns: 16rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: var(--s-8); }
+  .person--lead .person__frame { grid-row: 1; }
   .person--lead .person__head { grid-column: 2; align-self: start; }
   .person--lead .person__bio { grid-column: 1 / -1; }
 }
 @media (min-width: 70em) {
   .people--leads { grid-template-columns: 1fr; }
-  .person--lead { grid-template-columns: 16rem minmax(0, 1fr); grid-template-rows: auto auto; }
-  .person--lead .person__photo { grid-row: 1 / span 2; }
+  .person--lead { grid-template-columns: 20rem minmax(0, 1fr); grid-template-rows: auto auto; }
+  .person--lead .person__frame { grid-row: 1 / span 2; }
   .person--lead .person__bio { grid-column: 2; margin-top: 0; }
 }
-.people--collab { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: var(--s-6); }
+.people--collab { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--s-8) var(--s-6); }
 .person--compact .person__photo { aspect-ratio: 1 / 1; }
 .person__placeholder { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); display: grid; place-items: center; color: var(--ink-muted); font-family: var(--font-serif); font-size: var(--fs-h2); }
 .partners { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); }
 .partners img { height: 64px; width: auto; }
 .partners img:first-child { height: 88px; }
+
+/* --- Page header with a quiet watermark (publications) ------------------------------ */
+.page-header--wm .watermark--quiet { opacity: 0.09; --wm-size: 48rem; right: -16%; top: -40%; }
+.page-header--wm .page-header { position: relative; z-index: 1; }
 
 /* --- Publications ------------------------------------------------------------- */
 .pubs { display: grid; gap: var(--s-12); max-width: 56rem; }
@@ -80,16 +102,21 @@
 .module iframe { display: block; width: 100%; height: min(85vh, 60rem); min-height: 40rem; border: 0; }
 .module__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-top: 1px solid var(--rule); font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
 
+/* --- Training ---------------------------------------------------------------------- */
+.training-photos { margin-block: var(--s-12); max-width: var(--container); }
+/* Design-system v0.2.0 bug: `a.no-icon::after { content: none !important }` (the ↗ suppressor) also removes
+   MediaCard's gradient pseudo-element. Restore it here with higher specificity (report upstream). */
+.media-card.no-icon::after { content: "" !important; position: absolute; inset: 0; margin: 0; font-size: 0; opacity: 1; display: block; }
+/* The module card's image is a near-white slide: strengthen the gradient so the white title stays legible. */
+.modules .media-card:not(.media-card--accent)::after { background: linear-gradient(to top, rgba(28, 27, 25, 0.92) 0%, rgba(28, 27, 25, 0.7) 40%, rgba(28, 27, 25, 0.15) 75%, rgba(28, 27, 25, 0) 100%); }
+.modules { max-width: var(--container); }
+
 /* --- Contact ---------------------------------------------------------------------- */
 .contact { display: grid; gap: var(--s-8); }
 .contact__col > * + * { margin-top: var(--s-3); }
 .contact__col .btn { margin-top: var(--s-2); }
 @media (min-width: 60em) { .contact { grid-template-columns: 3fr 2fr; gap: var(--s-12); } }
 
-/* --- Training placeholder card ------------------------------------------------------ */
-.card--module { display: grid; gap: var(--s-3); }
-.card--module .cluster { margin-top: var(--s-4); }
-
 @media print {
-  .hero__mark, .playlists { display: none !important; }
+  .playlists { display: none !important; }
 }

@@ -1,37 +1,64 @@
 ---
-import { Section } from '@pcl/design-system';
-import ProsePage from '../../components/ProsePage.astro';
+import { PageHeader, Section, Figure, MediaCard, SectionMark } from '@pcl/design-system';
+import { getEntry } from 'astro:content';
+import { withBase, splitAtH2, splitFirstParagraph, revealHeadings } from '../../lib/content';
+import Shell from '../../components/Shell.astro';
 import { langPaths, href } from '../../lib/i18n';
+import { u } from '../../lib/url';
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props;
 const fr = lang === 'fr';
+const entry = await getEntry('pages', `${lang}/training`);
+if (!entry) throw new Error(`Missing content: ${lang}/training`);
+const d = entry.data;
+const html = revealHeadings(withBase(entry.rendered?.html ?? ''));
+// Section 1 = workshop (h2 + two paragraphs; the photo pair goes between them), section 2 = upcoming trainings.
+const [, workshop, upcoming] = splitAtH2(html);
+const [workshopIntro, workshopRest] = splitFirstParagraph(workshop);
 const moduleUrl = 'https://media.psychedelicsandcontemplationlab.com/montreal-model/module-1/';
+const photos = fr
+  ? [
+      { src: u('/images/workshop-2025-auditorium.jpg'), alt: 'Un amphithéâtre rempli de participants à l’atelier, tournés vers une diapositive projetée sur le Modèle de Montréal.', caption: 'L’atelier inaugural, les 29 et 30 mai 2025.' },
+      { src: u('/images/workshop-2025-team.jpg'), alt: 'L’équipe de l’atelier réunie devant la diapositive-titre du premier atelier sur le Modèle de Montréal, les 29 et 30 mai 2025.', caption: 'L’équipe de l’atelier et les bénévoles.' },
+    ]
+  : [
+      { src: u('/images/workshop-2025-auditorium.jpg'), alt: 'A lecture hall full of workshop participants facing a projected slide about the Montreal Model.', caption: 'The inaugural workshop, May 29–30, 2025.' },
+      { src: u('/images/workshop-2025-team.jpg'), alt: 'The workshop team gathered in front of the title slide of the first Montreal Model workshop, May 29–30, 2025.', caption: 'The workshop team and volunteers.' },
+    ];
 ---
-<ProsePage lang={lang} slug="training" path="/training/">
-  <Section id="online" band ariaLabelledby="online-h">
-    <p class="eyebrow">{fr ? 'Apprentissage en ligne' : 'Online learning'}</p>
-    <h2 id="online-h" style="margin-top: var(--s-3)">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
-    <div class="grid grid--2" style="margin-top: var(--s-8)">
-      <div class="card card--module">
-        <p class="eyebrow">{fr ? 'Module 1' : 'Module 1'}</p>
-        <h3>{fr ? 'Le modèle de Montréal – Module 1' : 'The Montreal Model – Module 1'}</h3>
-        <p class="sans muted">{fr
-          ? 'Module de formation interactif (HTML5) présentant le modèle de Montréal de thérapie par la kétamine. Hébergé sur le serveur média du laboratoire.'
-          : 'Interactive HTML5 training module introducing the Montreal Model of ketamine therapy. Hosted on the lab’s media server.'}</p>
-        <div class="cluster">
-          <a class="btn btn--primary" href={moduleUrl} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir le module 1' : 'Open Module 1'}<span class="btn__icon" aria-hidden="true"></span></a>
-        </div>
+<Shell lang={lang} path="/training/" title={d.seoTitle} description={d.description}>
+  <main id="main">
+    <PageHeader eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <Section>
+      <div class="prose" set:html={workshopIntro}></div>
+      <div class="image-pair reveal-group training-photos">
+        <Figure src={photos[0].src} alt={photos[0].alt} caption={photos[0].caption} ratio="wide" drift width={1600} height={1200} />
+        <Figure src={photos[1].src} alt={photos[1].alt} caption={photos[1].caption} ratio="wide" drift width={1600} height={1067} />
       </div>
-      <div class="card card--module">
-        <p class="eyebrow">{fr ? 'Module interactif' : 'Interactive module'}</p>
-        <h3>{fr ? 'Comment la kétamine agit sur le cerveau' : 'How ketamine acts on the brain'}</h3>
-        <p class="sans muted">{fr
-          ? 'Diapositives interactives sur la kétamine et le glutamate : doses subanesthésiques et anesthésiques comparées.'
-          : 'Interactive slides on ketamine and glutamate: subanesthetic and anesthetic doses compared.'}</p>
-        <div class="cluster">
-          <a class="btn btn--secondary" href={href(lang, '/ketamine-mechanism/')}>{fr ? 'Voir le module' : 'View the module'}</a>
-        </div>
+      <div class="prose" set:html={workshopRest}></div>
+    </Section>
+    <Section band>
+      <div class="prose" set:html={upcoming}></div>
+    </Section>
+    <Section id="online" ariaLabelledby="online-h">
+      <SectionMark label={fr ? 'Apprentissage en ligne' : 'Online learning'} accent />
+      <h2 id="online-h" class="reveal centered">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
+      <div class="grid grid--2 reveal-group modules">
+        <MediaCard
+          href={href(lang, '/ketamine-mechanism/')}
+          eyebrow={fr ? 'Module interactif' : 'Interactive module'}
+          title={fr ? 'Comment la kétamine agit sur le cerveau' : 'How ketamine acts on the brain'}
+          text={fr ? 'Onze diapositives interactives sur la kétamine et le glutamate : doses subanesthésiques et anesthésiques comparées. En anglais.' : 'Eleven interactive slides on ketamine and glutamate: subanesthetic and anesthetic doses compared.'}
+          src={u('/images/module-ketamine-mechanism.webp')}
+          alt={fr ? 'Première diapositive du module : « Ketamine and Glutamate: One Blocker, Different Effects at Different Doses », avec un schéma des doses analgésique, subanesthésique et anesthésique.' : 'First slide of the module, “Ketamine and Glutamate: One Blocker, Different Effects at Different Doses”, with a diagram of analgesic, subanesthetic and anesthetic dose ranges.'}
+          ratio="wide" />
+        <MediaCard
+          href={moduleUrl} external
+          eyebrow={fr ? 'Module 1' : 'Module 1'}
+          title={fr ? 'Le Modèle de Montréal – Module 1' : 'The Montreal Model – Module 1'}
+          text={fr ? 'Module de formation interactif (HTML5) présentant le Modèle de Montréal de thérapie par kétamine. Hébergé sur le serveur média du laboratoire.' : 'Interactive HTML5 training module introducing the Montreal Model of ketamine therapy. Hosted on the lab’s media server.'}
+          ratio="wide" />
       </div>
-    </div>
-  </Section>
-</ProsePage>
+    </Section>
+  </main>
+</Shell>

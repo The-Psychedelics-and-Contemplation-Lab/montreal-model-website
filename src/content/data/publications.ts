@@ -37,7 +37,7 @@ export const pubGroups: PubGroup[] = [
         url: 'https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2023.1268832/full',
         summary: {
           en: 'This article outlines the development and protocol of the Montreal Model and the team’s cumulative knowledge gained from hundreds of ketamine sessions conducted with highly severe patients with treatment resistant depression (TRD). To contextualize the model\'s development, we review the evidence for ketamine as a biomedical and as a psychedelic treatment of depression, emphasizing each perspectives’ strengths, weaknesses, and distinct methods of utilization. This article details the model’s rationale, its components, the goals and activities of each session, and the postulated therapeutic mechanisms.',
-          fr: 'Cet article décrit le développement et le protocole du modèle de Montréal ainsi que les connaissances cumulées par l’équipe au fil de centaines de séances de kétamine menées auprès de patients atteints de dépression résistante au traitement (DRT) très sévère. Pour situer le développement du modèle, nous passons en revue les données probantes sur la kétamine comme traitement biomédical et comme traitement psychédélique de la dépression, en soulignant les forces, les faiblesses et les modes d’utilisation distincts de chaque perspective. L’article détaille la logique du modèle, ses composantes, les objectifs et les activités de chaque séance, ainsi que les mécanismes thérapeutiques postulés.',
+          fr: 'Cet article décrit le développement et le protocole du Modèle de Montréal, ainsi que les connaissances accumulées par l\'équipe au cours de centaines de séances de kétamine menées auprès de patients très sévèrement atteints de dépression résistante au traitement (DRT). Afin de contextualiser le développement du modèle, nous examinons les données probantes sur la kétamine comme traitement biomédical et psychédélique de la dépression, en soulignant les forces, les faiblesses et les modes d\'utilisation distincts de chaque perspective. Cet article détaille la justification du modèle, ses composantes, les objectifs et les activités de chaque séance, ainsi que les mécanismes thérapeutiques postulés.',
         },
       },
     ],
@@ -47,7 +47,7 @@ export const pubGroups: PubGroup[] = [
     heading: { en: 'MUSIK Trial', fr: 'Essai MUSIK' },
     intro: {
       en: 'The Music for Subanesthetic Infusions of Ketamine (MUSIK) randomized clinical trial was conducted between January 2021 and August 2022 in Montreal, Canada and investigated the effects of ketamine-assisted psychotherapy—with and without music—on patients with highly treatment-resistant depression (TRD). During the trial, six subanesthetic ketamine infusions were administered over four weeks to 32 participants, alongside structured psychological support.',
-      fr: 'L’essai clinique randomisé MUSIK (Music for Subanesthetic Infusions of Ketamine) a été mené entre janvier 2021 et août 2022 à Montréal, au Canada, et a étudié les effets de la psychothérapie assistée par la kétamine – avec et sans musique – chez des patients atteints de dépression hautement résistante au traitement (DRT). Au cours de l’essai, six perfusions subanesthésiques de kétamine ont été administrées sur quatre semaines à 32 participants, accompagnées d’un soutien psychologique structuré.',
+      fr: 'L\'essai clinique randomisé MUSIK (Musique pour perfusions subanesthésiques de kétamine) a été mené entre janvier 2021 et août 2022 à Montréal, au Canada. Il visait à évaluer les effets de la psychothérapie assistée par kétamine, avec et sans musique, sur des patients souffrant de dépression hautement résistante au traitement (DRT). Au cours de cet essai, six perfusions subanesthésiques de kétamine ont été administrées sur quatre semaines à 32 participants, accompagnées d\'un soutien psychologique structuré.',
     },
     items: [
       {
@@ -62,7 +62,7 @@ export const pubGroups: PubGroup[] = [
         url: 'https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2814430',
         summary: {
           en: 'This article reports the MUSIK Trial’s primary outcome: systolic blood pressure changes. We examined the impact of music on the hemodynamic response to intravenous ketamine in patients with TRD. Given ketamine’s propensity to elevate blood pressure, the study assessed whether music, as a nonpharmacological intervention, could modulate these cardiovascular effects. Participants received subanesthetic ketamine infusions under either music or non-music conditions, with continuous monitoring of blood pressure and heart rate. Results indicated that music was associated with attenuated blood pressure increases during treatment, suggesting that music may serve as a simple and effective adjunct to improve the safety and tolerability of ketamine administration in psychiatric settings.',
-          fr: 'Cet article présente le critère d’évaluation principal de l’essai MUSIK : les variations de la pression artérielle systolique. Nous avons examiné l’effet de la musique sur la réponse hémodynamique à la kétamine intraveineuse chez des patients atteints de DRT. Étant donné la tendance de la kétamine à élever la pression artérielle, l’étude a évalué si la musique, en tant qu’intervention non pharmacologique, pouvait moduler ces effets cardiovasculaires. Les participants ont reçu des perfusions subanesthésiques de kétamine avec ou sans musique, sous surveillance continue de la pression artérielle et de la fréquence cardiaque. Les résultats indiquent que la musique était associée à des hausses atténuées de la pression artérielle pendant le traitement, ce qui suggère que la musique peut constituer un adjuvant simple et efficace pour améliorer la sécurité et la tolérance de l’administration de kétamine en contexte psychiatrique.',
+          fr: 'Cet article présente le critère d\'évaluation principal de l\'essai MUSIK : les variations de la pression artérielle systolique. Nous avons examiné l\'impact de la musique sur la réponse hémodynamique à la kétamine intraveineuse chez des patients atteints de TRD. Compte tenu de la propension de la kétamine à élever la pression artérielle, l\'étude a évalué si la musique, en tant qu\'intervention non pharmacologique, pouvait moduler ces effets cardiovasculaires. Les participants ont reçu des perfusions sous-anesthésiques de kétamine, avec ou sans musique, avec surveillance continue de la pression artérielle et de la fréquence cardiaque. Les résultats ont indiqué que la musique était associée à une atténuation des augmentations de la pression artérielle pendant le traitement, ce qui suggère que la musique pourrait constituer un complément simple et efficace pour améliorer la sécurité et la tolérance de l\'administration de kétamine en milieu psychiatrique.',
         },
       },
       {
@@ -77,7 +77,7 @@ export const pubGroups: PubGroup[] = [
         url: 'https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/music-for-subanesthetic-infusions-of-ketamine-randomised-clinical-trial-ketamine-as-a-psychedelic-treatment-for-highly-refractory-depression/86C378F62A8AE69292BAB0BB17BF1E54',
         summary: {
           en: 'This article reports the psychiatric outcomes of the MUSIK trial, overall and for both groups: music- and non-music conditions. Both treatment groups showed substantial and sustained improvements in depression, anxiety, and suicidality, with effects persisting at least eight weeks post-treatment. Importantly, the intensity of mystical-like experiences during sessions, not music itself, was strongly associated with greater antidepressant outcomes. These findings support the efficacy of psychedelic-like ketamine treatments and highlight the therapeutic potential of integrating psychological and contextual elements—such as set, setting, and supportive care—into ketamine-based interventions for severe depression.',
-          fr: 'Cet article présente les résultats psychiatriques de l’essai MUSIK, globalement et pour chacun des deux groupes : avec et sans musique. Les deux groupes de traitement ont montré des améliorations substantielles et durables de la dépression, de l’anxiété et de la suicidalité, les effets persistant au moins huit semaines après le traitement. Fait important, c’est l’intensité des expériences de type mystique pendant les séances, et non la musique elle-même, qui était fortement associée à de meilleurs résultats antidépresseurs. Ces résultats appuient l’efficacité des traitements à la kétamine de type psychédélique et soulignent le potentiel thérapeutique de l’intégration d’éléments psychologiques et contextuels – comme l’état d’esprit, le cadre et les soins de soutien – dans les interventions à base de kétamine pour la dépression sévère.',
+          fr: 'Cet article présente les résultats psychiatriques de l\'essai MUSIK, globalement et pour les deux groupes : troubles musicaux et non musicaux. Les deux groupes de traitement ont montré des améliorations substantielles et durables de la dépression, de l\'anxiété et des tendances suicidaires, les effets persistant au moins huit semaines après le traitement. Il est important de noter que l\'intensité des expériences de type mystique pendant les séances, et non la musique elle-même, était fortement associée à de meilleurs résultats antidépresseurs. Ces résultats confirment l\'efficacité des traitements à la kétamine de type psychédélique et soulignent le potentiel thérapeutique de l\'intégration d\'éléments psychologiques et contextuels – tels que le contexte, le cadre et les soins de soutien – dans les interventions à base de kétamine pour la dépression sévère.',
         },
       },
     ],
@@ -97,7 +97,7 @@ export const pubGroups: PubGroup[] = [
         url: 'https://www.nature.com/articles/s41386-023-01689-y',
         summary: {
           en: 'This article examines an ambi-directional cohort study we conducted of patients undergoing the Montreal Model for TRD who were taking long-term benzodiazepines (or Z-drugs) on evaluation. Participants undergoing treatment were assessed for their ability to reduce or cease benzodiazepine consumption. The study found that ketamine infusions not only alleviated depressive symptoms but also facilitated the tapering and discontinuation of benzodiazepines in a significant proportion of patients. These findings suggest that ketamine may serve a dual therapeutic role in managing TRD and assisting in benzodiazepine deprescription, offering a promising avenue for addressing the challenges of long-term benzodiazepine dependence in this population.',
-          fr: 'Cet article présente une étude de cohorte ambidirectionnelle que nous avons menée auprès de patients suivant le modèle de Montréal pour une DRT et qui prenaient des benzodiazépines (ou des médicaments en Z) à long terme au moment de l’évaluation. La capacité des participants en traitement à réduire ou à cesser leur consommation de benzodiazépines a été évaluée. L’étude a révélé que les perfusions de kétamine non seulement soulageaient les symptômes dépressifs, mais facilitaient aussi la diminution progressive et l’arrêt des benzodiazépines chez une proportion importante de patients. Ces résultats suggèrent que la kétamine pourrait jouer un double rôle thérapeutique, dans la prise en charge de la DRT et dans la déprescription des benzodiazépines, offrant une avenue prometteuse face aux défis de la dépendance à long terme aux benzodiazépines dans cette population.',
+          fr: 'Cet article examine une étude de cohorte ambidirectionnelle que nous avons menée auprès de patients participant au Modèle de Montréal pour la dépression et le trouble de stress post-traumatique (TRD) et prenant des benzodiazépines à long terme (ou médicaments Z) lors de l\'évaluation. Les participants sous traitement ont été évalués quant à leur capacité à réduire ou à cesser leur consommation de benzodiazépines. L\'étude a révélé que les perfusions de kétamine soulageaient non seulement les symptômes dépressifs, mais facilitaient également la diminution progressive et l\'arrêt des benzodiazépines chez une proportion significative de patients. Ces résultats suggèrent que la kétamine pourrait jouer un double rôle thérapeutique dans la prise en charge de la TRD et dans la déprescription des benzodiazépines, offrant ainsi une piste prometteuse pour relever les défis de la dépendance à long terme aux benzodiazépines dans cette population.',
         },
       },
     ],
@@ -117,7 +117,7 @@ export const pubGroups: PubGroup[] = [
         url: 'https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1200393/full',
         summary: {
           en: 'This article introduces the concept of “imprinting” to describe how recent environmental exposures, particularly digital media, can influence the content and emotional quality of psychedelic experiences, including those induced by ketamine. Drawing on qualitative data from a clinical trial of ketamine-assisted psychotherapy for TRD, several cases revealed that imagery and themes from media consumed days prior to treatment sessions re-emerged as vivid hallucinations, sometimes overriding therapeutic intentions and reducing the depth of mystical or emotional engagement. Additionally, an in-depth review of the literature revealed past, unrecognized examples of the imprinting phenomena with a wide variety of psychedelic drugs. These findings expand the traditional “set and setting” model by incorporating delayed contextual influences, suggesting that behavioural patterns before treatment, conscious or unconscious, may significantly shape outcomes. The concept of imprinting offers a useful framework for optimizing psychedelic therapies through more intentional and individualized preparation.',
-          fr: 'Cet article introduit le concept d’« imprinting » (empreinte) pour décrire comment des expositions environnementales récentes, en particulier aux médias numériques, peuvent influencer le contenu et la tonalité émotionnelle des expériences psychédéliques, y compris celles induites par la kétamine. À partir de données qualitatives d’un essai clinique de psychothérapie assistée par la kétamine pour la DRT, plusieurs cas ont révélé que des images et des thèmes issus de médias consommés dans les jours précédant les séances de traitement resurgissaient sous forme d’hallucinations vives, supplantant parfois les intentions thérapeutiques et réduisant la profondeur de l’engagement mystique ou émotionnel. De plus, une revue approfondie de la littérature a mis au jour des exemples passés, jusque-là non reconnus, du phénomène d’empreinte avec une grande variété de psychédéliques. Ces résultats élargissent le modèle traditionnel de l’« état d’esprit et du cadre » (set and setting) en y intégrant des influences contextuelles différées, ce qui suggère que les habitudes comportementales avant le traitement, conscientes ou non, peuvent façonner de manière importante les résultats. Le concept d’empreinte offre un cadre utile pour optimiser les thérapies psychédéliques par une préparation plus intentionnelle et individualisée.',
+          fr: 'Cet article introduit le concept d\'« imprinting » afin de décrire comment des expositions environnementales récentes, notamment numériques, peuvent influencer le contenu et la qualité émotionnelle des expériences psychédéliques, y compris celles induites par la kétamine. S\'appuyant sur des données qualitatives issues d\'un essai clinique de psychothérapie assistée par kétamine pour le trouble de la personnalité psychédélique, plusieurs cas ont révélé que des images et des thèmes issus des médias consommés quelques jours avant les séances de traitement réapparaissaient sous forme d\'hallucinations vives, prenant parfois le pas sur les intentions thérapeutiques et réduisant la profondeur de l\'engagement mystique ou émotionnel. De plus, une revue approfondie de la littérature a révélé des exemples passés et méconnus de phénomènes d\'imprinting liés à une grande variété de drogues psychédéliques. Ces résultats élargissent le modèle traditionnel du « set and setting » en intégrant des influences contextuelles différées, suggérant que les schémas comportementaux avant le traitement, conscients ou inconscients, peuvent influencer significativement les résultats. Le concept d\'imprinting offre un cadre utile pour optimiser les thérapies psychédéliques grâce à une préparation plus intentionnelle et individualisée.',
         },
       },
     ],
@@ -131,13 +131,13 @@ export const pubGroups: PubGroup[] = [
         authors: 'Diep, D., de la Salle, S., Thibault Lévesque, J., Lifshitz, M., Garel, N., & Greenway, K. T.',
         year: 2025,
         title: 'The ketamine chameleon: history, pharmacology, and the contested value of experience',
-        journal: 'Expert Review of Clinical Pharmacology',
+        journal: 'Expert review of clinical pharmacology',
         details: '18(3), 109–129',
         doi: '10.1080/17512433.2025.2459377',
         url: 'https://www.tandfonline.com/doi/full/10.1080/17512433.2025.2459377',
         summary: {
           en: 'Ketamine’s psychoactive effects have inspired diverse interpretations. In this review, we provide an extensive review of a neglected body of anesthesia literature that provides a unique angle to better understanding extra-pharmacological influences on ketamine’s subjective and therapeutic effects, including the remarkable power of how the drug effects are framed. We trace the historical evolution of these perspectives – which we broadly categorize as ‘dissociative,’ ‘dream-like,’ and ‘psychedelic’ – and show how they emerged out of these clinical contexts. We highlight the influence of factors such as language, dose, and environmental context on ketamine’s effects and therapeutic outcomes. We discuss potential mechanisms underlying these context-dependent effects and explore the broader clinical and research-related ramifications.',
-          fr: 'Les effets psychoactifs de la kétamine ont inspiré des interprétations diverses. Dans cette revue, nous examinons en profondeur un corpus négligé de la littérature en anesthésie qui offre un angle unique pour mieux comprendre les influences extra-pharmacologiques sur les effets subjectifs et thérapeutiques de la kétamine, y compris le pouvoir remarquable de la façon dont les effets du médicament sont présentés. Nous retraçons l’évolution historique de ces perspectives – que nous classons globalement comme « dissociative », « onirique » et « psychédélique » – et montrons comment elles ont émergé de ces contextes cliniques. Nous soulignons l’influence de facteurs comme le langage, la dose et le contexte environnemental sur les effets de la kétamine et les résultats thérapeutiques. Nous discutons des mécanismes possibles de ces effets dépendant du contexte et explorons leurs répercussions cliniques et scientifiques plus larges.',
+          fr: 'Les effets psychoactifs de la kétamine ont inspiré diverses interprétations. Dans cette revue, nous proposons une analyse approfondie d\'une littérature anesthésique négligée, offrant un angle unique pour mieux comprendre les influences extrapharmacologiques sur les effets subjectifs et thérapeutiques de la kétamine, notamment la puissance remarquable de la manière dont les effets du médicament sont présentés. Nous retraçons l\'évolution historique de ces perspectives – que nous classons globalement comme « dissociatives », « oniriques » et « psychédéliques » – et illustrons leur émergence dans ces contextes cliniques. Nous soulignons l\'influence de facteurs tels que le langage, la dose et le contexte environnemental sur les effets de la kétamine et les résultats thérapeutiques. Nous abordons les mécanismes potentiels sous-jacents à ces effets contextuels et explorons leurs ramifications cliniques et scientifiques plus larges.',
         },
       },
     ],
@@ -152,7 +152,7 @@ export const pubGroups: PubGroup[] = [
         authors: 'Guay, É., Brouillette, M. J., Drury, J., Garel, N., & Greenway, K.',
         year: 2024,
         title: 'Rapid Improvement of Post-Partum Depression With Subanesthetic Racemic Ketamine',
-        journal: 'Journal of Clinical Psychopharmacology',
+        journal: 'Journal of clinical psychopharmacology',
         details: '44(2), 196–198',
         doi: '10.1097/JCP.0000000000001780',
         url: 'https://doi.org/10.1097/JCP.0000000000001780',
@@ -164,7 +164,7 @@ export const pubGroups: PubGroup[] = [
         authors: 'Garel, N., Nazon, M., Naghi, K., Willis, E., Looper, K., Rej, S., & Greenway, K. T.',
         year: 2023,
         title: 'Ketamine for depression: a potential role in requests for Medical Aid in Dying?',
-        journal: 'International Clinical Psychopharmacology',
+        journal: 'International clinical psychopharmacology',
         details: '38(5), 352–355',
         doi: '10.1097/YIC.0000000000000462',
         url: 'https://doi.org/10.1097/YIC.0000000000000462',
@@ -176,7 +176,7 @@ export const pubGroups: PubGroup[] = [
         authors: 'Greenway, K. T., Garel, N., Goyette, N., Turecki, G., & Richard-Devantoy, S.',
         year: 2021,
         title: 'Adjunctive music improves the tolerability of intravenous ketamine for bipolar depression',
-        journal: 'International Clinical Psychopharmacology',
+        journal: 'International clinical psychopharmacology',
         details: '36(4), 218–220',
         doi: '10.1097/YIC.0000000000000363',
         url: 'https://doi.org/10.1097/YIC.0000000000000363',
@@ -188,9 +188,9 @@ export const pubGroups: PubGroup[] = [
 
 export const media = {
   podcasts: [
-    { title: 'The Carlat Psychiatry Podcast -- Ketamine Therapy Part 1', url: 'https://www.thecarlatreport.com/blogs/2-the-carlat-psychiatry-podcast/post/4743-ketamine-assisted-therapy-part-i' },
+    { title: 'The Carlat Psychiatry Podcast — Ketamine Therapy Part 1', url: 'https://www.thecarlatreport.com/blogs/2-the-carlat-psychiatry-podcast/post/4743-ketamine-assisted-therapy-part-i' },
     { title: 'The Mindspace Podcast #29: Ketamine-Assisted Psychotherapy with Dr. Kyle Greenway', url: 'https://www.youtube.com/watch?v=10hIx1WSeLM' },
-    { title: 'Modern Psychedelics - 065 | Ketamine 101: Ketamine-Assisted Psychotherapy & Making Treatment Accessible with Dr. Kyle Greenway', url: 'https://www.everand.com/podcast/664361917/065-Ketamine-101-Ketamine-Assisted-Psychotherapy-Making-Treatment-Accessible-with-Dr-Kyle-Greenway-It-s-the-ketamine-episode-you-ve-been-waitin' },
+    { title: 'Modern Psychedelics – 065 | Ketamine 101: Ketamine-Assisted Psychotherapy & Making Treatment Accessible with Dr. Kyle Greenway', url: 'https://www.everand.com/podcast/664361917/065-Ketamine-101-Ketamine-Assisted-Psychotherapy-Making-Treatment-Accessible-with-Dr-Kyle-Greenway-It-s-the-ketamine-episode-you-ve-been-waitin' },
   ],
   news: [
     { title: 'Le bon et le mauvais de la kétamine', outlet: 'La Presse', date: { en: 'June 20, 2025', fr: '20 juin 2025' }, lang: 'fr', url: 'https://www.lapresse.ca/actualites/sciences/2025-06-20/traitement-de-la-depression/le-bon-et-le-mauvais-de-la-ketamine.php' },
@@ -200,6 +200,11 @@ export const media = {
   ],
   spotify: {
     profile: 'https://open.spotify.com/user/cveosw0gqemcjcsjjsw55dbzz?si=0868844dec304963',
-    playlists: ['5yjHnx0IJCmMJ5U4akxef4', '0BMApP3v6iABjHjvaQJA0K', '5ZD7UPUoXn4FZjXTy8wKjy'],
+    // Names as on the old site's Spotify embeds ("Playlist 1 -- Classical", …)
+    playlists: [
+      { id: '5yjHnx0IJCmMJ5U4akxef4', name: 'Playlist 1 — Classical' },
+      { id: '0BMApP3v6iABjHjvaQJA0K', name: 'Playlist 2 — Ambient' },
+      { id: '5ZD7UPUoXn4FZjXTy8wKjy', name: 'Playlist 6 — Azure' },
+    ],
   },
 };

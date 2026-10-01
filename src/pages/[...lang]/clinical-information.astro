@@ -1,7 +1,39 @@
 ---
-import ProsePage from '../../components/ProsePage.astro';
+import { PageHeader, Section, Figure } from '@pcl/design-system';
+import { getEntry } from 'astro:content';
+import { withBase, splitAtH2, revealHeadings, mottoToPullquote } from '../../lib/content';
+import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
+import { u } from '../../lib/url';
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props;
+const fr = lang === 'fr';
+const entry = await getEntry('pages', `${lang}/clinical-information`);
+if (!entry) throw new Error(`Missing content: ${lang}/clinical-information`);
+const d = entry.data;
+const html = revealHeadings(mottoToPullquote(withBase(entry.rendered?.html ?? '')));
+// First h2 section = overview (motto + one paragraph); the protocol figure follows it, then the rest.
+const [, overview, ...rest] = splitAtH2(html);
+const diagram = {
+  src: u('/images/montreal-model-protocol.jpg'),
+  alt: fr
+    ? 'Schéma du protocole du Modèle de Montréal : évaluation psychiatrique, préparation initiale, six séances de traitement à la kétamine sur quatre semaines avec préparation et intégration continues, puis maintien, le tout accompagné d’une psychothérapie conventionnelle concomitante.'
+    : 'Diagram of the Montreal Model protocol: psychiatric assessment, initial preparation, six ketamine treatment sessions over four weeks with rolling preparation and integration, and maintenance, all accompanied by concomitant conventional psychotherapy.',
+  caption: fr ? 'Le protocole standard du Modèle de Montréal (Garel et coll., 2023). Figure en anglais.' : 'The standard Montreal Model protocol (Garel et al., 2023).',
+};
 ---
-<ProsePage lang={lang} slug="clinical-information" path="/clinical-information/" />
+<Shell lang={lang} path="/clinical-information/" title={d.seoTitle} description={d.description}>
+  <main id="main">
+    <PageHeader eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <Section>
+      <div class="prose" set:html={overview}></div>
+    </Section>
+    <Section tight>
+      <Figure src={diagram.src} alt={diagram.alt} caption={diagram.caption} ratio="cinema" width={1600} height={706} class="figure--diagram reveal reveal--scale" />
+      <p class="sans small muted figure__link"><a href={diagram.src} target="_blank" rel="noopener noreferrer">{fr ? 'Ouvrir le schéma en taille réelle' : 'Open the full-size diagram'}</a></p>
+    </Section>
+    <Section>
+      <div class="prose" set:html={rest.join('')}></div>
+    </Section>
+  </main>
+</Shell>

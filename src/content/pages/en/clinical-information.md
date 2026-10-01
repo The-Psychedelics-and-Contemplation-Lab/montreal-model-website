@@ -12,11 +12,6 @@ description: "How the Montreal Model works in practice: ketamine sessions, SMART
 
 The Montreal Model of Ketamine Therapy is an intensive, evidence-based program that combines low-dose ketamine treatments with psychological support and behavioral changes to help patients recover from treatment-resistant depression. It aims to use the rapid but often temporary antidepressant effects of ketamine as a window of opportunity that, in synergistic combination with psychotherapy and psychedelic-like treatment settings, can facilitate lasting psychological growth and recovery.
 
-<figure class="figure--wide">
-  <img src="/images/montreal-model-protocol.jpg" alt="Diagram of the Montreal Model protocol: psychiatric assessment, initial preparation, six ketamine treatment sessions over four weeks with rolling preparation and integration, and maintenance, all accompanied by concomitant conventional psychotherapy." width="1600" height="706" loading="lazy" decoding="async" />
-  <figcaption>The standard Montreal Model protocol (Garel et al., 2023). <a href="/images/montreal-model-protocol.jpg" target="_blank" rel="noopener noreferrer">Open the full-size diagram</a></figcaption>
-</figure>
-
 ## Ketamine Treatments
 
 Although originally developed with a standard course of six ketamine treatments over four weeks, the protocol has become more flexible with time depending on a given patient’s needs and contexts. Most will receive 4 or 5 low-dose ketamine treatments over 4 to 6 weeks. These sessions are provided in supportive settings with psychological care to help patients derive psychological growth from the psychedelic-like experiences induced by ketamine.
