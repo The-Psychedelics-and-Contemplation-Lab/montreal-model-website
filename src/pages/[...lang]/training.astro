@@ -1,5 +1,5 @@
 ---
-import { PageHeader, Section, Figure, MediaCard, SectionMark } from '@pcl/design-system';
+import { PageHeader, Section, Figure, MediaCard } from '@pcl/design-system';
 import { getEntry } from 'astro:content';
 import { withBase, splitAtH2, splitFirstParagraph, revealHeadings } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
@@ -41,9 +41,8 @@ const photos = fr
       <div class="prose" set:html={upcoming}></div>
     </Section>
     <Section id="online" ariaLabelledby="online-h">
-      <SectionMark label={fr ? 'Apprentissage en ligne' : 'Online learning'} accent />
-      <h2 id="online-h" class="reveal centered">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
-      <div class="grid grid--2 reveal-group modules">
+      <h2 id="online-h" class="ruled-heading reveal">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
+      <div class="grid grid--2 reveal-group modules" style="margin-top: var(--s-8)">
         <MediaCard
           href={href(lang, '/ketamine-mechanism/')}
           eyebrow={fr ? 'Module interactif' : 'Interactive module'}

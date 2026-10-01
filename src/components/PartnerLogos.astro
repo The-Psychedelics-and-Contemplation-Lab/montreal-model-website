@@ -1,0 +1,36 @@
+---
+/**
+ * Partner-logo row, laid out as on the original site: McGill and JGH/LDI on the first line,
+ * the Montreal Model mark centred, then CHUM and Université de Montréal — all on white,
+ * generously spaced. McGill and LDI–JGH are the official SVGs from the design system.
+ */
+import mcgillLogo from '@pcl/design-system/logos/mcgill.svg';
+import ldiLogo from '@pcl/design-system/logos/ldi-jgh.svg';
+import { u } from '../lib/url';
+import type { Lang } from '../site.config';
+export interface Props { lang: Lang; id?: string }
+const { lang, id = 'partners' } = Astro.props;
+const fr = lang === 'fr';
+---
+<section id={id} class="section" aria-labelledby={`${id}-h`}>
+  <div class="container">
+    <h2 id={`${id}-h`} class="visually-hidden">{fr ? 'Établissements partenaires' : 'Partner institutions'}</h2>
+    <div class="partners-row reveal-group">
+      <a class="partner partner--mcgill no-icon" href="https://www.mcgill.ca/" target="_blank" rel="noopener noreferrer">
+        <img src={mcgillLogo.src} alt={fr ? 'Université McGill' : 'McGill University'} width={mcgillLogo.width} height={mcgillLogo.height} loading="lazy" decoding="async" />
+      </a>
+      <a class="partner partner--ldi no-icon" href="https://www.ladydavis.ca/" target="_blank" rel="noopener noreferrer">
+        <img src={ldiLogo.src} alt={fr ? 'Hôpital général juif — Institut Lady Davis' : 'Jewish General Hospital — Lady Davis Institute'} width={ldiLogo.width} height={ldiLogo.height} loading="lazy" decoding="async" />
+      </a>
+      <div class="partner partner--mm">
+        <img src={u('/images/montreal-model-mark.webp')} alt={fr ? 'Logo du Modèle de Montréal : deux cœurs en nuage, du rouge au bleu' : 'Montreal Model logo: two heart-shaped clouds, red to blue'} width="790" height="436" loading="lazy" decoding="async" />
+      </div>
+      <a class="partner partner--chum no-icon" href="https://www.chumontreal.qc.ca/" target="_blank" rel="noopener noreferrer">
+        <img src={u('/images/logo-chum.png')} alt="Centre hospitalier de l’Université de Montréal (CHUM)" width="264" height="224" loading="lazy" decoding="async" />
+      </a>
+      <a class="partner partner--udem no-icon" href="https://www.umontreal.ca/" target="_blank" rel="noopener noreferrer">
+        <img src={u('/images/logo-udem.png')} alt="Université de Montréal" width="250" height="99" loading="lazy" decoding="async" />
+      </a>
+    </div>
+  </div>
+</section>

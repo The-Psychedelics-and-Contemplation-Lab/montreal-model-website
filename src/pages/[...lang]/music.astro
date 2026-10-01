@@ -1,5 +1,5 @@
 ---
-import { Section, SectionMark } from '@pcl/design-system';
+import { Section } from '@pcl/design-system';
 import ProsePage from '../../components/ProsePage.astro';
 import { langPaths } from '../../lib/i18n';
 import { media } from '../../content/data/publications';
@@ -9,9 +9,8 @@ const fr = lang === 'fr';
 ---
 <ProsePage lang={lang} slug="music" path="/music/">
   <Section id="playlists" band ariaLabelledby="playlists-h">
-    <SectionMark label={fr ? 'Écouter' : 'Listen'} accent />
-    <div class="prose prose--centered">
-      <h2 id="playlists-h" class="reveal">{fr ? 'Les Playlists Musicales' : 'Musical Playlists'}</h2>
+    <h2 id="playlists-h" class="ruled-heading reveal">{fr ? 'Les Playlists Musicales' : 'Musical Playlists'}</h2>
+    <div class="prose">
       <p class="reveal reveal--fade">
         {fr ? 'Pour plus de playlists, consultez notre ' : 'For more playlists, check out our '}
         <a href={media.spotify.profile} target="_blank" rel="noopener noreferrer"><strong>{fr ? 'Spotify page!' : 'Spotify page!'}</strong></a>

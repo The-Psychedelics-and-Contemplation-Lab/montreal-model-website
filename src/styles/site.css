@@ -1,80 +1,124 @@
-/* Site-specific layout for montreal-model-website. Tokens and typography come
-   from @pcl/design-system and are never overridden here. */
+/* Site-specific layout for montreal-model-website — "version 2.0" of the original site.
+   Design-system tokens and typography are never overridden here; the original's
+   plum is declared as a LOCAL token, measured from the original (Elementor authored
+   #77396E; the reference screenshots render it as #713B6C). The site accent (#6E4560,
+   links/buttons) is unchanged. */
+:root {
+  --brand-purple: #77396E;        /* plum bands · white text on it: 8.1:1 */
+  --brand-purple-deep: #4E2448;   /* panel frame, darker plum (replaces the original's black frame) */
+  --brand-purple-soft: #F4EDF3;   /* faint tint for hairlines on plum */
+  --panel-radius: 10px;
+}
 
-/* --- Home hero (typographic, waves watermark behind) --------------------------- */
-.hero--mm { border-bottom: 1px solid var(--rule); padding-block: var(--s-16) var(--s-16); }
-.hero--mm .watermark { --wm-size: 64rem; right: -22%; top: -30%; }
-.hero--mm .hero__inner { max-width: 60rem; }
-.hero-figure { padding-top: var(--s-12); }
+/* --- Header: thin plum top rule, as the original's plum bar ------------------------- */
+.site-header { border-top: 4px solid var(--brand-purple); }
 
-/* --- Figures: the protocol diagram must never be cropped (no drift, natural ratio) --- */
-.figure--diagram .figure__frame { aspect-ratio: auto; border: 1px solid var(--rule); background: #fff; }
-.figure--diagram .figure__frame img { height: auto; object-fit: contain; }
-.figure--diagram { max-width: var(--container); margin-inline: auto; }
-.figure__link { margin-top: var(--s-2); }
+/* --- Home hero: centred logo, one-sentence intro, "Learn More" (original layout) ---- */
+.hero--mm { padding-block: var(--s-16) var(--s-16); text-align: left; }
+.hero--mm .hero__inner { max-width: 48rem; margin-inline: auto; display: grid; justify-items: center; text-align: center; }
+.hero--mm .hero__inner > * { text-align: center; }
+.hero-logo { margin: 0; line-height: 0; }
+.hero-logo img { width: min(100%, 22rem); height: auto; display: block; }
+.hero--mm .eyebrow { margin-top: var(--s-8); }
+.hero--mm .lead { margin-top: var(--s-6); max-width: 52ch; color: var(--ink); font-size: 1.25rem; line-height: 1.55; }
+.hero--mm .cluster { margin-top: var(--s-8); justify-content: center; }
+@media (min-width: 60em) {
+  .hero--mm { padding-block: var(--s-24) var(--s-24); }
+  .hero-logo img { width: 26rem; }
+}
 
-/* --- Pull quote inside prose (the model's motto) --------------------------------------- */
-.prose blockquote.pullquote { border-left: 0; padding: 0; color: var(--ink); font-style: normal; margin-block: var(--s-6) var(--s-8); max-width: 28ch; }
-.prose blockquote.pullquote p { font-size: var(--fs-h3); line-height: 1.4; }
+/* --- Plum band holding a white, framed panel (original rhythm) --------------------- */
+.band-plum { background: var(--brand-purple); color: #fff; padding-block: var(--s-8); }
+.band-plum + .band-plum { padding-top: 0; }
+.band-plum__title { color: #fff; margin-bottom: var(--s-6); }
+.band-plum__intro { max-width: var(--measure); margin-bottom: var(--s-8); }
+.band-plum__intro p + p { margin-top: var(--s-3); }
+.panel {
+  background: var(--card); color: var(--ink);
+  border: 3px solid var(--brand-purple-deep); border-radius: var(--panel-radius);
+  padding: var(--s-8) var(--s-6);
+}
+.panel > .prose { margin-inline: auto; }
+.panel > .prose > h2 { margin-top: 0; }
+@media (min-width: 60em) {
+  .band-plum { padding-block: var(--s-12); }
+  .panel { padding: var(--s-12) var(--s-16); }
+}
 
-/* --- Home: stat tiles ------------------------------------------------------------- */
-.stats { display: grid; gap: var(--s-8) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
-.stat p { margin: 0; }
-.stat__value { max-width: 14ch; }
+/* --- Big plum heading with the underline rule (original pages) --------------------- */
+.ruled-heading { color: var(--brand-purple); padding-bottom: var(--s-3); border-bottom: 3px solid var(--brand-purple); }
+.ruled-heading--xl { font-size: clamp(2rem, 4.2vw, 3rem); }
+.ruled-heading + * { margin-top: var(--s-6); }
+.prose > h2.ruled-heading { padding-bottom: var(--s-3); }
+.page-header { border-bottom: 0; padding-bottom: var(--s-6); }
+.page-header h1 { color: var(--brand-purple); padding-bottom: var(--s-3); border-bottom: 3px solid var(--brand-purple); max-width: none; }
+.page-header .lead { margin-top: var(--s-6); }
+.page-header + .section { padding-top: var(--s-8); }
 
-/* --- Home prose sections: centred reading column under a SectionMark ----------------- */
-.prose--centered { margin-inline: auto; }
-.centered { text-align: center; }
-h2.centered { margin-bottom: var(--s-8); }
+/* --- Prose headings in plum (original inner pages) ----------------------------------- */
+.prose h2 { color: var(--brand-purple); }
+
+/* --- Home sections on white ----------------------------------------------------- */
+.home-ideas .prose { max-width: var(--container); }
+.home-ideas .prose > p, .home-ideas .prose > ul { max-width: var(--measure); }
+
+/* --- Partner-logo row (McGill · JGH/LDI · MM mark · CHUM · UdeM), white, airy ----- */
+.partners-row { display: grid; gap: var(--s-12) var(--s-8); justify-items: center; align-items: center; grid-template-columns: 1fr; padding-block: var(--s-4); }
+.partners-row > * { display: flex; align-items: center; justify-content: center; }
+.partners-row img { width: auto; max-width: 100%; height: auto; }
+.partners-row .partner--mcgill img { height: 56px; }
+.partners-row .partner--ldi img { height: 120px; }
+.partners-row .partner--mm img { height: 72px; }
+.partners-row .partner--chum img { height: 108px; }
+.partners-row .partner--udem img { height: 80px; }
+@media (min-width: 48em) {
+  .partners-row { grid-template-columns: 1fr 1fr; gap: var(--s-16) var(--s-12); }
+  .partners-row .partner--mm { grid-column: 1 / -1; }
+  .partners-row .partner--mcgill img { height: 84px; }
+  .partners-row .partner--ldi img { height: 170px; }
+  .partners-row .partner--mm img { height: 96px; }
+  .partners-row .partner--chum img { height: 160px; }
+  .partners-row .partner--udem img { height: 120px; }
+}
 
 /* --- Reference block ------------------------------------------------------------ */
-.reference { max-width: var(--measure); margin-inline: auto; border-left: 3px solid var(--accent); padding-left: var(--s-6); }
+.reference { max-width: var(--measure); border-left: 3px solid var(--brand-purple); padding-left: var(--s-6); }
 .reference p { font-family: var(--font-sans); font-size: var(--fs-ui); line-height: 1.55; }
 .reference .eyebrow { margin-bottom: var(--s-2); }
 
 /* --- Figures ------------------------------------------------------------------- */
+.figure--diagram .figure__frame { aspect-ratio: auto; border: 1px solid var(--rule); background: #fff; }
+.figure--diagram .figure__frame img { height: auto; object-fit: contain; }
+.figure--diagram { max-width: var(--container); margin-inline: auto; }
+.figure__link { margin-top: var(--s-2); }
 .prose figure.figure--wide { max-width: none; width: min(100vw - 2 * var(--gutter), var(--container)); }
 .prose figure img { border: 1px solid var(--rule); border-radius: var(--radius-card); background: var(--card); }
 
-/* --- People ------------------------------------------------------------------- */
+/* --- Pull quote inside prose (the model's motto) --------------------------------------- */
+.prose blockquote.pullquote { border-left: 3px solid var(--brand-purple); padding: var(--s-1) 0 var(--s-1) var(--s-6); color: var(--brand-purple); font-style: italic; margin-block: var(--s-6) var(--s-8); max-width: 34ch; }
+.prose blockquote.pullquote::before { content: none; }
+.prose blockquote.pullquote p { font-size: var(--fs-h3); line-height: 1.4; margin: 0; }
+
+/* --- People: plum band with two white columns (original) ---------------------------- */
+.leads { display: grid; gap: var(--s-12); }
+.lead-person { display: grid; gap: var(--s-6); align-content: start; color: #fff; }
+.lead-person h2 { color: #fff; text-align: center; }
+.lead-person__photo { width: 100%; max-width: 22rem; margin-inline: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 25%; border-radius: var(--panel-radius); border: 3px solid #fff; background: var(--brand-purple-deep); display: block; }
+.lead-person__role { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; color: #fff; margin: 0; text-align: center; }
+.lead-person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--brand-purple-soft); margin: var(--s-1) 0 0; text-align: center; }
+.lead-person__bio { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.6; color: #fff; }
+.lead-person__bio p { margin: 0; }
+.lead-person a { color: #fff; }
+@media (min-width: 48em) {
+  .leads { grid-template-columns: 1fr 1fr; gap: var(--s-16); }
+}
 .people { display: grid; gap: var(--s-8); }
 .person { display: grid; gap: var(--s-4); align-content: start; }
-.person__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); }
-.person__photo--portrait { aspect-ratio: 1 / 1; }
+.person__photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 30%; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); }
 .person__role { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; color: var(--ink); }
 .person__aff { font-family: var(--font-sans); font-size: var(--fs-ui); color: var(--ink-muted); }
-.person__bio { margin-top: var(--s-2); }
-.person__bio p + p { margin-top: var(--s-3); }
-.person__frame { overflow: hidden; border-radius: var(--radius-card); }
-.person--lead .person__frame { aspect-ratio: 1 / 1; }
-.person--lead .person__frame .person__photo { aspect-ratio: auto; height: 100%; border: 0; border-radius: 0; }
-@media (prefers-reduced-motion: no-preference) {
-  .person__frame img { transition: transform 900ms var(--ease); }
-  .person:hover .person__frame img { transform: scale(1.03); }
-}
-@media (min-width: 48em) {
-  .people--leads { grid-template-columns: 1fr 1fr; }
-  .person--lead { grid-template-columns: 16rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: var(--s-8); }
-  .person--lead .person__frame { grid-row: 1; }
-  .person--lead .person__head { grid-column: 2; align-self: start; }
-  .person--lead .person__bio { grid-column: 1 / -1; }
-}
-@media (min-width: 70em) {
-  .people--leads { grid-template-columns: 1fr; }
-  .person--lead { grid-template-columns: 20rem minmax(0, 1fr); grid-template-rows: auto auto; }
-  .person--lead .person__frame { grid-row: 1 / span 2; }
-  .person--lead .person__bio { grid-column: 2; margin-top: 0; }
-}
 .people--collab { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--s-8) var(--s-6); }
-.person--compact .person__photo { aspect-ratio: 1 / 1; }
 .person__placeholder { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius-card); border: 1px solid var(--rule); background: var(--paper-deep); display: grid; place-items: center; color: var(--ink-muted); font-family: var(--font-serif); font-size: var(--fs-h2); }
-.partners { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8); }
-.partners img { height: 64px; width: auto; }
-.partners img:first-child { height: 88px; }
-
-/* --- Page header with a quiet watermark (publications) ------------------------------ */
-.page-header--wm .watermark--quiet { opacity: 0.09; --wm-size: 48rem; right: -16%; top: -40%; }
-.page-header--wm .page-header { position: relative; z-index: 1; }
 
 /* --- Publications ------------------------------------------------------------- */
 .pubs { display: grid; gap: var(--s-12); max-width: 56rem; }
@@ -119,4 +163,6 @@ h2.centered { margin-bottom: var(--s-8); }
 
 @media print {
   .playlists { display: none !important; }
+  .band-plum { background: none; color: var(--ink); }
+  .lead-person, .lead-person h2, .lead-person__role, .lead-person__aff, .lead-person__bio { color: var(--ink); }
 }
