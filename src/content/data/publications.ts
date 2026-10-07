@@ -187,6 +187,58 @@ export const pubGroups: PubGroup[] = [
 ];
 
 export const media = {
+  featured: {
+    outlet: { en: 'La Presse canadienne · June 2025', fr: 'La Presse canadienne · Juin 2025' },
+    title: 'Dépression: l’efficacité du « modèle de Montréal » est prouvée par une étude',
+    lang: 'fr',
+    text: {
+      en: 'Kyle Greenway and Nicolas Garel discuss the Montreal Model, findings from the MUSIK trial, and its growing use beyond Montreal.',
+      fr: 'Kyle Greenway et Nicolas Garel discutent du Modèle de Montréal, des résultats de l’étude MUSIK et de son utilisation croissante au-delà de Montréal.',
+    },
+    cta: { en: 'Read the article →', fr: 'Lire l’article →' },
+    url: 'https://www.lapresse.ca/actualites/sciences/2025-06-20/traitement-de-la-depression/le-bon-et-le-mauvais-de-la-ketamine.php',
+    image: '/images/lapresse-logo.webp',
+    imageAlt: { en: 'La Presse logo', fr: 'Logo de La Presse' },
+  },
+  international: {
+    heading: { en: 'International Developments', fr: 'Développements internationaux' },
+    lead: {
+      en: 'The Montreal Model is increasingly informing clinical practice, research, and professional education beyond Montreal.',
+      fr: 'Le Modèle de Montréal contribue de plus en plus à éclairer la pratique clinique, la recherche et la formation professionnelle au-delà de Montréal.',
+    },
+    countries: [
+      {
+        name: { en: 'United Kingdom', fr: 'Royaume-Uni' }, flag: '🇬🇧',
+        title: { en: 'An NHS adaptation of the Montreal Model', fr: 'Une adaptation du Modèle de Montréal pour le NHS' },
+        text: {
+          en: 'CIM-KeT (CNWL–Imperial–Montreal Ketamine Therapy) adapts the Montreal Model for the UK healthcare system and is currently being piloted at the CIPPRes Clinic at Imperial College London and CNWL.',
+          fr: 'CIM-KeT (CNWL–Imperial–Montreal Ketamine Therapy) adapte le Modèle de Montréal au système de santé britannique et fait actuellement l’objet d’un projet pilote clinique à la clinique CIPPRes d’Imperial College London et du CNWL.',
+        },
+        cta: { en: 'Learn more →', fr: 'En savoir plus →' },
+        url: 'https://stepup.cnwl.nhs.uk/courses/delivering-ketamine-assisted-therapy-nhs-cim-ket-two-day-clinical-training-programme',
+      },
+      {
+        name: { en: 'Norway', fr: 'Norvège' }, flag: '🇳🇴',
+        title: { en: 'A parallel model at national scale', fr: 'Une approche similaire à l’échelle nationale' },
+        text: {
+          en: 'In 2025, Norway introduced nationwide public reimbursement for intravenous ketamine treatment for treatment-resistant depression. Its integrated approach, combining ketamine with preparation, music, and psychotherapy, has been described in peer-reviewed literature as closely resembling the Montreal Model.',
+          fr: 'En 2025, la Norvège a instauré un financement public à l’échelle nationale de la kétamine intraveineuse pour le traitement de la dépression résistante. Son approche intégrative, qui combine la kétamine à la préparation, à la musique et à la psychothérapie, a été décrite dans la littérature scientifique comme étant très similaire au Modèle de Montréal.',
+        },
+        cta: { en: 'Read more →', fr: 'Lire l’article →' },
+        url: 'https://journals.sagepub.com/doi/10.1177/20503245261452347',
+      },
+      {
+        name: { en: 'Australia', fr: 'Australie' }, flag: '🇦🇺',
+        title: { en: 'Clinical education and knowledge exchange', fr: 'Formation clinique et échange de connaissances' },
+        text: {
+          en: 'In May 2026, Dr. Nicolas Garel delivered a two-day workshop hosted by Aurora Healthcare at Belmont Private Hospital in Brisbane, bringing together psychiatrists from across the Aurora network and drawing on his experience co-developing the Montreal Model.',
+          fr: 'En mai 2026, le Dr Nicolas Garel a animé un atelier de deux jours organisé par Aurora Healthcare au Belmont Private Hospital, à Brisbane. L’atelier a réuni des psychiatres provenant de l’ensemble du réseau Aurora et s’est appuyé sur son expérience de codéveloppement du Modèle de Montréal.',
+        },
+        cta: { en: 'Learn more →', fr: 'En savoir plus →' },
+        url: 'https://aurorahealth.com.au/news/bringing-global-expertise-to-australia/',
+      },
+    ],
+  },
   podcasts: [
     { title: 'The Carlat Psychiatry Podcast — Ketamine Therapy Part 1', url: 'https://www.thecarlatreport.com/blogs/2-the-carlat-psychiatry-podcast/post/4743-ketamine-assisted-therapy-part-i' },
     { title: 'The Mindspace Podcast #29: Ketamine-Assisted Psychotherapy with Dr. Kyle Greenway', url: 'https://www.youtube.com/watch?v=10hIx1WSeLM' },

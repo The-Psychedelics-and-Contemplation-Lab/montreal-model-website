@@ -4,16 +4,45 @@ import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
 import { langPaths } from '../../lib/i18n';
 import { media } from '../../content/data/publications';
+import { u } from '../../lib/url';
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props;
 const fr = lang === 'fr';
 const meta = fr
-  ? { title: 'Couverture médiatique — Le modèle de Montréal', description: 'Balados et articles de presse sur le modèle de Montréal de thérapie par la kétamine : La Presse, National Post, Business Insider, Carlat Psychiatry.' }
-  : { title: 'Media Coverage — The Montreal Model of Ketamine Therapy', description: 'Podcasts and news articles about the Montreal Model of ketamine therapy: La Presse, National Post, Business Insider, the Carlat Psychiatry Podcast and more.' };
+  ? { title: 'Médias — Le modèle de Montréal', description: 'Le rayonnement du Modèle de Montréal : article à la une de La Presse canadienne, développements au Royaume-Uni, en Norvège et en Australie, balados et presse.' }
+  : { title: 'Media Coverage — The Montreal Model of Ketamine Therapy', description: 'The reach of the Montreal Model: a featured La Presse canadienne article, developments in the UK, Norway and Australia, podcasts and press coverage.' };
+const f = media.featured;
+const intl = media.international;
 ---
 <Shell lang={lang} path="/media-coverage/" title={meta.title} description={meta.description}>
   <main id="main">
-    <PageHead eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Couverture médiatique' : 'Media Coverage'} lead={fr ? 'Balados et reportages sur le modèle de Montréal et la thérapie par la kétamine.' : 'Podcasts and press coverage of the Montreal Model and ketamine therapy.'} />
+    <PageHead eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Médias' : 'Media Coverage'} lead={fr ? 'Suivez le rayonnement croissant du Modèle de Montréal dans les milieux cliniques, scientifiques et internationaux à travers les actualités, les médias et les publications institutionnelles.' : 'Follow the growing clinical, research, and international reach of the Montreal Model through news, media, and institutional features.'} />
+    <Section>
+      <h2 class="reveal-words">{fr ? 'À la une' : 'Featured'}</h2>
+      <article class="featured reveal reveal--rise-lg" style="margin-top: var(--s-6)">
+        <div class="featured__media"><img src={u(f.image)} alt={f.imageAlt[lang]} width="600" height="601" loading="lazy" decoding="async" /></div>
+        <div class="featured__body">
+          <p class="eyebrow">{f.outlet[lang]}</p>
+          <h3 lang={f.lang}>{f.title}</h3>
+          <p>{f.text[lang]}</p>
+          <p class="featured__cta"><a href={f.url} target="_blank" rel="noopener noreferrer">{f.cta[lang]}</a></p>
+        </div>
+      </article>
+    </Section>
+    <Section band>
+      <h2 class="reveal-words">{intl.heading[lang]}</h2>
+      <p class="lead text-center intl__lead reveal reveal--blur">{intl.lead[lang]}</p>
+      <div class="grid grid--3 intl reveal-group reveal-group--slow" style="margin-top: var(--s-8)">
+        {intl.countries.map((c) => (
+          <div class="intl__country">
+            <h3>{c.name[lang]} <span aria-hidden="true">{c.flag}</span></h3>
+            <p><strong>{c.title[lang]}</strong></p>
+            <p>{c.text[lang]}</p>
+            <p class="featured__cta"><a href={c.url} target="_blank" rel="noopener noreferrer">{c.cta[lang]}</a></p>
+          </div>
+        ))}
+      </div>
+    </Section>
     <Section>
       <h2 class="reveal-words">{fr ? 'Les Podcasts' : 'Podcasts'}</h2>
       <ul class="media-list reveal-group reveal-group--slow" style="margin-top: var(--s-6)">

@@ -222,3 +222,17 @@
   .explore .media-card__text, .modules .media-card__text { display: none; }
   .explore .media-card__body, .modules .media-card__body { margin-top: 0; }
 }
+
+/* Training: a single photo under the Brisbane workshop text */
+.training-photos--single { max-width: 56rem; margin-inline: auto; }
+
+/* Media coverage: featured article + international developments (structure of the WordPress page) */
+.featured { display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: var(--s-8); align-items: center; width: min(100%, var(--container)); margin-inline: auto; }
+.featured__media img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--rule); }
+.featured__body h3 { margin: var(--s-2) 0 var(--s-3); }
+.featured__cta { font-family: var(--font-sans); font-size: var(--fs-ui); font-weight: 600; margin-top: var(--s-2); }
+.intl__lead { margin-inline: auto; }
+.intl { width: min(100%, var(--container)); margin-inline: auto; }
+.intl__country h3 { font-size: var(--fs-h3); }
+.intl__country p { margin-top: var(--s-2); }
+@media (max-width: 720px) { .featured { grid-template-columns: 1fr; } .featured__media { max-width: 180px; } }

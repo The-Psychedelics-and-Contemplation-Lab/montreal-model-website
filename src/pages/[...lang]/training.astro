@@ -2,7 +2,7 @@
 import { Section, Figure, MediaCard } from '@pcl/design-system';
 import PageHead from '../../components/PageHead.astro';
 import { getEntry } from 'astro:content';
-import { withBase, splitAtH2, splitFirstParagraph, revealHeadings, revealLists } from '../../lib/content';
+import { withBase, splitAtH2, splitFirstParagraph, revealHeadings, revealLists, externalLinks } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import { langPaths, href } from '../../lib/i18n';
 import { u } from '../../lib/url';
@@ -12,10 +12,13 @@ const fr = lang === 'fr';
 const entry = await getEntry('pages', `${lang}/training`);
 if (!entry) throw new Error(`Missing content: ${lang}/training`);
 const d = entry.data;
-const html = revealLists(revealHeadings(withBase(entry.rendered?.html ?? '')));
-// Section 1 = workshop (h2 + two paragraphs; the photo pair goes between them), section 2 = upcoming trainings.
-const [, workshop, upcoming] = splitAtH2(html);
-const [workshopIntro, workshopRest] = splitFirstParagraph(workshop);
+const html = externalLinks(revealLists(revealHeadings(withBase(entry.rendered?.html ?? ''))));
+// Sections, in the order of the Markdown: London 2026, Brisbane 2026, Montreal 2025, future trainings.
+const [, london, brisbane, montreal, future] = splitAtH2(html);
+const [montrealIntro, montrealRest] = splitFirstParagraph(montreal);
+const brisbanePhoto = fr
+  ? { src: u('/images/brisbane-workshop-2026.webp'), alt: 'Six participants de l’atelier de Brisbane, dont le Dr Nicolas Garel, posant côte à côte devant un mur clair.', caption: 'L’atelier Aurora Healthcare, Brisbane, mai 2026.' }
+  : { src: u('/images/brisbane-workshop-2026.webp'), alt: 'Six participants of the Brisbane workshop, including Dr. Nicolas Garel, standing side by side in front of a light wall.', caption: 'The Aurora Healthcare workshop, Brisbane, May 2026.' };
 const moduleUrl = 'https://media.psychedelicsandcontemplationlab.com/montreal-model/module-1/';
 const photos = fr
   ? [
@@ -31,15 +34,24 @@ const photos = fr
   <main id="main">
     <PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
     <Section>
-      <div class="prose" set:html={workshopIntro}></div>
+      <div class="prose" set:html={london}></div>
+    </Section>
+    <Section band>
+      <div class="prose" set:html={brisbane}></div>
+      <div class="training-photos training-photos--single reveal reveal--mask-in">
+        <Figure src={brisbanePhoto.src} alt={brisbanePhoto.alt} caption={brisbanePhoto.caption} ratio="wide" drift width={1600} height={1154} class="unveil" />
+      </div>
+    </Section>
+    <Section>
+      <div class="prose" set:html={montrealIntro}></div>
       <div class="image-pair training-photos">
         <div class="reveal reveal--mask-in"><Figure src={photos[0].src} alt={photos[0].alt} caption={photos[0].caption} ratio="wide" drift width={1600} height={1200} class="unveil" /></div>
         <div class="reveal reveal--mask-in"><Figure src={photos[1].src} alt={photos[1].alt} caption={photos[1].caption} ratio="wide" drift width={1600} height={1067} class="unveil" /></div>
       </div>
-      <div class="prose" set:html={workshopRest}></div>
+      <div class="prose" set:html={montrealRest}></div>
     </Section>
     <Section band>
-      <div class="prose" set:html={upcoming}></div>
+      <div class="prose" set:html={future}></div>
     </Section>
     <Section id="online" ariaLabelledby="online-h">
       <h2 id="online-h" class="ruled-heading ruled-heading--drawn reveal-words">{fr ? 'Modules en ligne' : 'Online modules'}</h2>

@@ -41,3 +41,7 @@ export const mottoToPullquote = (html: string) =>
 
 /** Remove <figure>…</figure> blocks from rendered Markdown (the page renders them with <Figure>). */
 export const stripFigures = (html: string) => html.replace(/<figure[\s\S]*?<\/figure>/g, '');
+
+/** Outbound links in rendered Markdown open in a new tab with the usual rel attributes (the design-system CSS adds the ↗). */
+export const externalLinks = (html: string) =>
+  html.replace(/<a href="(https?:\/\/(?!montrealmodelketaminetherapy\.com)[^"]+)"(?![^>]*target=)/g, '<a href="$1" target="_blank" rel="noopener noreferrer"');
