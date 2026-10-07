@@ -251,4 +251,5 @@
 .site-footer__logos img, .site-footer__logos .footer-partner img { height: 64px; width: auto; }
 .site-footer__logos a:nth-child(2) img { height: 88px; }
 .site-footer__logos .footer-partner--mm img { height: 60px; }
+.site-footer__logos .footer-partner img[src*="logo-chum"] { height: 84px; }  /* the CHUM artwork has generous padding */
 @media (max-width: 60em) { .site-footer__logos { justify-content: center; gap: var(--s-6) var(--s-8); } .site-footer__logos img, .site-footer__logos .footer-partner img { height: 44px; } .site-footer__logos a:nth-child(2) img { height: 60px; } }
