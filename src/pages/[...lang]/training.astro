@@ -40,7 +40,7 @@ const photos = fr
     <Section band>
       <div class="prose" set:html={brisbane}></div>
       <div class="training-photos training-photos--single reveal reveal--mask-in">
-        <Figure src={brisbanePhoto.src} alt={brisbanePhoto.alt} caption={brisbanePhoto.caption} ratio="wide" drift width={1600} height={1154} class="unveil" />
+        <Figure src={brisbanePhoto.src} alt={brisbanePhoto.alt} caption={brisbanePhoto.caption} ratio="wide" width={1600} height={1154} class="unveil figure--natural" />
       </div>
     </Section>
     <Section>
@@ -70,8 +70,9 @@ const photos = fr
           href={moduleUrl} external
           eyebrow={fr ? 'Module 1' : 'Module 1'}
           title={fr ? 'Le Modèle de Montréal – Module 1' : 'The Montreal Model – Module 1'}
-          text={fr ? 'Module de formation interactif (HTML5) présentant le Modèle de Montréal de thérapie par kétamine. Hébergé sur le serveur média du laboratoire.' : 'Interactive HTML5 training module introducing the Montreal Model of ketamine therapy. Hosted on the lab’s media server.'}
-          mark={u('/images/montreal-model-mark.webp')} markAlt={fr ? 'Logo du Modèle de Montréal' : 'Montreal Model logo'}
+          text={fr ? 'Module de formation interactif présentant le Modèle de Montréal de thérapie par kétamine : démonstration, tutoriel, pratique et test.' : 'Interactive training module introducing the Montreal Model of ketamine therapy: demonstration, tutorial, practice and test.'}
+          src={u('/images/module-1-preview.webp')}
+          alt={fr ? 'Page d’accueil du module : menu bleu « Demonstration, Tutorial, Practice, Test » et titre « MM Module 1 ».' : 'Landing page of the module: a blue menu — Demonstration, Tutorial, Practice, Test — and the title “MM Module 1”.'}
           ratio="wide" class="media-card--hover" />
       </div>
     </Section>

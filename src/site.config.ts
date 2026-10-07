@@ -56,15 +56,17 @@ export function siteFor(lang: Lang): typeof site {
 /** Secondary pages, linked from the footer (built per language in lib/i18n.ts). */
 export const footerItems: { path: string; label: Record<Lang, string> }[] = [
   { path: '/media-coverage/', label: { en: 'Media coverage', fr: 'Couverture médiatique' } },
-  { path: '/#contact', label: { en: 'Contact', fr: 'Contact' } },
 ];
 
 /** Six items max so the header fits beside the McGill / LDI–JGH lockup from 1024 px up. */
+// Same order as the original site's menu (Home is the wordmark): People, Research Publications,
+// Clinical Information, Music, Training, Media Coverage, Ketamine Mechanism.
 export const navItems: { path: string; label: Record<Lang, string> }[] = [
+  { path: '/people/', label: { en: 'People', fr: 'Équipe' } },
+  { path: '/research-publications/', label: { en: 'Publications', fr: 'Publications' } },
   { path: '/clinical-information/', label: { en: 'Clinical', fr: 'Clinique' } },
-  { path: '/research-publications/', label: { en: 'Publications', fr: 'Recherche' } },
   { path: '/music/', label: { en: 'Music', fr: 'Musique' } },
   { path: '/training/', label: { en: 'Training', fr: 'Formation' } },
+  { path: '/media-coverage/', label: { en: 'Media', fr: 'Médias' } },
   { path: '/ketamine-mechanism/', label: { en: 'Mechanism', fr: 'Mécanisme' } },
-  { path: '/people/', label: { en: 'People', fr: 'Équipe' } },
 ];

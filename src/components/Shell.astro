@@ -12,6 +12,7 @@ const m = pageMeta(lang, path, { title, description, schema, ogType });
 const fr = lang === 'fr';
 m.site.siteLogo = u('/images/montreal-model-mark.webp');
 m.site.siteLogoAlt = fr ? 'Logo du Modèle de Montréal' : 'Montreal Model logo';
+m.site.headerLayout = 'wide';
 ---
 <Layout site={m.site} page={m.page} nav={m.nav} lang={lang}>
   <LangSwitch slot="header-aside" current={lang} links={m.switchLinks} />
