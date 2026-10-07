@@ -22,6 +22,7 @@ export const site: SiteConfig & { base: string; previewUrl: string } = {
   url,
   lang: 'en',
   accent: '#6E4560',
+  analyticsToken: '5dd75defb8bb48d9bba21ffe30e0ec16',   // Cloudflare Web Analytics (cookieless page-view counts; dashboard: dash.cloudflare.com → Web analytics)
   affiliation: affiliation.en,
   base: '/montreal-model-website',
   previewUrl: 'https://the-psychedelics-and-contemplation-lab.github.io',
