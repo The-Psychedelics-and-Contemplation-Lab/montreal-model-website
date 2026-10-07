@@ -2,14 +2,24 @@
 /** Site shell: <Layout> + language switch, for one page in one language. */
 import { Layout, LangSwitch } from '@pcl/design-system';
 import { pageMeta } from '../lib/i18n';
+import { u } from '../lib/url';
 import type { Lang } from '../site.config';
 import '../styles/site.css';
 
 export interface Props { lang: Lang; path: string; title: string; description: string; schema?: Record<string, unknown> | Record<string, unknown>[]; ogType?: 'website' | 'article' }
 const { lang, path, title, description, schema, ogType } = Astro.props;
 const m = pageMeta(lang, path, { title, description, schema, ogType });
+const fr = lang === 'fr';
+m.site.siteLogo = u('/images/montreal-model-mark.webp');
+m.site.siteLogoAlt = fr ? 'Logo du Modèle de Montréal' : 'Montreal Model logo';
 ---
 <Layout site={m.site} page={m.page} nav={m.nav} lang={lang}>
-  <LangSwitch slot="nav-extra" current={lang} links={m.switchLinks} />
+  <LangSwitch slot="header-aside" current={lang} links={m.switchLinks} />
   <slot />
+  <!-- Footer: the partner logos follow McGill and the JGH–LDI on the same (lowest) row -->
+  <Fragment slot="footer-logos">
+    <span class="footer-partner footer-partner--mm"><img src={u('/images/montreal-model-mark.webp')} alt={fr ? 'Logo du Modèle de Montréal : deux cœurs en nuage, du rouge au bleu' : 'Montreal Model logo: two heart-shaped clouds, red to blue'} width="790" height="436" loading="lazy" decoding="async" /></span>
+    <a class="footer-partner no-icon" href="https://www.chumontreal.qc.ca/" target="_blank" rel="noopener noreferrer" aria-label="Centre hospitalier de l’Université de Montréal (opens in a new tab)"><img src={u('/images/logo-chum.png')} alt="Centre hospitalier de l’Université de Montréal (CHUM)" width="264" height="224" loading="lazy" decoding="async" /></a>
+    <a class="footer-partner no-icon" href="https://www.umontreal.ca/" target="_blank" rel="noopener noreferrer" aria-label="Université de Montréal (opens in a new tab)"><img src={u('/images/logo-udem.png')} alt="Université de Montréal" width="250" height="99" loading="lazy" decoding="async" /></a>
+  </Fragment>
 </Layout>

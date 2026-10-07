@@ -4,7 +4,6 @@ import { getEntry } from 'astro:content';
 import { withBase, splitAtH2, h2Text } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
-import PartnerLogos from '../../components/PartnerLogos.astro';
 import { langPaths, href } from '../../lib/i18n';
 import { u } from '../../lib/url';
 import { site } from '../../site.config';
@@ -133,8 +132,6 @@ const schema = [
           ratio="wide" class="media-card--hover" />
       </div>
     </Section>
-
-    <PartnerLogos lang={lang} />
 
     <Section band tight ariaLabelledby="reference-h">
       <div class="reference reveal reveal--fade">

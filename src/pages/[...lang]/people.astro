@@ -2,7 +2,6 @@
 import { Section } from '@pcl/design-system';
 import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
-import PartnerLogos from '../../components/PartnerLogos.astro';
 import { langPaths } from '../../lib/i18n';
 import { u } from '../../lib/url';
 import { peopleIntro, leads, collaborators, type Person } from '../../content/data/people';
@@ -58,7 +57,5 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
         ))}
       </div>
     </Section>
-
-    <PartnerLogos lang={lang} />
   </main>
 </Shell>
