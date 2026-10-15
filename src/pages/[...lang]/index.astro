@@ -3,7 +3,8 @@ import { Section, SectionMark, Watermark, MediaCard } from '@pcl/design-system';
 import { getEntry } from 'astro:content';
 import { withBase, splitAtH2, h2Text } from '../../lib/content';
 import Shell from '../../components/Shell.astro';
-import HeroReveal from '../../components/HeroReveal.astro';
+import HeroLogo from '../../components/HeroLogo.astro';
+import BandArt from '../../components/BandArt.astro';
 import { langPaths, href } from '../../lib/i18n';
 import { u } from '../../lib/url';
 import { site } from '../../site.config';
@@ -70,7 +71,7 @@ const schema = [
   <main id="main">
     <div class="hero hero--mm">
       <div class="container hero__inner">
-        <HeroReveal lang={lang} />
+        <HeroLogo lang={lang} />
         <p class="eyebrow hero-after">{d.eyebrow}</p>
         <h1 class="reveal-chars" style="--reveal-delay: 1650ms">{d.title}</h1>
         <p class="lead hero-after">{d.lead}</p>
@@ -81,8 +82,8 @@ const schema = [
       </div>
     </div>
 
-    <section id={therapy.id} class="band-plum has-watermark" aria-labelledby={`${therapy.id}-h`}>
-      <Watermark motif="waves" position="right" speed={0.15} size="80rem" class="watermark--cream" />
+    <section id={therapy.id} class="band-plum band-plum--art" data-mouse-scene="26" aria-labelledby={`${therapy.id}-h`}>
+      <BandArt />
       <div class="container">
         <h2 id={`${therapy.id}-h`} class="band-plum__title reveal-words">{therapy.title}</h2>
         <div class="reveal reveal--wipe-in" style="--reveal-dur: 1000ms"><div class="panel unveil">
@@ -99,8 +100,8 @@ const schema = [
       </div>
     </section>
 
-    <section id={research.id} class="band-plum has-watermark" aria-labelledby={`${research.id}-h`}>
-      <Watermark motif="waves" position="left" speed={0.15} size="80rem" class="watermark--cream" />
+    <section id={research.id} class="band-plum band-plum--art" data-mouse-scene="26" aria-labelledby={`${research.id}-h`}>
+      <BandArt />
       <div class="container">
         <h2 id={`${research.id}-h`} class="band-plum__title reveal-words">{research.title}</h2>
         <div class="reveal reveal--wipe-in" style="--reveal-dur: 1000ms"><div class="panel unveil">

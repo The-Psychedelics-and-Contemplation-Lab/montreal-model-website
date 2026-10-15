@@ -1,0 +1,47 @@
+---
+/**
+ * <HeroLogo lang> — the home opens with the Montreal Model mark drawing itself: the stem first, then
+ * the base appears, the two cloud outlines are drawn from the bottom corners up and over the lobes,
+ * and the hearts' tips come last; the title follows. The mark is the exact vector reconstruction of
+ * the logo (see public/images/mm-logo.svg). Reduced motion / no JS: the mark is simply shown.
+ */
+import logo from '../assets/mm-logo.svg?raw';
+export interface Props { lang: string }
+const { lang } = Astro.props;
+const fr = lang === 'fr';
+const alt = fr ? 'Logo du Modèle de Montréal : deux cœurs en nuage, du rouge au bleu' : 'Montreal Model logo: two heart-shaped clouds, red to blue';
+// name the parts: stroked paths = left outline, right outline, stem, left tip, right tip; filled = base, two fillets
+const named = logo
+  .replace(/<svg /, '<svg class="hero-logo__svg" ')
+  .replace(/<g fill="none"/, '<g class="hero-logo__strokes" fill="none"')
+  .replace(/<g fill="url\(#mmg\)"/, '<g class="hero-logo__fills" fill="url(#mmg)"');
+---
+<div class="hero-logo" data-hero-logo role="img" aria-label={alt} set:html={named}></div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+  gsap.registerPlugin(DrawSVGPlugin);
+  const init = () => {
+    const box = document.querySelector<HTMLElement>('[data-hero-logo]');
+    if (!box || box.dataset.ready) return; box.dataset.ready = '1';
+    const after = [...document.querySelectorAll<HTMLElement>('.hero--mm .hero-after')];
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { box.classList.add('is-drawn'); return; }
+    const strokes = [...box.querySelectorAll<SVGPathElement>('.hero-logo__strokes path')];
+    const fills = [...box.querySelectorAll<SVGPathElement>('.hero-logo__fills path')];
+    const [outerL, outerR, stem, tipL, tipR] = strokes;
+    gsap.set(strokes, { drawSVG: '0%' });
+    gsap.set(fills, { opacity: 0 });
+    gsap.set(after, { opacity: 0, y: 14 });
+    box.classList.add('is-drawn');
+    gsap.timeline({ delay: 0.25 })
+      .to(stem, { drawSVG: '0% 100%', duration: 0.45, ease: 'power2.inOut' }, 0)
+      .to(fills, { opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.3)
+      // the outlines start at the bottom corners and are drawn up and around to the stem top
+      .to([outerL, outerR], { drawSVG: '0% 100%', duration: 1.15, ease: 'power2.inOut' }, 0.4)
+      .to([tipL, tipR], { drawSVG: '0% 100%', duration: 0.3, ease: 'power2.out' }, 1.35)
+      .to(after, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.3, clearProps: 'transform' }, 1.15);
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

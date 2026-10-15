@@ -2,6 +2,7 @@
 import { Section } from '@pcl/design-system';
 import PageHead from '../../components/PageHead.astro';
 import Shell from '../../components/Shell.astro';
+import BandArt from '../../components/BandArt.astro';
 import { langPaths } from '../../lib/i18n';
 import { u } from '../../lib/url';
 import { peopleIntro, leads, collaborators, type Person } from '../../content/data/people';
@@ -19,7 +20,8 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
       <p class="lead reveal reveal--blur" style="--reveal-delay: 320ms">{peopleIntro[lang][1]}</p>
     </PageHead>
 
-    <section class="band-plum section" aria-label={fr ? 'Les fondateurs du modèle' : 'The model’s founders'}>
+    <section class="band-plum band-plum--art section" data-mouse-scene="26" aria-label={fr ? 'Les fondateurs du modèle' : 'The model’s founders'}>
+      <BandArt />
       <div class="container">
         <div class="leads">
           {leads.map((p: Person) => (

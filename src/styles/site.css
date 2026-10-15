@@ -256,28 +256,23 @@
 
 /* ===== Motion (October 2026) ================================================================ */
 
-/* --- Home: the logo opens onto the artwork ------------------------------------------------- */
-.reveal-stage {
-  --ms-start: 10rem;                 /* the mark's natural width (same as the old static mark) */
-  --ms: var(--ms-start);
-  position: relative; width: 100%; aspect-ratio: 16 / 5.6; max-height: 24rem; min-height: 11rem;
-  border-radius: 1.5rem; overflow: hidden; isolation: isolate; justify-self: stretch;
-}
-.reveal-stage__art {
-  position: absolute; inset: 0; overflow: hidden; border-radius: inherit;
-  background: radial-gradient(120% 90% at 30% 20%, #5A2A5A 0%, #2A1230 60%, #1B0B22 100%);
-  -webkit-mask: var(--mask-url) center / var(--ms) auto no-repeat; mask: var(--mask-url) center / var(--ms) auto no-repeat;
-}
-.reveal-stage.is-open .reveal-stage__art { -webkit-mask: none; mask: none; }
-.art-ribbon { position: absolute; inset: -8% -4%; width: 108%; max-width: none; height: 116%; overflow: visible; mix-blend-mode: screen; will-change: transform; }
-.art-glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; will-change: transform; }
-.art-glow--1 { width: 45%; aspect-ratio: 1.35; left: 5%; top: -12%; background: #E04A4D; }
-.art-glow--2 { width: 50%; aspect-ratio: 1.4; right: -6%; bottom: -24%; background: #2F6CC0; }
-.reveal-stage__logo { position: absolute; left: 50%; top: 50%; width: var(--ms); translate: -50% -50%; pointer-events: none; }
-.reveal-stage__logo svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 2px 14px rgba(255, 255, 255, 0.25)); }
-/* no JS: artwork open, mark drawn on top (as the old static mark) */
-html:not(.js) .reveal-stage__art { -webkit-mask: none; mask: none; }
-html:not(.js) .reveal-stage__logo { width: var(--ms-start); }
+/* --- Home: the mark draws itself ------------------------------------------------------------- */
+.hero-logo { width: 10rem; margin: 0; line-height: 0; }
+.hero-logo__svg { display: block; width: 100%; height: auto; overflow: visible; }
+html.js .hero-logo:not(.is-drawn) { opacity: 0; }        /* nothing shows before the script takes over */
+@media (max-width: 59.99em) { .hero-logo { width: 7rem; } }
+
+/* --- Plum bands: the "music and light" artwork as a living background ------------------------- */
+.band-plum--art { position: relative; overflow: hidden; isolation: isolate; background: #2A1230; }
+.band-plum--art > .container { position: relative; z-index: 1; }
+.band-art { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background: radial-gradient(120% 90% at 30% 20%, #5A2A5A 0%, #2A1230 60%, #1B0B22 100%); }
+.band-plum--art::after { content: ""; position: absolute; inset: 0; z-index: 0; background: rgba(20, 8, 26, 0.22); pointer-events: none; } /* a touch darker so the white text stays crisp */
+.band-art__scroll, .band-art__mouse { position: absolute; inset: 0; will-change: transform; }
+.art-ribbon { position: absolute; inset: -10% -5%; width: 110%; max-width: none; height: 120%; overflow: visible; mix-blend-mode: screen; will-change: transform; }
+.art-glow { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.5; will-change: transform; }
+.art-glow--1 { width: 40%; aspect-ratio: 1.35; left: 2%; top: -20%; background: #E04A4D; }
+.art-glow--2 { width: 46%; aspect-ratio: 1.4; right: -8%; bottom: -30%; background: #2F6CC0; }
 @media (prefers-reduced-motion: no-preference) {
   .art-ribbon--1 { animation: art-drift-a 34s ease-in-out infinite alternate; }
   .art-ribbon--2 { animation: art-drift-b 26s ease-in-out infinite alternate; }
@@ -292,7 +287,7 @@ html:not(.js) .reveal-stage__logo { width: var(--ms-start); }
   @keyframes art-drift-c { from { transform: translate3d(-1.5%, 2.5%, 0); } to { transform: translate3d(1.5%, -2.5%, 0); } }
   @keyframes art-glow-a { from { transform: translate3d(-6%, -4%, 0) scale(0.95); } to { transform: translate3d(6%, 5%, 0) scale(1.1); } }
 }
-@media (max-width: 59.99em) { .reveal-stage { --ms-start: 7rem; aspect-ratio: 16 / 8; border-radius: 1rem; } }
+@media print { .band-art { display: none; } }
 
 /* --- Music: a small equaliser on each playlist card, playing on hover ----------------------- */
 .playlist h3 { display: flex; align-items: center; justify-content: center; gap: var(--s-3); }
