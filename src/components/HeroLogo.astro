@@ -1,8 +1,8 @@
 ---
 /**
- * <HeroLogo lang> — the home opens with the Montreal Model mark drawing itself: the stem first, then
- * the base appears, the two cloud outlines are drawn from the bottom corners up and over the lobes,
- * and the hearts' tips come last; the title follows. The mark is the exact vector reconstruction of
+ * <HeroLogo lang> — the home opens with the Montreal Model mark drawing itself in one symmetric
+ * gesture: from the bottom centre along the base, up and around the lobes (the hearts' tips drawn as
+ * the pens pass the cusps), down to the stem top and back down the stem; the title follows. The mark is the exact vector reconstruction of
  * the logo (see public/images/mm-logo.svg). Reduced motion / no JS: the mark is simply shown.
  */
 import logo from '../assets/mm-logo.svg?raw';
@@ -15,8 +15,13 @@ const named = logo
   .replace(/<svg /, '<svg class="hero-logo__svg" ')
   .replace(/<g fill="none"/, '<g class="hero-logo__strokes" fill="none"')
   .replace(/<g fill="url\(#mmg\)"/, '<g class="hero-logo__fills" fill="url(#mmg)"');
+// Two "pen" strokes along the base (centre → each corner, round ends) are drawn in place of the filled
+// base while the mark is being drawn; the real base (with its central notch and fillets) fades over
+// them at the very end.
+const pens = '<path class="hero-logo__pen" d="M 283 290.25 L 133.5 290.25"/><path class="hero-logo__pen" d="M 283 290.25 L 432.5 290.25"/>';
+const withPens = named.replace('</g>', pens + '</g>');
 ---
-<div class="hero-logo" data-hero-logo role="img" aria-label={alt} set:html={named}></div>
+<div class="hero-logo" data-hero-logo role="img" aria-label={alt} set:html={withPens}></div>
 
 <script>
   import { gsap } from 'gsap';
@@ -29,35 +34,37 @@ const named = logo
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { box.classList.add('is-drawn'); return; }
     const strokes = [...box.querySelectorAll<SVGPathElement>('.hero-logo__strokes path')];
     const fills = [...box.querySelectorAll<SVGPathElement>('.hero-logo__fills path')];
-    const [outerL, outerR, stem, tipL, tipR] = strokes;
+    const [outerL, outerR, stem, tipL, tipR, penL, penR] = strokes;
     const [base, ...fillets] = fills;
-    // One continuous gesture: the parts are chained at a constant internal speed (duration ∝ length,
-    // each starting a hair before the previous one ends so nothing stops at the joints), and the whole
-    // drawing is then played through a single soft ease-in-out — slow to start, slow to finish, no
-    // change of pace in between. Each part fades in over its first moments so the round caps never pop.
+    // Two symmetric pens draw the mark in one gesture, starting together at the bottom centre: along the
+    // base to the corners, up and around the side lobes to the cusps — where each heart's tip is drawn
+    // at the same moment the pen continues over the top lobe — down to the stem top, then the stem is
+    // drawn down to where they began. Constant speed along the whole path (duration ∝ length), played
+    // through one gentle ease so it starts and settles softly; each part fades in over its first moments.
     const len = (el: SVGPathElement) => el.getTotalLength();
-    const baseHalf = 150;
-    const total = len(stem) + baseHalf + len(outerL) + len(tipL);
-    const d = (u: number) => u / total;                    // fraction of the whole gesture
-    const ov = 0.03;                                        // overlap at the joints
+    const L = { base: 150, outline: len(outerL), stem: len(stem), tip: len(tipL) };
+    const cuspAt = L.base + L.outline / 2;                       // the cusp is halfway along the outline
+    const total = L.base + L.outline + L.stem;
+    const f = (u: number) => u / total;                           // → fraction of the gesture
+    const ov = 0.012;
     gsap.set(strokes, { drawSVG: '0%', opacity: 0 });
-    gsap.set(base, { clipPath: 'inset(0 50% 0 50%)', opacity: 0 });
+    gsap.set(base, { opacity: 0 });
     gsap.set(fillets, { opacity: 0 });
     gsap.set(after, { opacity: 0, y: 14 });
     box.classList.add('is-drawn');
-    const t1 = d(len(stem)), t2 = t1 + d(baseHalf) - ov, t3 = t2 + d(len(outerL)) - ov;
+    const tBase = 0, tOutline = f(L.base) - ov, tTip = f(cuspAt) - ov, tStem = f(L.base + L.outline) - ov;
     const draw = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
-      .to(stem, { drawSVG: '0% 100%', duration: d(len(stem)) }, 0)
-      .to(stem, { opacity: 1, duration: 0.06 }, 0)
-      .to(base, { clipPath: 'inset(0 0% 0 0%)', duration: d(baseHalf) }, t1 - ov)
-      .to(base, { opacity: 1, duration: 0.06 }, t1 - ov)
-      .to(fillets, { opacity: 1, duration: 0.12 }, t1)
-      .to([outerL, outerR], { drawSVG: '0% 100%', duration: d(len(outerL)) }, t2)
-      .to([outerL, outerR], { opacity: 1, duration: 0.06 }, t2)
-      .to([tipL, tipR], { drawSVG: '0% 100%', duration: d(len(tipL)) }, t3)
-      .to([tipL, tipR], { opacity: 1, duration: 0.04 }, t3);
-    gsap.to(draw, { progress: 1, duration: 2.2, ease: 'power2.inOut', delay: 0.3 });
-    gsap.to(after, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.3, delay: 1.9, clearProps: 'transform' });
+      .to([penL, penR], { drawSVG: '0% 100%', duration: f(L.base) }, tBase)
+      .to([penL, penR], { opacity: 1, duration: 0.05 }, tBase)
+      .to([outerL, outerR], { drawSVG: '0% 100%', duration: f(L.outline) }, tOutline)
+      .to([outerL, outerR], { opacity: 1, duration: 0.05 }, tOutline)
+      .to([tipL, tipR], { drawSVG: '0% 100%', duration: Math.max(f(L.tip), 0.08) }, tTip)
+      .to([tipL, tipR], { opacity: 1, duration: 0.04 }, tTip)
+      .to(stem, { drawSVG: '0% 100%', duration: f(L.stem) }, tStem)
+      .to(stem, { opacity: 1, duration: 0.05 }, tStem)
+      .to([base, ...fillets], { opacity: 1, duration: 0.1 }, 1 - 0.1);
+    gsap.to(draw, { progress: 1, duration: 2.4, ease: 'power1.inOut', delay: 0.3 });
+    gsap.to(after, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.3, delay: 2.1, clearProps: 'transform' });
   };
   init();
   document.addEventListener('astro:page-load', init);
