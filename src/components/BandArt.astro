@@ -5,15 +5,18 @@
  * at slightly different speeds with the scroll (data-parallax on an outer wrapper) and lean with the
  * cursor (data-mouse-depth on a middle wrapper, GSAP) — three transforms on three nested layers so
  * they never fight. The band itself carries data-mouse-scene (this layer has pointer-events: none).
- * The band's content sits above it (z-index). Decorative only.
+ * The band's content sits above it (z-index). `flip` mirrors the whole artwork (x, y or both) so two
+ * bands on one page never show the same pattern. Decorative only.
  */
 import art from '../assets/hero-art.html?raw';
+export interface Props { flip?: 'x' | 'y' | 'xy' }
+const { flip } = Astro.props;
 // Split the six <svg …> ribbons so each gets its own scroll/mouse wrappers
 const ribbons = art.split('\n').filter((l) => l.trim().startsWith('<svg'));
 const scroll = ['-0.05', '0.04', '-0.08', '0.06', '-0.03', '0.08'];
 const mouse = ['0.25', '0.5', '0.35', '0.7', '0.2', '0.55'];
 ---
-<div class="band-art" aria-hidden="true">
+<div class:list={['band-art', flip && `band-art--flip-${flip}`]} aria-hidden="true">
   <div class="art-glow art-glow--1" data-mouse-depth="0.3"></div>
   <div class="art-glow art-glow--2" data-mouse-depth="0.45"></div>
   {ribbons.map((svg, i) => (

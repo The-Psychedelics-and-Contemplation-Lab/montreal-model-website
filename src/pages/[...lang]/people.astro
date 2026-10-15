@@ -21,7 +21,7 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
     </PageHead>
 
     <section class="band-plum band-plum--art section" data-mouse-scene="26" aria-label={fr ? 'Les fondateurs du modèle' : 'The model’s founders'}>
-      <BandArt />
+      <BandArt flip="y" />
       <div class="container">
         <div class="leads">
           {leads.map((p: Person) => (
