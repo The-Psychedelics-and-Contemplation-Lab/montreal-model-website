@@ -40,14 +40,14 @@ const withPens = named.replace('</g>', pens + '</g>');
     // base to the corners, up and around the side lobes to the cusps — where each heart's tip is drawn
     // at the same moment the pen continues over the top lobe — down to the stem top, then the stem is
     // drawn down to where they began. Constant speed along the whole path (duration ∝ length), played
-    // through one gentle ease so it starts and settles softly; each part fades in over its first moments.
+    // through one gentle ease so it starts and settles softly; every part starts under an already-drawn one, so nothing pops and nothing fades.
     const len = (el: SVGPathElement) => el.getTotalLength();
     const L = { base: 150, outline: len(outerL), stem: len(stem), tip: len(tipL) };
     const cuspAt = L.base + L.outline / 2;                       // the cusp is halfway along the outline
     const total = L.base + L.outline + L.stem;
     const f = (u: number) => u / total;                           // → fraction of the gesture
     const ov = 0.012;
-    gsap.set(strokes, { drawSVG: '0%', opacity: 0 });
+    gsap.set(strokes, { drawSVG: '0%' });
     gsap.set(base, { opacity: 0 });
     gsap.set(fillets, { opacity: 0 });
     gsap.set(after, { opacity: 0, y: 14 });
@@ -55,14 +55,12 @@ const withPens = named.replace('</g>', pens + '</g>');
     const tBase = 0, tOutline = f(L.base) - ov, tTip = f(cuspAt) - ov, tStem = f(L.base + L.outline) - ov;
     const draw = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
       .to([penL, penR], { drawSVG: '0% 100%', duration: f(L.base) }, tBase)
-      .to([penL, penR], { opacity: 1, duration: 0.05 }, tBase)
       .to([outerL, outerR], { drawSVG: '0% 100%', duration: f(L.outline) }, tOutline)
-      .to([outerL, outerR], { opacity: 1, duration: 0.05 }, tOutline)
       .to([tipL, tipR], { drawSVG: '0% 100%', duration: Math.max(f(L.tip), 0.08) }, tTip)
-      .to([tipL, tipR], { opacity: 1, duration: 0.04 }, tTip)
       .to(stem, { drawSVG: '0% 100%', duration: f(L.stem) }, tStem)
-      .to(stem, { opacity: 1, duration: 0.05 }, tStem)
-      .to([base, ...fillets], { opacity: 1, duration: 0.1 }, 1 - 0.1);
+      // the real base (central notch, fillets) takes over from the pen strokes as the stem lands
+      .to([base, ...fillets], { opacity: 1, duration: 0.08 }, 1 - 0.08)
+      .to([penL, penR], { opacity: 0, duration: 0.08 }, 1 - 0.08);
     gsap.to(draw, { progress: 1, duration: 2.4, ease: 'power1.inOut', delay: 0.3 });
     gsap.to(after, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.3, delay: 2.1, clearProps: 'transform' });
   };
