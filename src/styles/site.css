@@ -253,3 +253,73 @@
 .site-footer__logos .footer-partner--mm img { height: 60px; }
 .site-footer__logos .footer-partner img[src*="logo-chum"] { height: 84px; }  /* the CHUM artwork has generous padding */
 @media (max-width: 60em) { .site-footer__logos { justify-content: center; gap: var(--s-6) var(--s-8); } .site-footer__logos img, .site-footer__logos .footer-partner img { height: 44px; } .site-footer__logos a:nth-child(2) img { height: 60px; } }
+
+/* ===== Motion (October 2026) ================================================================ */
+
+/* --- Home: the logo opens onto the artwork ------------------------------------------------- */
+.reveal-stage {
+  --ms-start: 10rem;                 /* the mark's natural width (same as the old static mark) */
+  --ms: var(--ms-start);
+  position: relative; width: 100%; aspect-ratio: 16 / 5.6; max-height: 24rem; min-height: 11rem;
+  border-radius: 1.5rem; overflow: hidden; isolation: isolate; justify-self: stretch;
+}
+.reveal-stage__art {
+  position: absolute; inset: 0; overflow: hidden; border-radius: inherit;
+  background: radial-gradient(120% 90% at 30% 20%, #5A2A5A 0%, #2A1230 60%, #1B0B22 100%);
+  -webkit-mask: var(--mask-url) center / var(--ms) auto no-repeat; mask: var(--mask-url) center / var(--ms) auto no-repeat;
+}
+.reveal-stage.is-open .reveal-stage__art { -webkit-mask: none; mask: none; }
+.art-ribbon { position: absolute; inset: -8% -4%; width: 108%; max-width: none; height: 116%; overflow: visible; mix-blend-mode: screen; will-change: transform; }
+.art-glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; will-change: transform; }
+.art-glow--1 { width: 45%; aspect-ratio: 1.35; left: 5%; top: -12%; background: #E04A4D; }
+.art-glow--2 { width: 50%; aspect-ratio: 1.4; right: -6%; bottom: -24%; background: #2F6CC0; }
+.reveal-stage__logo { position: absolute; left: 50%; top: 50%; width: var(--ms); translate: -50% -50%; pointer-events: none; }
+.reveal-stage__logo svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 2px 14px rgba(255, 255, 255, 0.25)); }
+/* no JS: artwork open, mark drawn on top (as the old static mark) */
+html:not(.js) .reveal-stage__art { -webkit-mask: none; mask: none; }
+html:not(.js) .reveal-stage__logo { width: var(--ms-start); }
+@media (prefers-reduced-motion: no-preference) {
+  .art-ribbon--1 { animation: art-drift-a 34s ease-in-out infinite alternate; }
+  .art-ribbon--2 { animation: art-drift-b 26s ease-in-out infinite alternate; }
+  .art-ribbon--3 { animation: art-drift-a 21s ease-in-out infinite alternate-reverse; }
+  .art-ribbon--4 { animation: art-drift-b 40s ease-in-out infinite alternate-reverse; }
+  .art-ribbon--5 { animation: art-drift-c 18s ease-in-out infinite alternate; }
+  .art-ribbon--6 { animation: art-drift-c 30s ease-in-out infinite alternate-reverse; }
+  .art-glow--1 { animation: art-glow-a 28s ease-in-out infinite alternate; }
+  .art-glow--2 { animation: art-glow-a 36s ease-in-out infinite alternate-reverse; }
+  @keyframes art-drift-a { from { transform: translate3d(-2.5%, -1.5%, 0); } to { transform: translate3d(2.5%, 2%, 0); } }
+  @keyframes art-drift-b { from { transform: translate3d(2%, 1.5%, 0) scaleY(1.04); } to { transform: translate3d(-2%, -2%, 0) scaleY(0.96); } }
+  @keyframes art-drift-c { from { transform: translate3d(-1.5%, 2.5%, 0); } to { transform: translate3d(1.5%, -2.5%, 0); } }
+  @keyframes art-glow-a { from { transform: translate3d(-6%, -4%, 0) scale(0.95); } to { transform: translate3d(6%, 5%, 0) scale(1.1); } }
+}
+@media (max-width: 59.99em) { .reveal-stage { --ms-start: 7rem; aspect-ratio: 16 / 8; border-radius: 1rem; } }
+
+/* --- Music: a small equaliser on each playlist card, playing on hover ----------------------- */
+.playlist h3 { display: flex; align-items: center; justify-content: center; gap: var(--s-3); }
+.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 1em; width: 1.1em; }
+.eq i { display: block; flex: 1; height: 30%; background: var(--brand-purple); border-radius: 1px; transform-origin: bottom; opacity: 0.7; }
+@media (prefers-reduced-motion: no-preference) {
+  .playlist:hover .eq i, .playlist:focus-within .eq i { animation: eq-bar 0.9s ease-in-out infinite alternate; opacity: 1; }
+  .eq i:nth-child(1) { animation-duration: 0.7s; } .eq i:nth-child(2) { animation-duration: 1.1s; } .eq i:nth-child(3) { animation-duration: 0.8s; }
+  .eq i:nth-child(4) { animation-duration: 1.3s; } .eq i:nth-child(5) { animation-duration: 0.95s; }
+  @keyframes eq-bar { from { height: 20%; } to { height: 100%; } }
+}
+
+/* --- Training: a timeline line that draws itself while you scroll ---------------------------- */
+.timeline { position: relative; }
+.timeline__line { position: absolute; left: calc(50% - var(--reading) / 2 - 2.25rem); top: 0; bottom: 0; width: 2px; background: var(--rule); border-radius: 1px; }
+.timeline__line::before { content: ""; position: absolute; inset: 0; background: var(--brand-purple); transform-origin: top; transform: scaleY(var(--tl, 0)); }
+.timeline__dot { position: absolute; left: calc(50% - var(--reading) / 2 - 2.25rem - 6px); width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--brand-purple); transform: scale(var(--dot, 0.4)); opacity: var(--dot, 0.4); transition: transform 500ms var(--ease), opacity 500ms var(--ease); }
+.timeline__dot.is-on { --dot: 1; }
+@media (max-width: 75em) { .timeline__line, .timeline__dot { display: none; } }
+
+/* --- Media: a slow ribbon of the outlets that covered the model ------------------------------ */
+.outlets { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); margin-top: var(--s-8); }
+.outlets__track { display: flex; gap: var(--s-12); width: max-content; padding-block: var(--s-3); }
+.outlets__track span { font-family: var(--font-serif); font-size: 1.25rem; color: var(--ink-muted); white-space: nowrap; }
+.outlets__track span::after { content: "·"; margin-left: var(--s-12); color: var(--brand-purple); }
+@media (prefers-reduced-motion: no-preference) {
+  .outlets__track { animation: outlets-roll 60s linear infinite; }
+  .outlets:hover .outlets__track { animation-play-state: paused; }
+  @keyframes outlets-roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+}

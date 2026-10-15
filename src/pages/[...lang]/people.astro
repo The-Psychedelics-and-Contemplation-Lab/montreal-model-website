@@ -25,7 +25,7 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
           {leads.map((p: Person) => (
             <article class="lead-person">
               <h2 class="reveal-words">{p.name}</h2>
-              <div class="lead-person__frame reveal reveal--mask-in">
+              <div class="lead-person__frame" data-portrait>
                 <div class="unveil"><img class="lead-person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" /></div>
               </div>
               <div class="reveal reveal--fade" style="--reveal-delay: 200ms">
@@ -46,7 +46,7 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
         {collaborators.map((p: Person) => (
           <article class="person">
             {p.photo
-              ? <div class="person__frame reveal reveal--mask-in"><div class="unveil"><img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" /></div></div>
+              ? <div class="person__frame" data-portrait><div class="unveil"><img class="person__photo" src={u(`/images/people/${p.photo}`)} alt={p.alt?.[lang] ?? p.name} width="900" height="900" loading="lazy" decoding="async" /></div></div>
               : <div class="person__placeholder" aria-hidden="true">{initials(p.name)}</div>}
             <div class="person__head">
               <h3>{p.name}</h3>
@@ -59,3 +59,28 @@ const initials = (n: string) => n.replace(/^Dr\.?\s+/, '').split(/\s+/).map(w =>
     </Section>
   </main>
 </Shell>
+
+<script>
+  // Portraits bloom in softly: a circular window opens from the centre while the photo settles from a
+  // light zoom and blur (GSAP, once, when the portrait scrolls into view).
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+  const init = () => {
+    const frames = [...document.querySelectorAll<HTMLElement>('[data-portrait]:not([data-ready])')];
+    if (!frames.length) return;
+    frames.forEach((f) => (f.dataset.ready = '1'));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    frames.forEach((frame) => {
+      const img = frame.querySelector('img'); if (!img) return;
+      gsap.set(img, { clipPath: 'circle(18% at 50% 50%)', scale: 1.12, filter: 'blur(8px)', opacity: 0.4 });
+      gsap.to(img, {
+        clipPath: 'circle(75% at 50% 50%)', scale: 1, filter: 'blur(0px)', opacity: 1, duration: 1.3, ease: 'power3.out',
+        scrollTrigger: { trigger: frame, start: 'top 88%', once: true },
+        onComplete: () => gsap.set(img, { clearProps: 'clipPath,filter' }),
+      });
+    });
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

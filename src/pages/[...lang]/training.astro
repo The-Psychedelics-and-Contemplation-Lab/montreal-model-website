@@ -34,6 +34,8 @@ const photos = fr
 <Shell lang={lang} path="/training/" title={d.seoTitle} description={d.description}>
   <main id="main">
     <PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+    <div class="timeline" data-timeline>
+    <div class="timeline__line" aria-hidden="true"></div>
     <Section>
       <div class="prose" set:html={london}></div>
     </Section>
@@ -54,6 +56,7 @@ const photos = fr
     <Section band>
       <div class="prose" set:html={future}></div>
     </Section>
+    </div>
     <Section id="online" ariaLabelledby="online-h">
       <h2 id="online-h" class="ruled-heading ruled-heading--drawn reveal-words">{fr ? 'Modules en ligne' : 'Online modules'}</h2>
       <span class="ruled-heading__rule reveal reveal--line" style="--reveal-delay: 240ms" aria-hidden="true"></span>
@@ -78,3 +81,31 @@ const photos = fr
     </Section>
   </main>
 </Shell>
+
+<script>
+  // Training timeline (wide screens): a vertical line left of the reading column fills while you scroll
+  // through the four periods, and a dot lights up next to each heading as the line reaches it.
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+  const init = () => {
+    const tl = document.querySelector<HTMLElement>('[data-timeline]');
+    if (!tl || tl.dataset.ready || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    tl.dataset.ready = '1';
+    const heads = [...tl.querySelectorAll<HTMLElement>('h2')];
+    const dots = heads.map((h) => {
+      const d = document.createElement('span'); d.className = 'timeline__dot'; d.setAttribute('aria-hidden', 'true'); tl.appendChild(d); return d;
+    });
+    const place = () => { const top = tl.getBoundingClientRect().top; heads.forEach((h, i) => { const r = h.getBoundingClientRect(); dots[i].style.top = `${r.top - top + r.height / 2 - 7}px`; }); };
+    place(); window.addEventListener('resize', place); document.fonts?.ready.then(place);
+    gsap.to(tl, {
+      '--tl': 1, ease: 'none',
+      scrollTrigger: {
+        trigger: tl, start: 'top 60%', end: 'bottom 60%', scrub: 0.6,
+        onUpdate: (st) => { const y = st.progress * tl.offsetHeight; dots.forEach((d) => d.classList.toggle('is-on', parseFloat(d.style.top) <= y)); },
+      },
+    });
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

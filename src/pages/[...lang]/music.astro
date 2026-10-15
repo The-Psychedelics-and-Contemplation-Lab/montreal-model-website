@@ -20,7 +20,7 @@ const fr = lang === 'fr';
     <div class="playlists reveal-group" style="margin-top: var(--s-8)">
       {media.spotify.playlists.map(({ id, name }) => (
         <div class="card playlist">
-          <h3>{name}</h3>
+          <h3><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>{name}</h3>
           <iframe
             src={`https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0`}
             title={fr ? `Lecteur Spotify – ${name}` : `Spotify player – ${name}`}

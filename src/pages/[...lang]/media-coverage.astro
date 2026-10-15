@@ -13,10 +13,19 @@ const meta = fr
   : { title: 'Media Coverage — The Montreal Model of Ketamine Therapy', description: 'The reach of the Montreal Model: a featured La Presse canadienne article, developments in the UK, Norway and Australia, podcasts and press coverage.' };
 const f = media.featured;
 const intl = media.international;
+// Outlets that covered the model (from the news list — nothing invented), for the slow ribbon under the title
+const outlets = [...new Set([
+  'La Presse canadienne',
+  ...media.news.map((n) => n.outlet),
+  ...media.podcasts.map((p) => p.title.split(/\s[—–#]|\s-\s|:/)[0].trim()),
+])];
 ---
 <Shell lang={lang} path="/media-coverage/" title={meta.title} description={meta.description}>
   <main id="main">
     <PageHead eyebrow={fr ? 'Médias' : 'Media'} title={fr ? 'Médias' : 'Media Coverage'} lead={fr ? 'Suivez le rayonnement croissant du Modèle de Montréal dans les milieux cliniques, scientifiques et internationaux à travers les actualités, les médias et les publications institutionnelles.' : 'Follow the growing clinical, research, and international reach of the Montreal Model through news, media, and institutional features.'} />
+    <div class="outlets reveal reveal--fade" aria-label={fr ? 'Médias ayant couvert le modèle' : 'Outlets that covered the model'}>
+      <div class="outlets__track">{[...outlets, ...outlets].map((o) => <span>{o}</span>)}</div>
+    </div>
     <Section>
       <h2 class="reveal-words">{fr ? 'À la une' : 'Featured'}</h2>
       <article class="featured reveal reveal--rise-lg" style="margin-top: var(--s-6)">
